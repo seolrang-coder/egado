@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>비전 | 관악구장애인단체연합회</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--brand:#4b4b8f;--brand-dark:#352f74;--muted:#6c757d;--bg:#f3f3f3}
+    body{font-family:'Noto Sans KR',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:#fff;color:#222}
+    .topbar{font-size:12px;background:#f8f9fa;border-bottom:1px solid #e9ecef}
+    .navbar-brand img{height:44px}
+    .brand-title{font-weight:800;color:var(--brand-dark);font-size:1.95rem;letter-spacing:-.2px}
+    @media (max-width: 576px){.brand-title{display:none}}
+    .mainnav{border-bottom:1px solid #e9ecef}
+    .mainnav .nav-link{font-weight:600;color:#333}
+    .mainnav .nav-link:hover{color:var(--brand)}
+    .footer{background:#2d2142;color:#d9d6e5}
+    .footer a{color:#e3def2;text-decoration:none}
+    .footer a:hover{text-decoration:underline}
+    .footer-brand img{height:36px}
+    .vision-card{transition:transform 0.3s ease,box-shadow 0.3s ease}
+    .vision-card:hover{transform:translateY(-5px);box-shadow:0 8px 20px rgba(0,0,0,0.15)!important}
+    .value-card{transition:transform 0.3s ease,box-shadow 0.3s ease;height:100%}
+    .value-card:hover{transform:translateY(-3px);box-shadow:0 6px 15px rgba(0,0,0,0.1)!important}
+    .goal-card{border-left:4px solid #4b4b8f;transition:all 0.3s ease}
+    .goal-card:hover{border-left-width:8px;box-shadow:0 4px 12px rgba(0,0,0,0.1)}
+    .activity-list{list-style:none;padding:0}
+    .activity-list li{background:#f8f9fa;border-left:4px solid #4b4b8f;padding:1rem;margin-bottom:0.75rem;border-radius:0.25rem;transition:all 0.2s ease}
+    .activity-list li:hover{background:#e9ecef;transform:translateX(5px);box-shadow:0 2px 8px rgba(0,0,0,0.05)}
+    .activity-list li::before{content:'\2022';color:#4b4b8f;font-weight:bold;display:inline-block;width:1em;margin-right:0.5rem}
+  </style>
+</head>
+<body>
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="container d-flex justify-content-end align-items-center gap-3 py-1">
+      <div id="userInfo" style="display:none;">
+        <span id="usernameDisplay" class="text-muted me-2"></span>
+        <form action="/logout" method="post" style="display:inline;">
+          <button type="submit" class="btn btn-link link-secondary p-0" style="text-decoration:none;">로그아웃</button>
+        </form>
+      </div>
+      <div id="guestInfo">
+        <a href="login.html" class="link-secondary">로그인</a>
+        <a href="register.html" class="link-secondary">회원가입</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white mainnav">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-3" href="index.html">
+        <img src="img/footer-logo.png" alt="로고" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="토글 내비게이션">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="about.html" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">협회소개</a>
+            <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+              <li><a class="dropdown-item" href="about.html">협회소개</a></li>
+              <li><a class="dropdown-item" href="org.html">조직도</a></li>
+              <li><a class="dropdown-item" href="history.html">연혁</a></li>
+              <li><a class="dropdown-item" href="vision.html">비전</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="business.html">협회사업</a></li>
+          <li class="nav-item"><a class="nav-link" href="info.html">정보마당</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="activity-lovehouse.html" id="activityDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">행사 및 활동</a>
+            <ul class="dropdown-menu" aria-labelledby="activityDropdown">
+              <li><a class="dropdown-item" href="activity-lovehouse.html">러브하우스</a></li>
+              <li><a class="dropdown-item" href="activity-volunteer.html">행사 및 환경봉사단</a></li>
+              <li><a class="dropdown-item" href="activity-mobilitycare.html">전동보장구교육&케어</a></li>
+              <li><a class="dropdown-item" href="activity-beauty.html">무료 이·미용 봉사</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="board.html">게시판</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="affiliateDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">연합회소속단체</a>
+            <ul class="dropdown-menu" aria-labelledby="affiliateDropdown">
+              <li><a class="dropdown-item" href="http://www.sappd.or.kr/" target="_blank" rel="noopener noreferrer">사)서울지체장애인협회</a></li>
+              <li><a class="dropdown-item" href="http://www.kadi.or.kr/kadi/" target="_blank" rel="noopener noreferrer">사)한국장애인정보화협회</a></li>
+              <li><a class="dropdown-item" href="https://kaiad.or.kr/" target="_blank" rel="noopener noreferrer">사)한국산업재해장애인협회</a></li>
+              <li><a class="dropdown-item" href="http://www.kaed.or.kr/" target="_blank" rel="noopener noreferrer">사)한국장애인기업협회</a></li>
+              <li><a class="dropdown-item" href="http://www.nanum.tv/" target="_blank" rel="noopener noreferrer">사)국제장애인문화교류협회</a></li>
+              <li><a class="dropdown-item" href="http://www.kofd.co.kr/kofd/" target="_blank" rel="noopener noreferrer">사)한국기능장애인협회</a></li>
+              <li><a class="dropdown-item" href="https://www.deafkorea.com/main/" target="_blank" rel="noopener noreferrer">사)한국농아인협회</a></li>
+              <li><a class="dropdown-item" href="http://www.bluesky82.org/" target="_blank" rel="noopener noreferrer">사)한국장애인문화협회</a></li>
+              <li><a class="dropdown-item" href="https://www.kdwa.or.kr/main" target="_blank" rel="noopener noreferrer">사)서울신체장애인복지회</a></li>
+              <li><a class="dropdown-item" href="#">사)열린정보장애인협회</a></li>
+              <li><a class="dropdown-item" href="#">사)서울시각장애인연합회</a></li>
+              <li><a class="dropdown-item" href="#">사)한국장애인환경실천협회</a></li>
+              <li><a class="dropdown-item" href="nanum.html">전국장애인나눔협동조합</a></li>
+              <li><a class="dropdown-item" href="aboutgolf.html">한국장애인스크린파크골프협회</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="directions.html">오시는길</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container my-5">
+    <!-- 페이지 헤더 -->
+    <section class="page-header text-center mb-5">
+      <div class="header-decoration mb-3">
+        <i class="bi bi-lightbulb display-6 text-warning"></i>
+      </div>
+      <h2 class="display-8 fw-bold text-dark mb-3">비전 및 미션</h2>
+      <p class="lead text-muted">관악구장애인단체연합회의 비전과 미션을 소개합니다.</p>
+    </section>
+    
+    <!-- 비전 및 미션 섹션 -->
+    <section class="vision-mission-section mb-5">
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <div class="card border-0 shadow-lg h-100 vision-card">
+            <div class="card-header bg-primary text-white border-0 rounded-top-4 py-4">
+              <div class="d-flex align-items-center justify-content-center">
+                <i class="bi bi-eye-fill me-3 fs-3"></i>
+                <h3 class="mb-0 fw-bold">비전 (Vision)</h3>
+              </div>
+            </div>
+            <div class="card-body p-5">
+              <h4 class="text-primary fw-bold mb-4">"모든 장애인이 존엄한 삶을 살 수 있는 포용적 사회 구현"</h4>
+              <p class="text-muted mb-0 lead">장애인의 권리와 존엄성을 보장하고, 사회의 모든 영역에서 장애인이 차별 없이 참여할 수 있는 포용적 사회를 만들어 나갑니다.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-6">
+          <div class="card border-0 shadow-lg h-100 vision-card">
+            <div class="card-header bg-success text-white border-0 rounded-top-4 py-4">
+              <div class="d-flex align-items-center justify-content-center">
+                <i class="bi bi-target me-3 fs-3"></i>
+                <h3 class="mb-0 fw-bold">미션 (Mission)</h3>
+              </div>
+            </div>
+            <div class="card-body p-5">
+              <h4 class="text-success fw-bold mb-4">"장애인 복지 증진과 사회 통합을 위한 선도적 역할"</h4>
+              <p class="text-muted mb-0 lead">관악구 지역 내 장애인들의 복지 증진과 사회 통합을 위해 다양한 사업과 프로그램을 개발하고 운영합니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 핵심 가치 섹션 -->
+    <section class="mb-5">
+      <div class="card border-0 shadow-lg">
+        <div class="card-header bg-info text-white border-0 rounded-top-4 py-4">
+          <div class="text-center">
+            <i class="bi bi-heart-fill fs-3 mb-2"></i>
+            <h3 class="mb-0 fw-bold">핵심 가치</h3>
+          </div>
+        </div>
+        <div class="card-body p-5">
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+              <div class="value-card card border-0 bg-light h-100">
+                <div class="card-body text-center p-4">
+                  <div class="icon-circle bg-primary bg-opacity-10 text-primary d-inline-flex align-items-center justify-content-center rounded-circle mb-3" style="width: 60px; height: 60px;">
+                    <i class="bi bi-person-badge fs-4"></i>
+                  </div>
+                  <h5 class="fw-bold text-primary mb-3">존엄성 (Dignity)</h5>
+                  <p class="text-muted mb-0 small">모든 장애인의 인간으로서의 존엄성을 최우선으로 생각하며, 개인의 독립성과 자율성을 존중합니다.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+              <div class="value-card card border-0 bg-light h-100">
+                <div class="card-body text-center p-4">
+                  <div class="icon-circle bg-success bg-opacity-10 text-success d-inline-flex align-items-center justify-content-center rounded-circle mb-3" style="width: 60px; height: 60px;">
+                    <i class="bi bi-arrow-left-right fs-4"></i>
+                  </div>
+                  <h5 class="fw-bold text-success mb-3">평등성 (Equality)</h5>
+                  <p class="text-muted mb-0 small">장애 유무에 관계없이 모든 사람이 평등한 기회와 권리를 가질 수 있도록 노력합니다.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+              <div class="value-card card border-0 bg-light h-100">
+                <div class="card-body text-center p-4">
+                  <div class="icon-circle bg-info bg-opacity-10 text-info d-inline-flex align-items-center justify-content-center rounded-circle mb-3" style="width: 60px; height: 60px;">
+                    <i class="bi bi-people-fill fs-4"></i>
+                  </div>
+                  <h5 class="fw-bold text-info mb-3">포용성 (Inclusion)</h5>
+                  <p class="text-muted mb-0 small">장애인이 사회의 모든 영역에 차별 없이 참여할 수 있도록 지원하고 촉진합니다.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+              <div class="value-card card border-0 bg-light h-100">
+                <div class="card-body text-center p-4">
+                  <div class="icon-circle bg-warning bg-opacity-10 text-warning d-inline-flex align-items-center justify-content-center rounded-circle mb-3" style="width: 60px; height: 60px;">
+                    <i class="bi bi-handshake fs-4"></i>
+                  </div>
+                  <h5 class="fw-bold text-warning mb-3">연대성 (Solidarity)</h5>
+                  <p class="text-muted mb-0 small">지역사회와 함께 협력하여 장애인 복지 향상을 위한 공동의 노력을 기울입니다.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 주요 목표 섹션 -->
+    <section class="mb-5">
+      <div class="card border-0 shadow-lg">
+        <div class="card-header bg-warning text-dark border-0 rounded-top-4 py-4">
+          <div class="text-center">
+            <i class="bi bi-bullseye fs-3 mb-2"></i>
+            <h3 class="mb-0 fw-bold">주요 목표</h3>
+          </div>
+        </div>
+        <div class="card-body p-5">
+          <div class="row g-4">
+            <div class="col-md-6">
+              <div class="goal-card card border-0 bg-light h-100 p-4">
+                <h5 class="fw-bold text-primary mb-3">
+                  <i class="bi bi-shield-check me-2"></i>1. 장애인 권익 보호
+                </h5>
+                <ul class="list-unstyled mb-0">
+                  <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>장애인 차별 금지 및 권리 보호</li>
+                  <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>장애인 접근성 향상</li>
+                  <li class="mb-0"><i class="bi bi-check-circle-fill text-success me-2"></i>장애인 정보 접근권 보장</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="col-md-6">
+              <div class="goal-card card border-0 bg-light h-100 p-4">
+                <h5 class="fw-bold text-success mb-3">
+                  <i class="bi bi-heart-pulse me-2"></i>2. 복지 서비스 확대
+                </h5>
+                <ul class="list-unstyled mb-0">
+                  <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>장애인 맞춤형 복지 서비스 개발</li>
+                  <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>장애인 자립생활 지원</li>
+                  <li class="mb-0"><i class="bi bi-check-circle-fill text-success me-2"></i>장애인 가족 지원 프로그램 운영</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="col-md-6">
+              <div class="goal-card card border-0 bg-light h-100 p-4">
+                <h5 class="fw-bold text-info mb-3">
+                  <i class="bi bi-person-workspace me-2"></i>3. 사회 참여 확대
+                </h5>
+                <ul class="list-unstyled mb-0">
+                  <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>장애인 문화·예술 활동 지원</li>
+                  <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>장애인 스포츠 활동 활성화</li>
+                  <li class="mb-0"><i class="bi bi-check-circle-fill text-success me-2"></i>장애인 직업 재활 프로그램 운영</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="col-md-6">
+              <div class="goal-card card border-0 bg-light h-100 p-4">
+                <h5 class="fw-bold text-warning mb-3">
+                  <i class="bi bi-diagram-3 me-2"></i>4. 지역사회 협력
+                </h5>
+                <ul class="list-unstyled mb-0">
+                  <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>지역사회와의 협력 네트워크 구축</li>
+                  <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>장애인 인식 개선 교육</li>
+                  <li class="mb-0"><i class="bi bi-check-circle-fill text-success me-2"></i>장애인 복지 정책 제안 및 모니터링</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2025년 주요 추진활동 섹션 -->
+    <section class="mb-5">
+      <div class="card border-0 shadow-lg">
+        <div class="card-header bg-danger text-white border-0 rounded-top-4 py-4">
+          <div class="text-center">
+            <i class="bi bi-calendar-check fs-3 mb-2"></i>
+            <h3 class="mb-0 fw-bold">2026년 주요 추진활동</h3>
+          </div>
+        </div>
+        <div class="card-body p-5">
+          <ul class="activity-list mb-0">
+            <li>저소득장애인 주거환경개선 사업</li>
+            <li>장애인 전동보조기기 이용자 안전교육</li>
+            <li>장애인 이동기기 클린서비스 사업</li>
+            <li>장애인 이동봉사차량 운영</li>
+            <li>장애인의 날 기념행사 개최</li>
+            <li>장애인 문화체험 여가활동</li>
+            <li>장애인 무료 이·미용 봉사서비스</li>
+            <li>환경봉사단 구성.운영 (클린&짜장면 데이 장애인 환경봉사대)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer pt-4 pb-5 mt-5">
+    <div class="container">
+      <div class="row g-3">
+        <div class="col-12 col-lg-8">
+          <a class="footer-brand d-inline-flex align-items-center gap-2 mb-2" href="index.html">
+            <img src="img/main.jpg" alt="관악구장애인단체연합회 로고" />
+            <span class="fw-bold text-white">관악구장애인단체연합회</span>
+          </a>
+          <div class="small text-secondary">고유번호:119-82-74874 | 협회장: 송 낙 규</div>
+          <div class="small text-secondary">서울특별시 남부순환로 1696, 뉴명지빌딩 (5,6,7층) | 대표 02-871-5686 | FAX 02-3281-3702</div>
+          <div class="small text-secondary">Copyright &copy; 2025 관악구장애인단체연합회. All Rights Reserved.</div>
+        </div>
+        <div class="col-12 col-lg-4">
+          <div class="d-flex gap-3 justify-content-lg-end small">
+            <a href="terms.html">이용약관</a>
+            <a href="privacy.html">개인정보처리방침</a>
+            <a href="email-policy.html">이메일무단수집거부</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // 로그인 상태 확인
+    async function checkLoginStatus() {
+      try {
+        const res = await fetch('/api/user', {
+          credentials: 'include'
+        });
+        const data = await res.json();
+        
+        if (data.loggedIn) {
+          document.getElementById('userInfo').style.display = 'block';
+          document.getElementById('guestInfo').style.display = 'none';
+          document.getElementById('usernameDisplay').textContent = `${data.username}님`;
+        } else {
+          document.getElementById('userInfo').style.display = 'none';
+          document.getElementById('guestInfo').style.display = 'block';
+        }
+      } catch (error) {
+        console.error('Error checking login status:', error);
+      }
+    }
+    
+    checkLoginStatus();
+  </script>
+</body>
+</html>

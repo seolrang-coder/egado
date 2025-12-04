@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>후원 신청 관리 | 관악구장애인단체연합회</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <style>
+    .status-badge {
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+    .status-pending { background: #fff3cd; color: #856404; }
+    .status-confirmed { background: #d1ecf1; color: #0c5460; }
+    .status-completed { background: #d4edda; color: #155724; }
+    .status-cancelled { background: #f8d7da; color: #721c24; }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="/index.html">
+        <strong>관악구장애인단체연합회</strong>
+      </a>
+      <div class="ms-auto d-flex gap-2 align-items-center flex-wrap">
+        <span class="navbar-text">안녕하세요, <strong><%= currentUser.username %></strong>님</span>
+        <a href="/admin/users" class="btn btn-outline-primary btn-sm">
+          <i class="bi bi-people me-1"></i>회원 관리
+        </a>
+        <a href="/admin/sponsors" class="btn btn-primary btn-sm">
+          <i class="bi bi-heart me-1"></i>후원 관리
+        </a>
+        <a href="/admin/settings" class="btn btn-outline-primary btn-sm">
+          <i class="bi bi-gear me-1"></i>사이트 설정
+        </a>
+        <a href="/index.html" class="btn btn-outline-secondary btn-sm">홈으로</a>
+        <form action="/logout" method="post" class="d-inline">
+          <button type="submit" class="btn btn-outline-secondary btn-sm">로그아웃</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h2 class="mb-1">후원 신청 관리</h2>
+        <p class="text-muted mb-0">총 <strong><%= totalCount %></strong>건의 후원 신청</p>
+      </div>
+    </div>
+
+    <!-- 상태 필터 -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <div class="d-flex gap-2 flex-wrap">
+          <a href="/admin/sponsors?status=all" class="btn <%= currentStatus === 'all' ? 'btn-primary' : 'btn-outline-primary' %> btn-sm">
+            전체
+          </a>
+          <a href="/admin/sponsors?status=pending" class="btn <%= currentStatus === 'pending' ? 'btn-warning' : 'btn-outline-warning' %> btn-sm">
+            대기중
+          </a>
+          <a href="/admin/sponsors?status=confirmed" class="btn <%= currentStatus === 'confirmed' ? 'btn-info' : 'btn-outline-info' %> btn-sm">
+            확인됨
+          </a>
+          <a href="/admin/sponsors?status=completed" class="btn <%= currentStatus === 'completed' ? 'btn-success' : 'btn-outline-success' %> btn-sm">
+            완료
+          </a>
+          <a href="/admin/sponsors?status=cancelled" class="btn <%= currentStatus === 'cancelled' ? 'btn-danger' : 'btn-outline-danger' %> btn-sm">
+            취소됨
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 후원 신청 목록 -->
+    <div class="card">
+      <div class="card-body p-0">
+        <% if (sponsors.length === 0) { %>
+          <div class="text-center py-5 text-muted">
+            <i class="bi bi-inbox fs-1 d-block mb-3"></i>
+            <p>후원 신청이 없습니다.</p>
+          </div>
+        <% } else { %>
+          <div class="table-responsive">
+            <table class="table table-hover mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th>ID</th>
+                  <th>성함</th>
+                  <th>연락처</th>
+                  <th>이메일</th>
+                  <th>후원 형태</th>
+                  <th>금액</th>
+                  <th>상태</th>
+                  <th>신청일</th>
+                  <th>관리</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% sponsors.forEach(sponsor => { %>
+                  <tr>
+                    <td><%= sponsor.id %></td>
+                    <td><strong><%= sponsor.name %></strong></td>
+                    <td><%= sponsor.phone %></td>
+                    <td><%= sponsor.email || '-' %></td>
+                    <td>
+                      <% 
+                        const typeMap = {
+                          'regular': '정기후원',
+                          'one_time': '일시후원',
+                          'corporate': '기업/단체 후원'
+                        };
+                      %>
+                      <%= typeMap[sponsor.sponsor_type] || sponsor.sponsor_type %>
+                    </td>
+                    <td>
+                      <% if (sponsor.amount) { %>
+                        <%= sponsor.amount.toLocaleString() %>원
+                      <% } else { %>
+                        -
+                      <% } %>
+                    </td>
+                    <td>
+                      <% 
+                        const statusMap = {
+                          'pending': { class: 'status-pending', text: '대기중' },
+                          'confirmed': { class: 'status-confirmed', text: '확인됨' },
+                          'completed': { class: 'status-completed', text: '완료' },
+                          'cancelled': { class: 'status-cancelled', text: '취소됨' }
+                        };
+                        const status = statusMap[sponsor.status] || { class: 'status-pending', text: sponsor.status };
+                      %>
+                      <span class="status-badge <%= status.class %>"><%= status.text %></span>
+                    </td>
+                    <td><%= new Date(sponsor.created_at).toLocaleDateString('ko-KR') %></td>
+                    <td>
+                      <a href="/admin/sponsors/<%= sponsor.id %>" class="btn btn-sm btn-outline-primary">
+                        <i class="bi bi-eye"></i> 상세
+                      </a>
+                    </td>
+                  </tr>
+                <% }); %>
+              </tbody>
+            </table>
+          </div>
+        <% } %>
+      </div>
+    </div>
+
+    <!-- 페이지네이션 -->
+    <% if (totalPages > 1) { %>
+      <nav aria-label="페이지 네비게이션" class="mt-4">
+        <ul class="pagination justify-content-center">
+          <% if (currentPage > 1) { %>
+            <li class="page-item">
+              <a class="page-link" href="/admin/sponsors?page=<%= currentPage - 1 %>&status=<%= currentStatus %>">이전</a>
+            </li>
+          <% } %>
+          <% for (let i = 1; i <= totalPages; i++) { %>
+            <li class="page-item <%= i === currentPage ? 'active' : '' %>">
+              <a class="page-link" href="/admin/sponsors?page=<%= i %>&status=<%= currentStatus %>"><%= i %></a>
+            </li>
+          <% } %>
+          <% if (currentPage < totalPages) { %>
+            <li class="page-item">
+              <a class="page-link" href="/admin/sponsors?page=<%= currentPage + 1 %>&status=<%= currentStatus %>">다음</a>
+            </li>
+          <% } %>
+        </ul>
+      </nav>
+    <% } %>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+

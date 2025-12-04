@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>관악구장애인단체연합회 | 홈</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--brand:#4b4b8f;--brand-dark:#352f74;--muted:#6c757d;--bg:#f3f3f3}
+    body{font-family:'Noto Sans KR',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:#fff;color:#222}
+    .topbar{font-size:12px;background:#f8f9fa;border-bottom:1px solid #e9ecef}
+    .navbar-brand img{height:44px}
+    .brand-title{font-weight:800;color:var(--brand-dark);font-size:1.95rem;letter-spacing:-.2px}
+    @media (max-width: 576px){.brand-title{display:none}}
+    .mainnav{border-bottom:1px solid #e9ecef}
+    .mainnav .nav-link{font-weight:600;color:#333}
+    .mainnav .nav-link:hover{color:var(--brand)}
+    .hero{position:relative;height:420px;background-position:center;background-size:cover;background-repeat:no-repeat}
+    .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.45))}
+    .hero-content{position:relative;z-index:2;color:#fff;padding-top:80px}
+    .hero h1{font-weight:800;letter-spacing:-.2px}
+    .hero p{font-size:18px;color:#e9ecef}
+    .section{padding:48px 0}
+    .cards-3 .card{border:0;box-shadow:0 4px 16px rgba(0,0,0,.08);transition:transform 0.3s ease,box-shadow 0.3s ease;border-radius:0.75rem;overflow:hidden}
+    .cards-3 .card:hover{transform:translateY(-5px);box-shadow:0 8px 20px rgba(0,0,0,.15)}
+    .cards-3 .card-title{font-weight:700}
+    .cards-3 .card .card-body{display:flex;flex-direction:column;align-items:center;text-align:center}
+    .cards-3 .card .card-title{text-align:center;width:100%}
+    .cards-3 .card .card-body .btn{margin-top:auto}
+    .card-cover{width:100%;height:220px;background-position:center;background-size:cover;background-repeat:no-repeat;border-radius:0.75rem 0.75rem 0 0}
+    .panel{background:#fff;border:0;box-shadow:0 2px 10px rgba(0,0,0,.08);border-radius:0.75rem;transition:box-shadow 0.3s ease}
+    .panel:hover{box-shadow:0 4px 15px rgba(0,0,0,.12)}
+    .panel-header{background:linear-gradient(135deg,#4b4b8f 0%,#352f74 100%);color:#fff;padding:1rem 1.5rem;border-bottom:0;font-weight:700;border-radius:0.75rem 0.75rem 0 0;display:flex;justify-content:space-between;align-items:center}
+    .panel-body{padding:1.5rem}
+    .list-compact{list-style:none;padding-left:0;margin:0}
+    .list-compact li{display:flex;justify-content:space-between;gap:1rem;padding:.75rem 0;border-bottom:1px dashed #e9ecef;transition:background 0.2s ease}
+    .list-compact li:hover{background:#f8f9fa;padding-left:0.5rem;border-radius:0.25rem}
+    .list-compact li:last-child{border-bottom:0}
+    .mission-section{background:linear-gradient(135deg,#f8f9fa 0%,#e9ecef 100%);border-radius:1rem;padding:3rem 2rem}
+    .mission-section h3{color:var(--brand-dark);font-weight:800}
+    .mission-section p{color:#6c757d;line-height:1.8}
+    .partners{background:#f8f9fa;border-top:1px solid #e9ecef;border-bottom:1px solid #e9ecef;padding:2rem 0}
+    .partners a{transition:transform 0.3s ease,opacity 0.3s ease}
+    .partners a:hover{transform:scale(1.1);opacity:0.8}
+    .partners{background:#f8f9fa;border-top:1px solid #e9ecef;border-bottom:1px solid #e9ecef}
+    .partners img{height:48px;filter:none;opacity:1}
+    @media (max-width: 576px){.partners img{height:36px}}
+    .footer{background:#2d2142;color:#d9d6e5}
+    .footer a{color:#e3def2;text-decoration:none}
+    .footer a:hover{text-decoration:underline}
+    .footer-brand img{height:36px}
+  </style>
+</head>
+<body>
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="container d-flex justify-content-end align-items-center gap-3 py-1">
+      <div id="userInfo" style="display:none;">
+        <span id="usernameDisplay" class="text-muted me-2"></span>
+        <form action="/logout" method="post" style="display:inline;">
+          <button type="submit" class="btn btn-link link-secondary p-0" style="text-decoration:none;">로그아웃</button>
+        </form>
+      </div>
+      <div id="guestInfo">
+        <a href="login.html" class="link-secondary">로그인</a>
+        <a href="register.html" class="link-secondary">회원가입</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white mainnav">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-3" href="index.html">
+        <img src="img/footer-logo.png" alt="로고" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="토글 내비게이션">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="about.html" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">협회소개</a>
+            <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+              <li><a class="dropdown-item" href="about.html">협회소개</a></li>
+              <li><a class="dropdown-item" href="org.html">조직도</a></li>
+              <li><a class="dropdown-item" href="history.html">연혁</a></li>
+              <li><a class="dropdown-item" href="vision.html">비전</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="business.html">협회사업</a></li>
+          <li class="nav-item"><a class="nav-link" href="info.html">정보마당</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="activity-lovehouse.html" id="activityDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">행사 및 활동</a>
+            <ul class="dropdown-menu" aria-labelledby="activityDropdown">
+              <li><a class="dropdown-item" href="activity-lovehouse.html">러브하우스</a></li>
+              <li><a class="dropdown-item" href="activity-volunteer.html">행사 및 환경봉사단</a></li>
+              <li><a class="dropdown-item" href="activity-mobilitycare.html">전동보장구교육&amp;케어</a></li>
+              <li><a class="dropdown-item" href="activity-beauty.html">무료 이·미용 봉사</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="/board">게시판</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="affiliateDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">연합회소속단체</a>
+            <ul class="dropdown-menu" aria-labelledby="affiliateDropdown">
+              <li><a class="dropdown-item" href="http://www.sappd.or.kr/" target="_blank" rel="noopener noreferrer">사)서울지체장애인협회</a></li>
+              <li><a class="dropdown-item" href="http://www.kadi.or.kr/kadi/" target="_blank" rel="noopener noreferrer">사)한국장애인정보화협회</a></li>
+              <li><a class="dropdown-item" href="https://kaiad.or.kr/" target="_blank" rel="noopener noreferrer">사)한국산업재해장애인협회</a></li>
+              <li><a class="dropdown-item" href="http://www.kaed.or.kr/" target="_blank" rel="noopener noreferrer">사)한국장애인기업협회</a></li>
+              <li><a class="dropdown-item" href="http://www.nanum.tv/" target="_blank" rel="noopener noreferrer">사)국제장애인문화교류협회</a></li>
+              <li><a class="dropdown-item" href="http://www.kofd.co.kr/kofd/" target="_blank" rel="noopener noreferrer">사)한국기능장애인협회</a></li>
+              <li><a class="dropdown-item" href="https://www.deafkorea.com/main/" target="_blank" rel="noopener noreferrer">사)한국농아인협회</a></li>
+              <li><a class="dropdown-item" href="http://www.bluesky82.org/" target="_blank" rel="noopener noreferrer">사)한국장애인문화협회</a></li>
+              <li><a class="dropdown-item" href="https://www.kdwa.or.kr/main" target="_blank" rel="noopener noreferrer">사)서울신체장애인복지회</a></li>
+              <li><a class="dropdown-item" href="#">사)열린정보장애인협회</a></li>
+              <li><a class="dropdown-item" href="#">사)서울시각장애인연합회</a></li>
+              <li><a class="dropdown-item" href="#">사)한국장애인환경실천협회</a></li>
+              <li><a class="dropdown-item" href="nanum.html">전국장애인나눔협동조합</a></li>
+              <li><a class="dropdown-item" href="aboutgolf.html">한국장애인스크린파크골프협회</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="directions.html">오시는길</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="heroSection" style="background-image:url('img/hero.jpg')">
+    <div class="container hero-content">
+      <div class="col-12 col-lg-8">
+        <h1 class="display-5 mb-3">장애인 삶의 질 향상</h1>
+        <p class="mb-4">더욱 더 발전하는 협회가 되도록 모든 임직원이 한마음 한뜻으로 최선을 다하겠습니다.</p>
+        <div class="d-flex gap-2 flex-wrap">
+          <a href="business.html" class="btn btn-primary px-4">
+            <i class="bi bi-briefcase me-2"></i>협회사업
+          </a>
+          <a href="board.html" class="btn btn-outline-light px-4">
+            <i class="bi bi-bell me-2"></i>공지사항 보기
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Start -->
+  <section class="about-section py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
+                <div class="about-img position-relative">
+                    <img id="aboutImage" src="img/0009.jpg" alt="관악구장애인단체연합회" class="img-fluid rounded-4 shadow">
+                    <div class="about-overlay position-absolute top-0 start-0 w-100 h-100 bg-primary bg-opacity-10 rounded-4"></div>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-6">
+                <div class="about-content">
+                    <div class="section-header mb-4">
+                        <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill mb-3">
+                            
+                        </span>
+                        <h2 class="display-5 fw-bold text-dark mb-3">
+                            <i class="bi bi-building text-primary me-2"></i>관악구장애인단체연합회
+                        </h2>
+                    </div>
+                    <div class="about-text">
+                        <p class="lead text-muted mb-4">
+                            관악구장애인단체연합회는 지역 내 장애인들의 권익 보호와 복지 향상을 위해 설립된 비영리 민간 단체입니다.
+                        </p>
+                        <div class="features-list mb-4">
+                            <div class="feature-item d-flex align-items-center mb-3">
+                                <div class="feature-icon me-3">
+                                    <i class="bi bi-check-circle-fill text-success fs-5"></i>
+                                </div>
+                                <span class="text-muted">장애인의 사회참여 확대 및 재활 지원</span>
+                            </div>
+                            <div class="feature-item d-flex align-items-center mb-3">
+                                <div class="feature-icon me-3">
+                                    <i class="bi bi-check-circle-fill text-success fs-5"></i>
+                                </div>
+                                <span class="text-muted">장애인에 대한 사회 인식 개선</span>
+                            </div>
+                            <div class="feature-item d-flex align-items-center">
+                                <div class="feature-icon me-3">
+                                    <i class="bi bi-check-circle-fill text-success fs-5"></i>
+                                </div>
+                                <span class="text-muted">포용적인 지역사회 구축</span>
+                            </div>
+                        </div>
+                        <a class="btn btn-primary btn-lg px-4 py-2 rounded-pill" href="sponsor.html">
+                            <i class="bi bi-heart me-2"></i>후원안내 및 신청<i class="bi bi-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- About End -->
+
+ <!-- News & Notices -->
+ <section class="section pt-0">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-12 col-lg-8">
+        <div class="panel h-100">
+          <div class="panel-header d-flex justify-content-between align-items-center">
+            <span><i class="bi bi-megaphone me-2"></i>협회알림</span>
+            <a class="btn btn-sm btn-outline-light" href="board.html">
+              <i class="bi bi-arrow-right-circle me-1"></i>더보기
+            </a>
+          </div>
+          <div class="panel-body">
+            <ul class="list-compact" id="announcementsList">
+              <li><span class="text-muted">로딩 중...</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <div class="panel h-100">
+          <div class="panel-header d-flex justify-content-between align-items-center">
+            <span><i class="bi bi-bell me-2"></i>공지사항</span>
+            <a class="btn btn-sm btn-outline-light" href="board.html">
+              <i class="bi bi-arrow-right-circle me-1"></i>더보기
+            </a>
+          </div>
+          <div class="panel-body">
+            <ul class="list-compact" id="noticesList">
+              <li><span class="text-muted">로딩 중...</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Mission Section -->
+  <section class="mission-section my-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center mb-4">
+          <i class="bi bi-heart-fill text-danger display-6 mb-3"></i>
+          <h3 class="fw-bold mb-2">장애인과 비장애인이 함께</h3>
+          <h3 class="fw-bold mb-4">행복한 미래를 만들어 나갑니다.</h3>
+        </div>
+        <div class="col-12 col-lg-10 mx-auto">
+          <div class="card border-0 shadow-lg">
+            <div class="card-body p-5">
+              <p class="lead text-muted mb-3">관악구장애인단체연합회는 1991년 설립되어 현재 15개 장애인단체를 회원으로 두고 있는 단체로서 지역 장애인의 권익을 증진, 보호하고 장애인복지를 발전시켜 장애인이 살기 좋은 따뜻한 관악구글 만들기 위해 최선의 노력을 기울이고 있습니다.</p>
+              <p class="text-muted mb-3">관악구장애인단체연합회는 관악구장애인단체의 협의체로서의 중심적 역할을 할 것이며, 인간의 존엄과 가치를 존중하며 지역 사회참여와 평등을 실현하고 장애인과 비장애인이 보다 더 나은 삶을 살아갈 수 있도록 사회 환경을 개선하고 정책을 마련하는데 최선을 다할 것입니다.</p>
+              <p class="text-muted mb-3">관악구장애인단체는 장애인과 비장애인이 함께 행복한 미래를 꿈꾸며 복지사업 활동에 더욱 더 힘차게 뛰어 관악구민들의 대변자로서의 역할을 충실히 할 것을 다짐하고 사업을 통하여 단체와 장애인인 모두가 함께 성장하고 함께 만들어가는 밝은 사회를 위해 정성을 다하겠습니다.</p>
+              <p class="text-muted mb-0">관악구장애인단체연합회는 지역 장애인과 비장애인이 항상 함께하며 지역사회를 대표하는 여러분들의 따뜻한 관심과 사랑 그리고 아낌없는 성원과 지원을 부탁드립니다.</p>
+              <div class="text-center mt-4">
+                <h5 class="text-primary fw-bold">
+                  <i class="bi bi-quote me-2"></i>관악구장애인단체연합회 일동<i class="bi bi-quote ms-2"></i>
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intro cards -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="row g-4 cards-3">
+        <!-- 카드 1 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card h-100">
+            <div class="card-cover" style="background-image:url('img/service-1.jpg')"></div>
+            <div class="card-body">
+              <h5 class="card-title">
+                <i class="bi bi-house-heart text-success me-2"></i>주거환경개선사업
+              </h5>
+              <p class="card-text text-muted">거주환경개선사업을 통해 장애인과 저소득층의 주거환경을 개선합니다.</p>
+              <a href="activity-lovehouse.html" class="btn btn-outline-success btn-sm">
+                <i class="bi bi-arrow-right-circle me-1"></i>러브하우스
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- 카드 2 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card h-100">
+            <div class="card-cover" style="background-image:url('img/about.jpg')"></div>
+            <div class="card-body">
+              <h5 class="card-title">
+                <i class="bi bi-people-fill text-info me-2"></i>환경봉사단
+              </h5>
+              <p class="card-text text-muted">환경봉사 활동과 함께하는 의미있는 시간을 만들어갑니다.</p>
+              <a href="activity-volunteer.html" class="btn btn-outline-info btn-sm">
+                <i class="bi bi-arrow-right-circle me-1"></i>클린&짜장면데이
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- 카드 3 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card h-100">
+            <div class="card-cover" style="background-image:url('img/service-4.jpg')"></div>
+            <div class="card-body">
+              <h5 class="card-title">
+                <i class="bi bi-tools text-warning me-2"></i>전동보장구교육
+              </h5>
+              <p class="card-text text-muted">전동보장구 사용법 교육 및 케어서비스를 제공합니다.</p>
+              <a href="activity-mobilitycare.html" class="btn btn-outline-warning btn-sm">
+                <i class="bi bi-arrow-right-circle me-1"></i>전동보장구교육
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- 카드 4 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card h-100">
+            <div class="card-cover" style="background-image:url('img/service-6.jpg')"></div>
+            <div class="card-body">
+              <h5 class="card-title">
+                <i class="bi bi-gear text-warning me-2"></i>전동보장구 케어서비스
+              </h5>
+              <p class="card-text text-muted">전동휠체어/장애인보장구/무료검사/세척행사</p>
+              <a href="activity-mobilitycare.html" class="btn btn-outline-warning btn-sm">
+                <i class="bi bi-arrow-right-circle me-1"></i>케어서비스
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- 카드 5 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card h-100">
+            <div class="card-cover" style="background-image:url('img/service-3.jpg')"></div>
+            <div class="card-body">
+              <h5 class="card-title">
+                <i class="bi bi-scissors text-danger me-2"></i>무료 이·미용 봉사
+              </h5>
+              <p class="card-text text-muted">무료 이·미용 봉사 활동을 통해 지역사회에 기여합니다.</p>
+              <a href="activity-beauty.html" class="btn btn-outline-danger btn-sm">
+                <i class="bi bi-arrow-right-circle me-1"></i>무료 이·미용 봉사
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- 카드 6 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card h-100">
+            <div class="card-cover" style="background-image:url('img/service-5.jpg')"></div>
+            <div class="card-body">
+              <h5 class="card-title">
+                <i class="bi bi-building text-primary me-2"></i>주거협동조합
+              </h5>
+              <p class="card-text text-muted">협동조합기본법에 따라 주택의 공동 구매, 건설, 관리 등을 목적으로 하는 협동조합을 추진합니다.</p>
+              <a href="business.html" class="btn btn-outline-primary btn-sm">
+                <i class="bi bi-arrow-right-circle me-1"></i>주거협동조합
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partners -->
+  <section class="partners py-3 mt-4">
+    <div class="container d-flex flex-wrap justify-content-center align-items-center gap-4">
+      <a href="https://www.gwanak.go.kr" target="_blank" rel="noopener" aria-label="관악구청 바로가기">
+        <img src="img/banner-1.jpg" alt="관악구청" />
+      </a>
+      <a href="https://www.seoul.go.kr" target="_blank" rel="noopener" aria-label="서울특별시 바로가기">
+        <img src="img/banner-2.jpg" alt="서울시" />
+      </a>
+      <a href="https://www.moel.go.kr" target="_blank" rel="noopener" aria-label="고용노동부 바로가기">
+        <img src="img/banner-3.jpg" alt="고용노동부" />
+      </a>
+      <a href="https://www.mohw.go.kr" target="_blank" rel="noopener" aria-label="보건복지부 바로가기">
+        <img src="img/banner-4.jpg" alt="보건복지부" />
+      </a>
+      <a href="http://www.kappd.or.kr/" target="_blank" rel="noopener" aria-label="한국지체장애인협회 바로가기">
+        <img src="img/banner-5.jpg" alt="한국지체장애인협회" />
+      </a>
+      <a href="https://www.1365.go.kr" target="_blank" rel="noopener" aria-label="1365 자원봉사포털 바로가기">
+        <img src="img/banner-6.jpg" alt="1365자원봉사포털" />
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer pt-4 pb-5 mt-0">
+    <div class="container">
+      <div class="row g-3">
+        <div class="col-12 col-lg-8">
+          <a class="footer-brand d-inline-flex align-items-center gap-2 mb-2" href="index.html">
+            <img src="img/main.jpg" alt="관악구장애인단체연합회 로고" />
+            <span class="fw-bold text-white">관악구장애인단체연합회</span>
+          </a>
+          <div class="small text-secondary">고유번호:119-82-74874 | 협회장: 송 낙 규</div>
+          <div class="small text-secondary">서울특별시 남부순환로 1696, 뉴명지빌딩 (5,6,7층) | 대표 02-871-5686 | FAX 02-3281-3702</div>
+          <div class="small text-secondary">Copyright &copy; 2025 관악구장애인단체연합회. All Rights Reserved.</div>
+        </div>
+        <div class="col-12 col-lg-4">
+          <div class="d-flex gap-3 justify-content-lg-end small">
+            <a href="terms.html">이용약관</a>
+            <a href="privacy.html">개인정보처리방침</a>
+            <a href="email-policy.html">이메일무단수집거부</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // 로그인 상태 확인
+    async function checkLoginStatus() {
+      try {
+        const res = await fetch('/api/user', {
+          credentials: 'include' // 쿠키 포함
+        });
+        const data = await res.json();
+        
+        if (data.loggedIn) {
+          document.getElementById('userInfo').style.display = 'block';
+          document.getElementById('guestInfo').style.display = 'none';
+          document.getElementById('usernameDisplay').textContent = `${data.username}님`;
+        } else {
+          document.getElementById('userInfo').style.display = 'none';
+          document.getElementById('guestInfo').style.display = 'block';
+        }
+      } catch (error) {
+        console.error('Error checking login status:', error);
+      }
+    }
+    
+    checkLoginStatus();
+    
+    // 사이트 설정 이미지 로드
+    async function loadSiteImages() {
+      try {
+        const res = await fetch('/api/site-settings', {
+          credentials: 'include'
+        });
+        const data = await res.json();
+        
+        if (data.heroImage) {
+          document.getElementById('heroSection').style.backgroundImage = `url('${data.heroImage}')`;
+        }
+        if (data.aboutImage) {
+          document.getElementById('aboutImage').src = data.aboutImage;
+        }
+      } catch (error) {
+        console.error('Error loading site images:', error);
+      }
+    }
+    
+    loadSiteImages();
+    
+    // 협회알림 로드
+    async function loadAnnouncements() {
+      try {
+        const res = await fetch('/api/announcements', {
+          credentials: 'include'
+        });
+        const data = await res.json();
+        
+        const list = document.getElementById('announcementsList');
+        if (data.announcements && data.announcements.length > 0) {
+          list.innerHTML = data.announcements.map(announcement => 
+            `<li><span>${announcement.content}</span></li>`
+          ).join('');
+        } else {
+          list.innerHTML = '<li><span class="text-muted">등록된 협회알림이 없습니다.</span></li>';
+        }
+      } catch (error) {
+        console.error('Error loading announcements:', error);
+        const list = document.getElementById('announcementsList');
+        list.innerHTML = '<li><span class="text-muted">협회알림을 불러오는 중 오류가 발생했습니다.</span></li>';
+      }
+    }
+    
+    loadAnnouncements();
+    
+    // 공지사항 로드
+    async function loadNotices() {
+      try {
+        const res = await fetch('/api/notices', {
+          credentials: 'include'
+        });
+        const data = await res.json();
+        
+        const list = document.getElementById('noticesList');
+        if (data.notices && data.notices.length > 0) {
+          list.innerHTML = data.notices.map(notice => {
+            let iconHtml = '';
+            if (notice.icon_class && notice.icon_color) {
+              iconHtml = `<i class="bi ${notice.icon_class} text-${notice.icon_color} me-2"></i>`;
+            }
+            const dateHtml = notice.notice_date ? `<small class="text-muted">${notice.notice_date}</small>` : '';
+            const linkStart = notice.link ? `<a href="${notice.link}" class="text-decoration-none text-dark">` : '';
+            const linkEnd = notice.link ? '</a>' : '';
+            
+            return `<li>${linkStart}<span>${iconHtml}${notice.title}</span>${dateHtml}${linkEnd}</li>`;
+          }).join('');
+        } else {
+          list.innerHTML = '<li><span class="text-muted">등록된 공지사항이 없습니다.</span></li>';
+        }
+      } catch (error) {
+        console.error('Error loading notices:', error);
+        const list = document.getElementById('noticesList');
+        list.innerHTML = '<li><span class="text-muted">공지사항을 불러오는 중 오류가 발생했습니다.</span></li>';
+      }
+    }
+    
+    loadNotices();
+  </script>
+</body>
+</html>

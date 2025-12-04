@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>회원가입 | 관악구장애인단체연합회</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--brand:#4b4b8f;--brand-dark:#352f74;--muted:#6c757d;--bg:#f3f3f3}
+    body{font-family:'Noto Sans KR',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:#fff;color:#222}
+    .topbar{font-size:12px;background:#f8f9fa;border-bottom:1px solid #e9ecef}
+    .navbar-brand img{height:44px}
+    .brand-title{font-weight:800;color:var(--brand-dark);font-size:1.95rem;letter-spacing:-.2px}
+    @media (max-width: 576px){.brand-title{display:none}}
+    .mainnav{border-bottom:1px solid #e9ecef}
+    .mainnav .nav-link{font-weight:600;color:#333}
+    .mainnav .nav-link:hover{color:var(--brand)}
+    .footer{background:#2d2142;color:#d9d6e5}
+    .footer a{color:#e3def2;text-decoration:none}
+    .footer a:hover{text-decoration:underline}
+    .footer-brand img{height:36px}
+    .username-check{display:flex;gap:0.5rem}
+    .username-check input{flex:1}
+    .check-result{font-size:0.875rem;margin-top:0.25rem}
+    .check-result.available{color:#28a745}
+    .check-result.unavailable{color:#dc3545}
+    .check-result.checking{color:#6c757d}
+  </style>
+</head>
+<body>
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="container d-flex justify-content-end align-items-center gap-3 py-1">
+      <div id="userInfo" style="display:none;">
+        <span id="usernameDisplay" class="text-muted me-2"></span>
+        <form action="/logout" method="post" style="display:inline;">
+          <button type="submit" class="btn btn-link link-secondary p-0" style="text-decoration:none;">로그아웃</button>
+        </form>
+      </div>
+      <div id="guestInfo">
+        <a href="login.html" class="link-secondary">로그인</a>
+        <a href="register.html" class="link-secondary">회원가입</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white mainnav">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-3" href="index.html">
+        <img src="img/footer-logo.png" alt="로고" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="토글 내비게이션">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="about.html" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">협회소개</a>
+            <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+              <li><a class="dropdown-item" href="about.html">협회소개</a></li>
+              <li><a class="dropdown-item" href="org.html">조직도</a></li>
+              <li><a class="dropdown-item" href="history.html">연혁</a></li>
+              <li><a class="dropdown-item" href="vision.html">비전</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="business.html">협회사업</a></li>
+          <li class="nav-item"><a class="nav-link" href="info.html">정보마당</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="activity-lovehouse.html" id="activityDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">행사 및 활동</a>
+            <ul class="dropdown-menu" aria-labelledby="activityDropdown">
+              <li><a class="dropdown-item" href="activity-lovehouse.html">러브하우스</a></li>
+              <li><a class="dropdown-item" href="activity-volunteer.html">행사 및 환경봉사단</a></li>
+              <li><a class="dropdown-item" href="activity-mobilitycare.html">전동보장구교육&amp;케어</a></li>
+              <li><a class="dropdown-item" href="activity-beauty.html">무료 이·미용 봉사</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="/board">게시판</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="affiliateDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">연합회소속단체</a>
+            <ul class="dropdown-menu" aria-labelledby="affiliateDropdown">
+              <li><a class="dropdown-item" href="http://www.sappd.or.kr/" target="_blank" rel="noopener noreferrer">사)서울지체장애인협회</a></li>
+              <li><a class="dropdown-item" href="http://www.kadi.or.kr/kadi/" target="_blank" rel="noopener noreferrer">사)한국장애인정보화협회</a></li>
+              <li><a class="dropdown-item" href="https://kaiad.or.kr/" target="_blank" rel="noopener noreferrer">사)한국산업재해장애인협회</a></li>
+              <li><a class="dropdown-item" href="http://www.kaed.or.kr/" target="_blank" rel="noopener noreferrer">사)한국장애인기업협회</a></li>
+              <li><a class="dropdown-item" href="http://www.nanum.tv/" target="_blank" rel="noopener noreferrer">사)국제장애인문화교류협회</a></li>
+              <li><a class="dropdown-item" href="http://www.kofd.co.kr/kofd/" target="_blank" rel="noopener noreferrer">사)한국기능장애인협회</a></li>
+              <li><a class="dropdown-item" href="https://www.deafkorea.com/main/" target="_blank" rel="noopener noreferrer">사)한국농아인협회</a></li>
+              <li><a class="dropdown-item" href="http://www.bluesky82.org/" target="_blank" rel="noopener noreferrer">사)한국장애인문화협회</a></li>
+              <li><a class="dropdown-item" href="https://www.kdwa.or.kr/main" target="_blank" rel="noopener noreferrer">사)서울신체장애인복지회</a></li>
+              <li><a class="dropdown-item" href="#">사)열린정보장애인협회</a></li>
+              <li><a class="dropdown-item" href="#">사)서울시각장애인연합회</a></li>
+              <li><a class="dropdown-item" href="#">사)한국장애인환경실천협회</a></li>
+              <li><a class="dropdown-item" href="nanum.html">전국장애인나눔협동조합</a></li>
+              <li><a class="dropdown-item" href="aboutgolf.html">한국장애인스크린파크골프협회</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="directions.html">오시는길</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-5" style="max-width:720px">
+    <h1 class="h3 fw-bold mb-4">회원가입</h1>
+    <div id="errorMessage" class="alert alert-danger" style="display:none;"></div>
+    <form id="registerForm" action="/register" method="post">
+      <div class="row g-3">
+        <div class="col-12">
+          <label class="form-label">아이디 <span class="text-danger">*</span></label>
+          <div class="username-check">
+            <input type="text" name="username" id="username" class="form-control" placeholder="아이디를 입력하세요" required>
+            <button type="button" id="checkUsernameBtn" class="btn btn-outline-primary">중복확인</button>
+          </div>
+          <div id="usernameCheckResult" class="check-result"></div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">이름</label>
+          <input type="text" name="name" class="form-control" placeholder="홍길동">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">이메일</label>
+          <input type="email" name="email" class="form-control" placeholder="you@example.com">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">비밀번호 <span class="text-danger">*</span></label>
+          <input type="password" name="password" id="password" class="form-control" minlength="6" placeholder="비밀번호는 6자 이상이어야 합니다" required>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">비밀번호 확인 <span class="text-danger">*</span></label>
+          <input type="password" name="passwordConfirm" id="passwordConfirm" class="form-control" placeholder="비밀번호를 다시 입력하세요" required>
+          <div id="passwordMatchResult" class="check-result"></div>
+        </div>
+        <div class="col-12">
+          <label class="form-label">연락처</label>
+          <input type="tel" name="phone" class="form-control" placeholder="010-0000-0000">
+        </div>
+        <div class="col-12">
+          <label class="form-label">주소</label>
+          <input type="text" name="address" class="form-control" placeholder="주소">
+        </div>
+        <div class="col-12 form-check ms-2">
+          <input class="form-check-input" type="checkbox" id="agree" required>
+          <label for="agree" class="form-check-label">이용약관 및 개인정보처리방침에 동의합니다. <span class="text-danger">*</span></label>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary mt-3" id="submitBtn">가입하기</button>
+    </form>
+    <div class="text-center mt-3">
+      <a href="login.html" class="small">이미 계정이 있으신가요? 로그인</a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer pt-4 pb-5 mt-0">
+    <div class="container">
+      <div class="row g-3">
+        <div class="col-12 col-lg-8">
+          <a class="footer-brand d-inline-flex align-items-center gap-2 mb-2" href="index.html">
+            <img src="img/main.jpg" alt="관악구장애인단체연합회 로고" />
+            <span class="fw-bold text-white">관악구장애인단체연합회</span>
+          </a>
+          <div class="small text-secondary">고유번호:119-82-74874 | 협회장: 송 낙 규</div>
+          <div class="small text-secondary">서울특별시 남부순환로 1696, 뉴명지빌딩 (5,6,7층) | 대표 02-871-5686 | FAX 02-3281-3702</div>
+          <div class="small text-secondary">Copyright &copy; 2025 관악구장애인단체연합회. All Rights Reserved.</div>
+        </div>
+        <div class="col-12 col-lg-4">
+          <div class="d-flex gap-3 justify-content-lg-end small">
+            <a href="terms.html">이용약관</a>
+            <a href="privacy.html">개인정보처리방침</a>
+            <a href="email-policy.html">이메일무단수집거부</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    let usernameChecked = false;
+    let usernameAvailable = false;
+
+    // 아이디 중복확인
+    document.getElementById('checkUsernameBtn').addEventListener('click', async function() {
+      const username = document.getElementById('username').value.trim();
+      const resultDiv = document.getElementById('usernameCheckResult');
+      
+      if (!username) {
+        resultDiv.textContent = '아이디를 입력하세요.';
+        resultDiv.className = 'check-result unavailable';
+        return;
+      }
+
+      if (username.length < 3) {
+        resultDiv.textContent = '아이디는 3자 이상이어야 합니다.';
+        resultDiv.className = 'check-result unavailable';
+        return;
+      }
+
+      resultDiv.textContent = '확인 중...';
+      resultDiv.className = 'check-result checking';
+
+      try {
+        const response = await fetch('/api/check-username', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          credentials: 'include',
+          body: JSON.stringify({ username })
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error('Server error:', response.status, errorText);
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log('Response data:', data);
+
+        if (data.available) {
+          resultDiv.textContent = '사용 가능한 아이디입니다.';
+          resultDiv.className = 'check-result available';
+          usernameChecked = true;
+          usernameAvailable = true;
+        } else {
+          resultDiv.textContent = data.message || '이미 사용 중인 아이디입니다.';
+          resultDiv.className = 'check-result unavailable';
+          usernameChecked = true;
+          usernameAvailable = false;
+        }
+      } catch (error) {
+        console.error('Fetch error:', error);
+        if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+          resultDiv.textContent = '서버에 연결할 수 없습니다. 서버가 실행 중인지 확인해주세요.';
+        } else {
+          resultDiv.textContent = '확인 중 오류가 발생했습니다.';
+        }
+        resultDiv.className = 'check-result unavailable';
+      }
+    });
+
+    // 아이디 입력 시 중복확인 초기화
+    document.getElementById('username').addEventListener('input', function() {
+      usernameChecked = false;
+      usernameAvailable = false;
+      document.getElementById('usernameCheckResult').textContent = '';
+    });
+
+    // 비밀번호 확인
+    document.getElementById('passwordConfirm').addEventListener('input', function() {
+      const password = document.getElementById('password').value;
+      const passwordConfirm = document.getElementById('passwordConfirm').value;
+      const resultDiv = document.getElementById('passwordMatchResult');
+
+      if (passwordConfirm) {
+        if (password === passwordConfirm) {
+          resultDiv.textContent = '비밀번호가 일치합니다.';
+          resultDiv.className = 'check-result available';
+        } else {
+          resultDiv.textContent = '비밀번호가 일치하지 않습니다.';
+          resultDiv.className = 'check-result unavailable';
+        }
+      } else {
+        resultDiv.textContent = '';
+      }
+    });
+
+    // 폼 제출 검증
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+      const password = document.getElementById('password').value;
+      const passwordConfirm = document.getElementById('passwordConfirm').value;
+      const errorDiv = document.getElementById('errorMessage');
+
+      // 아이디 중복확인 체크
+      if (!usernameChecked) {
+        e.preventDefault();
+        errorDiv.textContent = '아이디 중복확인을 해주세요.';
+        errorDiv.style.display = 'block';
+        return;
+      }
+
+      if (!usernameAvailable) {
+        e.preventDefault();
+        errorDiv.textContent = '사용 가능한 아이디를 입력해주세요.';
+        errorDiv.style.display = 'block';
+        return;
+      }
+
+      // 비밀번호 확인
+      if (password !== passwordConfirm) {
+        e.preventDefault();
+        errorDiv.textContent = '비밀번호가 일치하지 않습니다.';
+        errorDiv.style.display = 'block';
+        return;
+      }
+
+      if (password.length < 6) {
+        e.preventDefault();
+        errorDiv.textContent = '비밀번호는 6자 이상이어야 합니다.';
+        errorDiv.style.display = 'block';
+        return;
+      }
+
+      errorDiv.style.display = 'none';
+    });
+  </script>
+</body>
+</html>

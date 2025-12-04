@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= categoryName || '게시글 상세' %> | <%= typeof orgName !== 'undefined' ? orgName : (typeof orgType !== 'undefined' && orgType === 'coop' ? '전국장애인나눔협동조합' : (typeof orgType !== 'undefined' && orgType === 'golf' ? '한국장애인스크린파크골프협회' : '관악구장애인단체연합회')) %></title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brand: #4b4b8f;
+      --brand-dark: #352f74;
+      --muted: #6c757d;
+      --bg: #f8f9fa;
+    }
+    body {
+      font-family: 'Noto Sans KR', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background: var(--bg);
+      color: #222;
+    }
+    .navbar {
+      background: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .post-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+    .post-header {
+      background: linear-gradient(135deg, #6b7ba8 0%, #8a9bc4 100%);
+      color: #fff;
+      padding: 2rem;
+    }
+    .post-header.notice {
+      background: linear-gradient(135deg, #ffd54f 0%, #ffe082 100%);
+      color: #000;
+    }
+    .post-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+    .post-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      font-size: 0.9rem;
+      opacity: 0.95;
+    }
+    .post-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .post-meta-item i {
+      font-size: 1rem;
+    }
+    .post-body {
+      padding: 2rem;
+    }
+    .post-content {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #333;
+      white-space: pre-wrap;
+      word-break: break-word;
+      min-height: 200px;
+    }
+    .image-section {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid #e9ecef;
+    }
+    .image-section-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--brand-dark);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .image-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    @media (min-width: 768px) {
+      .image-gallery {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+      }
+    }
+    .gallery-item {
+      cursor: pointer;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 1;
+      background: #f8f9fa;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .gallery-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    .action-buttons {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.95);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.active {
+      display: flex;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: #fff;
+      font-size: 40px;
+      cursor: pointer;
+      z-index: 10000;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      transition: background 0.2s;
+    }
+    .lightbox-close:hover {
+      background: rgba(255,255,255,0.2);
+    }
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #fff;
+      font-size: 40px;
+      cursor: pointer;
+      z-index: 10000;
+      padding: 20px;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      transition: background 0.2s;
+    }
+    .lightbox-nav:hover {
+      background: rgba(255,255,255,0.2);
+    }
+    .lightbox-prev {
+      left: 20px;
+    }
+    .lightbox-next {
+      right: 20px;
+    }
+    .badge-notice {
+      background: rgba(0,0,0,0.2);
+      color: #000;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .back-link {
+      color: var(--muted);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover {
+      color: var(--brand);
+    }
+    .admin-controls {
+      display: none;
+    }
+    .admin-controls.show {
+      display: block;
+    }
+    .project-info {
+      background: rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-top: 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.75rem;
+    }
+    .project-info-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .project-info-label {
+      font-size: 0.75rem;
+      opacity: 0.8;
+      font-weight: 500;
+    }
+    .project-info-value {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    .nowrap { white-space: nowrap; }
+    .post-header.notice .project-info {
+      background: rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light border-bottom">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="<%= categoryRoute || '/board.html' %>">
+        <i class="bi bi-arrow-left"></i>
+        <span><%= categoryName || '게시판' %></span>
+      </a>
+      <div class="ms-auto d-flex gap-2 align-items-center">
+        <div class="admin-controls" id="adminControls">
+          <a href="<%= category ? `/category/${category}/posts/${post.id}/edit` : `/posts/${post.id}/edit` %>" class="btn btn-sm btn-outline-primary">
+            <i class="bi bi-pencil me-1"></i>수정
+          </a>
+          <form action="<%= category ? `/category/${category}/posts/${post.id}/delete` : `/posts/${post.id}/delete` %>" method="post" style="display:inline;" onsubmit="return confirm('정말 삭제하시겠습니까?')">
+            <button class="btn btn-sm btn-outline-danger">
+              <i class="bi bi-trash me-1"></i>삭제
+            </button>
+          </form>
+        </div>
+        <a href="<%= categoryRoute || '/board.html' %>" class="btn btn-outline-secondary btn-sm">
+          <i class="bi bi-list me-1"></i>목록
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container my-5" style="max-width: 900px;">
+    <a href="<%= categoryRoute || '/board.html' %>" class="back-link">
+      <i class="bi bi-chevron-left"></i>
+      <span>목록으로 돌아가기</span>
+    </a>
+    
+    <article class="post-card">
+      <div class="post-header <%= post.is_notice ? 'notice' : '' %>">
+        <% if (post.is_notice) { %>
+          <span class="badge-notice mb-2">공지사항</span>
+        <% } %>
+        <h1 class="post-title"><%= post.title %></h1>
+        
+        <% 
+          // 사업정보/문의전화/접수시간 파싱 (카테고리와 무관하게 동작)
+          let projectInfo = null;
+          let cleanedContent = post.content;
+          const projectCategories = ['lovehouse', 'volunteer', 'mobilitycare', 'beauty'];
+          
+          if (post.content) {
+            const lines = post.content.split('\n');
+            const businessLine = lines.find(line => line.trim().startsWith('사업명:'));
+            const dateLine = lines.find(line => line.trim().startsWith('실시일:'));
+            const targetLine = lines.find(line => line.trim().startsWith('대상:'));
+            const participantsLine = lines.find(line => line.trim().startsWith('참여인원:'));
+            // 라벨 변형까지 허용: '문의 및 신청 전화:', '전화 :', '접수 시간:' 등
+            const phoneLine = lines.find(line => {
+              const t = line.trim();
+              return /^문의\s*및\s*신청\s*전화\s*:/.test(t) || /^문의\s*전화\s*:/.test(t) || /^전화\s*:/.test(t);
+            });
+            const hoursLine = lines.find(line => {
+              const t = line.trim();
+              return /^접수\s*시간\s*:/.test(t) || /^접수시간\s*:/.test(t);
+            });
+            
+            const businessName = businessLine ? businessLine.replace('사업명:', '').trim() : '';
+            const date = dateLine ? dateLine.replace('실시일:', '').trim() : '';
+            const target = targetLine ? targetLine.replace('대상:', '').trim() : '';
+            const participants = participantsLine ? participantsLine.replace('참여인원:', '').trim() : '';
+            const phone = phoneLine ? phoneLine.replace(/^\s*(문의\s*및\s*신청\s*전화|문의\s*전화|전화)\s*:\s*/,'').trim() : '';
+            const hours = hoursLine ? hoursLine.replace(/^\s*(접수\s*시간|접수시간)\s*:\s*/,'').trim() : '';
+            
+            if (businessName || date || target || participants || phone || hours) {
+              projectInfo = { businessName, date, target, participants, phone, hours };
+              
+              // 본문에서 해당 라인들 제거
+              const filteredLines = lines.filter(line => {
+                const trimmed = line.trim();
+                const isBiz = trimmed.startsWith('사업명:');
+                const isDate = trimmed.startsWith('실시일:');
+                const isTarget = trimmed.startsWith('대상:');
+                const isParticipants = trimmed.startsWith('참여인원:');
+                const isPhone = /^\s*(문의\s*및\s*신청\s*전화|전화)\s*:/.test(trimmed);
+                const isHours = /^\s*(접수\s*시간|접수시간)\s*:/.test(trimmed);
+                return !(isBiz || isDate || isTarget || isParticipants || isPhone || isHours);
+              });
+              
+              // 연속된 빈 줄 제거
+              cleanedContent = filteredLines
+                .join('\n')
+                .replace(/\n{3,}/g, '\n\n')
+                .trim();
+            }
+          }
+        %>
+        
+        <% if (projectInfo) { %>
+          <div class="project-info">
+            <% if (projectInfo.businessName) { %>
+              <div class="project-info-item">
+                <div class="project-info-label">사업명</div>
+                <div class="project-info-value"><%= projectInfo.businessName %></div>
+              </div>
+            <% } %>
+            <% if (projectInfo.date) { %>
+              <div class="project-info-item">
+                <div class="project-info-label">실시일</div>
+                <div class="project-info-value"><%= projectInfo.date %></div>
+              </div>
+            <% } %>
+            <% if (projectInfo.target) { %>
+              <div class="project-info-item">
+                <div class="project-info-label">대상</div>
+                <div class="project-info-value"><%= projectInfo.target %></div>
+              </div>
+            <% } %>
+            <% if (projectInfo.participants) { %>
+              <div class="project-info-item">
+                <div class="project-info-label">참여인원</div>
+                <div class="project-info-value nowrap"><%= projectInfo.participants %></div>
+              </div>
+            <% } %>
+          </div>
+          
+        <% } %>
+        
+        <div class="post-meta d-flex justify-content-between align-items-center">
+          <div class="d-flex flex-wrap gap-3 align-items-center">
+            <div class="post-meta-item">
+            <i class="bi bi-person"></i>
+            <span><%= post.username %></span>
+          </div>
+          <div class="post-meta-item">
+            <i class="bi bi-calendar"></i>
+            <span><%
+              // 날짜 문자열을 직접 파싱하여 YYYY.MM.DD 형식으로 변환
+              var year, month, day;
+              var dateStr = post.created_at;
+              if (dateStr && dateStr.indexOf('T') === -1 && dateStr.indexOf('Z') === -1 && dateStr.indexOf('+') === -1) {
+                var parts = dateStr.split(' ');
+                var datePart = parts[0].split('-');
+                year = parseInt(datePart[0]);
+                month = parseInt(datePart[1]);
+                day = parseInt(datePart[2]);
+              } else if (dateStr && dateStr.includes('T')) {
+                var datePart = dateStr.split('T')[0].split('-');
+                year = parseInt(datePart[0]);
+                month = parseInt(datePart[1]);
+                day = parseInt(datePart[2]);
+              } else {
+                var date = new Date(dateStr);
+                year = date.getFullYear();
+                month = date.getMonth() + 1;
+                day = date.getDate();
+              }
+              var monthStr = month < 10 ? '0' + month : month;
+              var dayStr = day < 10 ? '0' + day : day;
+              %><%= year + '.' + monthStr + '.' + dayStr %></span>
+          </div>
+          <% if (post.view_count !== undefined) { %>
+          <div class="post-meta-item">
+            <i class="bi bi-eye"></i>
+            <span>조회 <%= post.view_count || 0 %></span>
+          </div>
+          <% } %>
+          </div>
+          <div class="text-white-75 fw-semibold"><%= typeof orgName !== 'undefined' ? orgName : (typeof orgType !== 'undefined' && orgType === 'coop' ? '전국장애인나눔협동조합' : (typeof orgType !== 'undefined' && orgType === 'golf' ? '한국장애인스크린파크골프협회' : '관악구장애인단체연합회')) %></div>
+        </div>
+      </div>
+      
+      <div class="post-body">
+        <div class="post-content">
+          <%= cleanedContent || post.content %>
+        </div>
+        
+        <% if (images && images.length > 0) { %>
+          <div class="image-section">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h3 class="image-section-title mb-0">
+                <i class="bi bi-images"></i>
+                첨부 사진 (<%= images.length %>)
+              </h3>
+              <small class="text-muted">
+                <i class="bi bi-info-circle me-1"></i>
+                이미지를 클릭하면 크게 볼 수 있습니다.
+              </small>
+            </div>
+            <div class="image-gallery">
+              <% images.forEach((img, index) => { %>
+                <div class="gallery-item" data-index="<%= index %>">
+                  <img src="<%= img.image_path %>" alt="사진 <%= index + 1 %>" loading="lazy" />
+                </div>
+              <% }); %>
+            </div>
+          </div>
+        <% } %>
+      </div>
+    </article>
+  </main>
+
+  <!-- 라이트박스 -->
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close" id="lightboxClose">&times;</span>
+    <span class="lightbox-nav lightbox-prev" id="lightboxPrev">
+      <i class="bi bi-chevron-left"></i>
+    </span>
+    <img id="lightbox-img" src="" alt="" />
+    <span class="lightbox-nav lightbox-next" id="lightboxNext">
+      <i class="bi bi-chevron-right"></i>
+    </span>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- 이미지 데이터 전달용 (EJS를 JS 리터럴로 직접 출력하지 않도록) -->
+  <div id="imageData" data-images='<%- JSON.stringify((images && images.length > 0) ? images.map(function(it){ return it.image_path; }) : []) %>' style="display:none;"></div>
+  <script>
+    let currentImageIndex = 0;
+    const images = JSON.parse(document.getElementById('imageData').dataset.images || '[]');
+    
+    function openLightbox(index) {
+      if (images.length === 0) return;
+      currentImageIndex = index;
+      document.getElementById('lightbox').classList.add('active');
+      document.getElementById('lightbox-img').src = images[index];
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    
+    function changeImage(direction) {
+      if (images.length === 0) return;
+      currentImageIndex += direction;
+      if (currentImageIndex < 0) currentImageIndex = images.length - 1;
+      if (currentImageIndex >= images.length) currentImageIndex = 0;
+      document.getElementById('lightbox-img').src = images[currentImageIndex];
+    }
+    
+    document.addEventListener('keydown', function(e) {
+      if (document.getElementById('lightbox').classList.contains('active')) {
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') changeImage(-1);
+        if (e.key === 'ArrowRight') changeImage(1);
+      }
+    });
+
+    // 갤러리 클릭 위임 (인라인 onclick 제거 대응)
+    document.addEventListener('click', function(e){
+      const item = e.target.closest('.gallery-item');
+      if (!item) return;
+      const idx = parseInt(item.getAttribute('data-index'), 10);
+      if (!Number.isNaN(idx)) openLightbox(idx);
+    });
+
+    // 라이트박스 버튼 이벤트 바인딩
+    document.getElementById('lightboxClose')?.addEventListener('click', closeLightbox);
+    document.getElementById('lightboxPrev')?.addEventListener('click', function(){ changeImage(-1); });
+    document.getElementById('lightboxNext')?.addEventListener('click', function(){ changeImage(1); });
+  
+    // 관리자 체크
+    async function checkAdmin() {
+      try {
+        <% if (typeof orgType !== 'undefined' && orgType === 'coop') { %>
+        const res = await fetch('/api/coop/check-admin', { credentials: 'include' });
+        <% } else if (typeof orgType !== 'undefined' && orgType === 'golf') { %>
+        const res = await fetch('/api/golf/check-admin', { credentials: 'include' });
+        <% } else { %>
+        const res = await fetch('/api/check-admin', { credentials: 'include' });
+        <% } %>
+        const data = await res.json();
+        if (data.isAdmin) {
+          document.getElementById('adminControls').classList.add('show');
+        }
+      } catch (error) {
+        console.error('Error checking admin:', error);
+      }
+    }
+    
+    checkAdmin();
+  </script>
+</body>
+</html>

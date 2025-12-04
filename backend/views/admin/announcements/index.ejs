@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>협회알림 관리 | 관악구장애인단체연합회</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <style>
+    .announcement-item {
+      border: 1px solid #dee2e6;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      background: #fff;
+      transition: all 0.3s ease;
+    }
+    .announcement-item:hover {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .announcement-item.inactive {
+      opacity: 0.6;
+      background: #f8f9fa;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="/index.html">
+        <strong>관악구장애인단체연합회</strong>
+      </a>
+      <div class="ms-auto d-flex gap-2 align-items-center flex-wrap">
+        <span class="navbar-text">안녕하세요, <strong><%= currentUser.username %></strong>님</span>
+        <a href="/admin/users" class="btn btn-outline-primary btn-sm">
+          <i class="bi bi-people me-1"></i>회원 관리
+        </a>
+        <a href="/admin/sponsors" class="btn btn-outline-primary btn-sm">
+          <i class="bi bi-heart me-1"></i>후원 관리
+        </a>
+        <a href="/admin/settings" class="btn btn-outline-primary btn-sm">
+          <i class="bi bi-gear me-1"></i>사이트 설정
+        </a>
+        <a href="/admin/announcements" class="btn btn-primary btn-sm">
+          <i class="bi bi-megaphone me-1"></i>협회알림 관리
+        </a>
+        <a href="/index.html" class="btn btn-outline-secondary btn-sm">홈으로</a>
+        <form action="/logout" method="post" class="d-inline">
+          <button type="submit" class="btn btn-outline-secondary btn-sm">로그아웃</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2><i class="bi bi-megaphone me-2"></i>협회알림 관리</h2>
+      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAnnouncementModal">
+        <i class="bi bi-plus-circle me-1"></i>새 알림 추가
+      </button>
+    </div>
+
+    <!-- 협회알림 목록 -->
+    <div id="announcementsList">
+      <% if (announcements && announcements.length > 0) { %>
+        <% announcements.forEach((announcement) => { %>
+          <div class="announcement-item <%= announcement.is_active === 0 ? 'inactive' : '' %>" data-id="<%= announcement.id %>">
+            <div class="d-flex justify-content-between align-items-start">
+              <div class="flex-grow-1">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <span class="badge bg-<%= announcement.is_active === 1 ? 'success' : 'secondary' %>">
+                    <%= announcement.is_active === 1 ? '활성' : '비활성' %>
+                  </span>
+                  <small class="text-muted">순서: <%= announcement.display_order %></small>
+                </div>
+                <p class="mb-0" id="content-<%= announcement.id %>"><%= announcement.content %></p>
+                <small class="text-muted">
+                  생성일: <%= new Date(announcement.created_at).toLocaleString('ko-KR') %>
+                  <% if (announcement.updated_at) { %>
+                    | 수정일: <%= new Date(announcement.updated_at).toLocaleString('ko-KR') %>
+                  <% } %>
+                </small>
+              </div>
+              <div class="d-flex gap-2">
+                <button class="btn btn-sm btn-outline-primary" onclick="editAnnouncement(<%= announcement.id %>, '<%= announcement.content.replace(/'/g, "\\'") %>', <%= announcement.display_order %>, <%= announcement.is_active %>)">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button class="btn btn-sm btn-outline-danger" onclick="deleteAnnouncement(<%= announcement.id %>)">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        <% }); %>
+      <% } else { %>
+        <div class="alert alert-info text-center">
+          <i class="bi bi-info-circle me-2"></i>등록된 협회알림이 없습니다.
+        </div>
+      <% } %>
+    </div>
+  </main>
+
+  <!-- 새 알림 추가 모달 -->
+  <div class="modal fade" id="addAnnouncementModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">새 협회알림 추가</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="addAnnouncementForm">
+            <div class="mb-3">
+              <label class="form-label">내용 <span class="text-danger">*</span></label>
+              <textarea class="form-control" id="addContent" rows="3" required placeholder="협회알림 내용을 입력하세요"></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">표시 순서</label>
+              <input type="number" class="form-control" id="addDisplayOrder" value="0" min="0">
+              <small class="text-muted">숫자가 작을수록 먼저 표시됩니다.</small>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+          <button type="button" class="btn btn-primary" onclick="saveAnnouncement()">저장</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 알림 수정 모달 -->
+  <div class="modal fade" id="editAnnouncementModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">협회알림 수정</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="editAnnouncementForm">
+            <input type="hidden" id="editId">
+            <div class="mb-3">
+              <label class="form-label">내용 <span class="text-danger">*</span></label>
+              <textarea class="form-control" id="editContent" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">표시 순서</label>
+              <input type="number" class="form-control" id="editDisplayOrder" min="0">
+            </div>
+            <div class="mb-3">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="editIsActive">
+                <label class="form-check-label" for="editIsActive">활성화</label>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+          <button type="button" class="btn btn-primary" onclick="updateAnnouncement()">수정</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    async function saveAnnouncement() {
+      const content = document.getElementById('addContent').value.trim();
+      const displayOrder = parseInt(document.getElementById('addDisplayOrder').value) || 0;
+      
+      if (!content) {
+        alert('내용을 입력해주세요.');
+        return;
+      }
+
+      try {
+        const response = await fetch('/admin/announcements', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+          body: JSON.stringify({ content, display_order: displayOrder })
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          alert('협회알림이 추가되었습니다.');
+          location.reload();
+        } else {
+          alert(result.error || '협회알림 추가 중 오류가 발생했습니다.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('협회알림 추가 중 오류가 발생했습니다.');
+      }
+    }
+
+    function editAnnouncement(id, content, displayOrder, isActive) {
+      document.getElementById('editId').value = id;
+      document.getElementById('editContent').value = content;
+      document.getElementById('editDisplayOrder').value = displayOrder;
+      document.getElementById('editIsActive').checked = isActive === 1;
+      
+      const modal = new bootstrap.Modal(document.getElementById('editAnnouncementModal'));
+      modal.show();
+    }
+
+    async function updateAnnouncement() {
+      const id = document.getElementById('editId').value;
+      const content = document.getElementById('editContent').value.trim();
+      const displayOrder = parseInt(document.getElementById('editDisplayOrder').value) || 0;
+      const isActive = document.getElementById('editIsActive').checked ? 1 : 0;
+      
+      if (!content) {
+        alert('내용을 입력해주세요.');
+        return;
+      }
+
+      try {
+        const response = await fetch(`/admin/announcements/${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+          body: JSON.stringify({ content, display_order: displayOrder, is_active: isActive })
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          alert('협회알림이 수정되었습니다.');
+          location.reload();
+        } else {
+          alert(result.error || '협회알림 수정 중 오류가 발생했습니다.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('협회알림 수정 중 오류가 발생했습니다.');
+      }
+    }
+
+    async function deleteAnnouncement(id) {
+      if (!confirm('정말 이 협회알림을 삭제하시겠습니까?')) {
+        return;
+      }
+
+      try {
+        const response = await fetch(`/admin/announcements/${id}`, {
+          method: 'DELETE',
+          credentials: 'include'
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          alert('협회알림이 삭제되었습니다.');
+          location.reload();
+        } else {
+          alert(result.error || '협회알림 삭제 중 오류가 발생했습니다.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('협회알림 삭제 중 오류가 발생했습니다.');
+      }
+    }
+  </script>
+</body>
+</html>
+

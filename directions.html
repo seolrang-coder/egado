@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>오시는길 | 관악구장애인단체연합회</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--brand:#4b4b8f;--brand-dark:#352f74;--muted:#6c757d;--bg:#f3f3f3}
+    body{font-family:'Noto Sans KR',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:#fff;color:#222}
+    .topbar{font-size:12px;background:#f8f9fa;border-bottom:1px solid #e9ecef}
+    .navbar-brand img{height:44px}
+    .brand-title{font-weight:800;color:var(--brand-dark);font-size:1.95rem;letter-spacing:-.2px}
+    @media (max-width: 576px){.brand-title{display:none}}
+    .mainnav{border-bottom:1px solid #e9ecef}
+    .mainnav .nav-link{font-weight:600;color:#333}
+    .mainnav .nav-link:hover{color:var(--brand)}
+    .footer{background:#2d2142;color:#d9d6e5}
+    .footer a{color:#e3def2;text-decoration:none}
+    .footer a:hover{text-decoration:underline}
+    .footer-brand img{height:36px}
+  </style>
+</head>
+<body>
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="container d-flex justify-content-end align-items-center gap-3 py-1">
+      <div id="userInfo" style="display:none;">
+        <span id="usernameDisplay" class="text-muted me-2"></span>
+        <form action="/logout" method="post" style="display:inline;">
+          <button type="submit" class="btn btn-link link-secondary p-0" style="text-decoration:none;">로그아웃</button>
+        </form>
+      </div>
+      <div id="guestInfo">
+        <a href="login.html" class="link-secondary">로그인</a>
+        <a href="register.html" class="link-secondary">회원가입</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white mainnav">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-3" href="index.html">
+        <img src="img/footer-logo.png" alt="로고" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="토글 내비게이션">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="about.html" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">협회소개</a>
+            <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+              <li><a class="dropdown-item" href="about.html">협회소개</a></li>
+              <li><a class="dropdown-item" href="org.html">조직도</a></li>
+              <li><a class="dropdown-item" href="history.html">연혁</a></li>
+              <li><a class="dropdown-item" href="vision.html">비전</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="business.html">협회사업</a></li>
+          <li class="nav-item"><a class="nav-link" href="info.html">정보마당</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="activity-lovehouse.html" id="activityDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">행사 및 활동</a>
+            <ul class="dropdown-menu" aria-labelledby="activityDropdown">
+              <li><a class="dropdown-item" href="activity-lovehouse.html">러브하우스</a></li>
+              <li><a class="dropdown-item" href="activity-volunteer.html">행사 및 환경봉사단</a></li>
+              <li><a class="dropdown-item" href="activity-mobilitycare.html">전동보장구교육&케어</a></li>
+              <li><a class="dropdown-item" href="activity-beauty.html">무료 이·미용 봉사</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="board.html">게시판</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="affiliateDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">연합회소속단체</a>
+            <ul class="dropdown-menu" aria-labelledby="affiliateDropdown">
+              <li><a class="dropdown-item" href="http://www.sappd.or.kr/" target="_blank" rel="noopener noreferrer">사)서울지체장애인협회</a></li>
+              <li><a class="dropdown-item" href="http://www.kadi.or.kr/kadi/" target="_blank" rel="noopener noreferrer">사)한국장애인정보화협회</a></li>
+              <li><a class="dropdown-item" href="https://kaiad.or.kr/" target="_blank" rel="noopener noreferrer">사)한국산업재해장애인협회</a></li>
+              <li><a class="dropdown-item" href="http://www.kaed.or.kr/" target="_blank" rel="noopener noreferrer">사)한국장애인기업협회</a></li>
+              <li><a class="dropdown-item" href="http://www.nanum.tv/" target="_blank" rel="noopener noreferrer">사)국제장애인문화교류협회</a></li>
+              <li><a class="dropdown-item" href="http://www.kofd.co.kr/kofd/" target="_blank" rel="noopener noreferrer">사)한국기능장애인협회</a></li>
+              <li><a class="dropdown-item" href="https://www.deafkorea.com/main/" target="_blank" rel="noopener noreferrer">사)한국농아인협회</a></li>
+              <li><a class="dropdown-item" href="http://www.bluesky82.org/" target="_blank" rel="noopener noreferrer">사)한국장애인문화협회</a></li>
+              <li><a class="dropdown-item" href="https://www.kdwa.or.kr/main" target="_blank" rel="noopener noreferrer">사)서울신체장애인복지회</a></li>
+              <li><a class="dropdown-item" href="#">사)열린정보장애인협회</a></li>
+              <li><a class="dropdown-item" href="#">사)서울시각장애인연합회</a></li>
+              <li><a class="dropdown-item" href="#">사)한국장애인환경실천협회</a></li>
+              <li><a class="dropdown-item" href="nanum.html">전국장애인나눔협동조합</a></li>
+              <li><a class="dropdown-item" href="aboutgolf.html">한국장애인스크린파크골프협회</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link active" href="directions.html">오시는길</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<main class="container my-5">
+<!-- 페이지 헤더 -->
+<section class="page-header text-center mb-5">
+  <div class="header-decoration mb-3">
+    <i class="bi bi-geo-alt display-6 text-primary"></i>
+  </div>
+  <h2 class="display-8 fw-bold text-dark mb-6">오시는 길</h2>
+  <p class="lead text-muted">관악구장애인단체연합회 찾아오시는 방법을 안내해드립니다.</p>
+</section>
+
+<!-- 연락처 정보 섹션 -->
+<section class="contact-info-section mb-5">
+  <div class="row g-4">
+    <div class="col-lg-4 col-md-6">
+      <div class="contact-card h-100 bg-white rounded-4 shadow-sm border-0 p-4 text-center hover-service">
+        <div class="contact-icon mb-3">
+          <i class="bi bi-building text-primary fs-1"></i>
+        </div>
+        <h5 class="fw-bold mb-3">주소</h5>
+        <p class="text-muted mb-0">서울특별시 관악구<br>남부순환로 1696<br>뉴명지빌딩 (5,6,7층)</p>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+      <div class="contact-card h-100 bg-white rounded-4 shadow-sm border-0 p-4 text-center hover-service">
+        <div class="contact-icon mb-3">
+          <i class="bi bi-telephone text-success fs-1"></i>
+        </div>
+        <h5 class="fw-bold mb-3">연락처</h5>
+        <p class="text-muted mb-2"><strong>전화:</strong> 02-871-5686</p>
+        <p class="text-muted mb-2"><strong>팩스:</strong> 02-3281-3702</p>
+        <p class="text-muted mb-0"><strong>이메일:</strong> 2002cjy@daum.net</p>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+      <div class="contact-card h-100 bg-white rounded-4 shadow-sm border-0 p-4 text-center hover-service">
+        <div class="contact-icon mb-3">
+          <i class="bi bi-p-square text-info fs-1"></i>
+        </div>
+        <h5 class="fw-bold mb-3">주차 안내</h5>
+        <p class="text-muted mb-0">주차타워 이용 가능<br><small class="text-success">무료 주차 서비스</small></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 교통편 안내 섹션 -->
+<section class="transportation-section mb-5">
+  <div class="card border-0 shadow-lg">
+    <div class="card-body p-5">
+      <div class="section-header text-center mb-4">
+        <span class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill mb-3">
+          <i class="bi bi-train-front me-1"></i> 대중교통
+        </span>
+        <h5 class="fw-bold mb-3">지하철 이용 안내</h5>
+      </div>
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <div class="transport-info">
+            <div class="transport-item d-flex align-items-center mb-3 p-3 bg-light rounded-3">
+              <div class="transport-icon me-3">
+                <i class="bi bi-2-circle text-success fs-3"></i>
+              </div>
+              <div>
+                <h5 class="mb-1">지하철 2호선</h5>
+                <p class="text-muted mb-0">봉천역 3번 출구</p>
+              </div>
+            </div>
+            <div class="transport-item d-flex align-items-center mb-3 p-3 bg-light rounded-3">
+              <div class="transport-icon me-3">
+                <i class="bi bi-person-walking text-primary fs-3"></i>
+              </div>
+              <div>
+                <h5 class="mb-1">도보 5분</h5>
+                <p class="text-muted mb-0">신림동 방향으로 약 200m</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="directions-card bg-primary bg-opacity-10 rounded-4 p-4">
+            <h5 class="text-primary mb-3"><i class="bi bi-signpost-2 me-2"></i>길찾기 안내</h5>
+            <ol class="text-muted mb-0">
+              <li class="mb-2">봉천역 3번 출구로 나오세요</li>
+              <li class="mb-2">신림동 방향으로 직진하세요</li>
+              <li class="mb-2">약 200m 직진 후 뉴명지빌딩</li>
+              <li>(5, 6, 7)층이 연합회 사무실입니다</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 지도 섹션 -->
+<section class="map-section">
+  <div class="card border-0 shadow-lg overflow-hidden">
+    <div class="card-header bg-white border-0 p-4">
+      <div class="text-center">
+        <span class="badge bg-info bg-opacity-10 text-info px-3 py-2 rounded-pill mb-3">
+          <i class="bi bi-map me-1"></i> 위치 안내
+        </span>
+        <h5 class="fw-bold mb-2">지도로 찾아보기</h5>
+        <p class="text-muted mb-0">정확한 위치를 지도에서 확인하실 수 있습니다.</p>
+      </div>
+    </div>
+    <div class="map-container position-relative">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3166.038559570867!2d126.93590971183026!3d37.48341642877284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9f93faff9b9b%3A0xa0f7aa08d9105704!2z7ISc7Jq47Yq567OE7IucIOq0gOyVheq1rCDrgqjrtoDsiJztmZjroZwgMTY5Ng!5e0!3m2!1sko!2skr!4v1754144156476!5m2!1sko!2skr"
+        width="100%" 
+        height="400" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade"
+        class="rounded-bottom-4">
+      </iframe>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- Footer -->
+<footer class="footer pt-4 pb-5 mt-0">
+  <div class="container">
+    <div class="row g-3">
+      <div class="col-12 col-lg-8">
+        <a class="footer-brand d-inline-flex align-items-center gap-2 mb-2" href="index.html">
+          <img src="img/main.jpg" alt="관악구장애인단체연합회 로고" />
+          <span class="fw-bold text-white">관악구장애인단체연합회</span>
+        </a>
+        <div class="small text-secondary">고유번호:119-82-74874 | 협회장: 송 낙 규</div>
+        <div class="small text-secondary">서울특별시 남부순환로 1696, 뉴명지빌딩 (5,6,7층) | 대표 02-871-5686 | FAX 02-3281-3702</div>
+        <div class="small text-secondary">Copyright &copy; 2025 관악구장애인단체연합회. All Rights Reserved.</div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <div class="d-flex gap-3 justify-content-lg-end small">
+          <a href="terms.html">이용약관</a>
+            <a href="privacy.html">개인정보처리방침</a>
+            <a href="email-policy.html">이메일무단수집거부</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // 로그인 상태 확인
+    async function checkLoginStatus() {
+      try {
+        const res = await fetch('/api/user', {
+          credentials: 'include'
+        });
+        const data = await res.json();
+        
+        if (data.loggedIn) {
+          document.getElementById('userInfo').style.display = 'block';
+          document.getElementById('guestInfo').style.display = 'none';
+          document.getElementById('usernameDisplay').textContent = `${data.username}님`;
+        } else {
+          document.getElementById('userInfo').style.display = 'none';
+          document.getElementById('guestInfo').style.display = 'block';
+        }
+      } catch (error) {
+        console.error('Error checking login status:', error);
+      }
+    }
+    
+    checkLoginStatus();
+  </script>
+</body>
+</html>

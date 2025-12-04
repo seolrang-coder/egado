@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>태양광 갤러리 관리 | <%= typeof orgName !== 'undefined' ? orgName : '전국장애인나눔협동조합' %></title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <style>
+    .gallery-item {
+      border: 1px solid #dee2e6;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    .gallery-item img {
+      max-width: 200px;
+      max-height: 200px;
+      border-radius: 0.25rem;
+      object-fit: cover;
+    }
+    .upload-area {
+      border: 2px dashed #dee2e6;
+      border-radius: 0.5rem;
+      padding: 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .upload-area:hover {
+      border-color: #ffc107;
+      background-color: #fffbf0;
+    }
+    .upload-area.dragover {
+      border-color: #ffc107;
+      background-color: #fffbf0;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="/nanum.html">
+        <strong><%= typeof orgName !== 'undefined' ? orgName : '전국장애인나눔협동조합' %></strong>
+      </a>
+      <div class="ms-auto d-flex gap-2 align-items-center flex-wrap">
+        <span class="navbar-text">안녕하세요, <strong><%= currentUser.username %></strong>님</span>
+        <a href="/coop/admin/users" class="btn btn-outline-primary btn-sm">
+          <i class="bi bi-people me-1"></i>회원 관리
+        </a>
+        <a href="/coop/admin/accessions" class="btn btn-outline-primary btn-sm">
+          <i class="bi bi-file-earmark-text me-1"></i>가입 신청 관리
+        </a>
+        <a href="/coop/admin/solar-gallery" class="btn btn-primary btn-sm">
+          <i class="bi bi-images me-1"></i>태양광 갤러리
+        </a>
+        <a href="/coop/admin/settings" class="btn btn-outline-primary btn-sm">
+          <i class="bi bi-gear me-1"></i>사이트 설정
+        </a>
+        <a href="/nanum.html" class="btn btn-outline-secondary btn-sm">홈으로</a>
+        <form action="/coop/logout" method="post" class="d-inline">
+          <button type="submit" class="btn btn-outline-secondary btn-sm">로그아웃</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h2 class="mb-1">태양광 갤러리 관리</h2>
+        <p class="text-muted mb-0">태양광 시설구축 예시 사진을 관리합니다.</p>
+      </div>
+    </div>
+
+    <!-- 이미지 업로드 폼 -->
+    <div class="card mb-4">
+      <div class="card-header bg-warning text-dark">
+        <h5 class="mb-0"><i class="bi bi-cloud-upload me-2"></i>새 이미지 업로드</h5>
+      </div>
+      <div class="card-body">
+        <form id="uploadForm" enctype="multipart/form-data">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">이미지 파일 <span class="text-danger">*</span></label>
+              <div class="upload-area" id="uploadArea">
+                <i class="bi bi-cloud-upload fs-1 text-muted d-block mb-2"></i>
+                <p class="mb-1">이미지를 드래그하거나 클릭하여 업로드</p>
+                <small class="text-muted">JPG, PNG, GIF, WEBP (최대 50MB)</small>
+                <input type="file" id="imageInput" name="image" accept="image/*" class="d-none" required>
+              </div>
+              <div id="imagePreview" class="mt-2"></div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label class="form-label">제목 <span class="text-danger">*</span></label>
+                <input type="text" name="title" class="form-control" placeholder="예: 태양광 발전소 준공" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">상태 배지</label>
+                <select name="status_badge" class="form-select">
+                  <option value="">선택 안함</option>
+                  <option value="시설구축">시설구축</option>
+                  <option value="설치완료">설치완료</option>
+                  <option value="시공진행">시공진행</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">날짜</label>
+                <input type="text" name="date_text" class="form-control" placeholder="예: 2025년 06월 29일">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">표시 순서</label>
+                <input type="number" name="display_order" class="form-control" value="0" min="0">
+              </div>
+            </div>
+          </div>
+          <div class="mt-3">
+            <button type="submit" class="btn btn-warning">
+              <i class="bi bi-upload me-1"></i>업로드
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- 갤러리 목록 -->
+    <div class="card">
+      <div class="card-header bg-light">
+        <h5 class="mb-0"><i class="bi bi-images me-2"></i>갤러리 목록</h5>
+      </div>
+      <div class="card-body">
+        <div id="galleryList">
+          <% if (items.length === 0) { %>
+            <div class="text-center py-5 text-muted">
+              <i class="bi bi-images fs-1 d-block mb-3"></i>
+              <p>등록된 이미지가 없습니다.</p>
+            </div>
+          <% } else { %>
+            <% items.forEach((item, index) => { %>
+              <div class="gallery-item" data-id="<%= item.id %>">
+                <div class="row align-items-center">
+                  <div class="col-md-2">
+                    <img src="<%= item.image_path %>" alt="<%= item.title %>" class="img-fluid">
+                  </div>
+                  <div class="col-md-6">
+                    <h6 class="mb-1"><%= item.title %></h6>
+                    <% if (item.status_badge) { %>
+                      <span class="badge bg-warning rounded-pill me-2"><%= item.status_badge %></span>
+                    <% } %>
+                    <% if (item.date_text) { %>
+                      <small class="text-muted">
+                        <i class="bi bi-calendar3 me-1"></i><%= item.date_text %>
+                      </small>
+                    <% } %>
+                    <div class="mt-2">
+                      <small class="text-muted">순서: <%= item.display_order %> | 
+                        상태: <% if (item.is_active) { %>활성<% } else { %>비활성<% } %>
+                      </small>
+                    </div>
+                  </div>
+                  <div class="col-md-4 text-end">
+                    <button class="btn btn-sm btn-outline-primary edit-btn" data-id="<%= item.id %>">
+                      <i class="bi bi-pencil"></i> 수정
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger delete-btn" data-id="<%= item.id %>">
+                      <i class="bi bi-trash"></i> 삭제
+                    </button>
+                  </div>
+                </div>
+              </div>
+            <% }); %>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 수정 모달 -->
+  <div class="modal fade" id="editModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">갤러리 항목 수정</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="editForm">
+            <input type="hidden" name="id" id="editId">
+            <div class="mb-3">
+              <label class="form-label">제목 <span class="text-danger">*</span></label>
+              <input type="text" name="title" id="editTitle" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">상태 배지</label>
+              <select name="status_badge" id="editStatusBadge" class="form-select">
+                <option value="">선택 안함</option>
+                <option value="시설구축">시설구축</option>
+                <option value="설치완료">설치완료</option>
+                <option value="시공진행">시공진행</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">날짜</label>
+              <input type="text" name="date_text" id="editDateText" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">표시 순서</label>
+              <input type="number" name="display_order" id="editDisplayOrder" class="form-control" min="0">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">활성 상태</label>
+              <select name="is_active" id="editIsActive" class="form-select">
+                <option value="1">활성</option>
+                <option value="0">비활성</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+          <button type="button" class="btn btn-primary" id="saveEditBtn">저장</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // 업로드 영역 클릭
+    document.getElementById('uploadArea').addEventListener('click', () => {
+      document.getElementById('imageInput').click();
+    });
+
+    // 이미지 미리보기
+    document.getElementById('imageInput').addEventListener('change', function(e) {
+      const preview = document.getElementById('imagePreview');
+      preview.innerHTML = '';
+      
+      if (this.files && this.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = document.createElement('img');
+          img.src = e.target.result;
+          img.className = 'img-fluid rounded';
+          img.style.maxHeight = '200px';
+          preview.appendChild(img);
+        };
+        reader.readAsDataURL(this.files[0]);
+      }
+    });
+
+    // 업로드 폼 제출
+    document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      
+      try {
+        const response = await fetch('/coop/admin/solar-gallery', {
+          method: 'POST',
+          body: formData
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          alert('이미지가 업로드되었습니다.');
+          location.reload();
+        } else {
+          alert(result.error || '업로드 중 오류가 발생했습니다.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('업로드 중 오류가 발생했습니다.');
+      }
+    });
+
+    // 수정 버튼
+    document.querySelectorAll('.edit-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const id = this.dataset.id;
+        const item = document.querySelector(`.gallery-item[data-id="${id}"]`);
+        const title = item.querySelector('h6').textContent;
+        const badge = item.querySelector('.badge')?.textContent || '';
+        const date = item.querySelector('small')?.textContent.replace('📅 ', '') || '';
+        
+        document.getElementById('editId').value = id;
+        document.getElementById('editTitle').value = title;
+        document.getElementById('editStatusBadge').value = badge;
+        document.getElementById('editDateText').value = date;
+        
+        const modal = new bootstrap.Modal(document.getElementById('editModal'));
+        modal.show();
+      });
+    });
+
+    // 저장 버튼
+    document.getElementById('saveEditBtn').addEventListener('click', async function() {
+      const form = document.getElementById('editForm');
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData);
+      
+      try {
+        const response = await fetch(`/coop/admin/solar-gallery/${data.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          alert('수정되었습니다.');
+          location.reload();
+        } else {
+          alert(result.error || '수정 중 오류가 발생했습니다.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('수정 중 오류가 발생했습니다.');
+      }
+    });
+
+    // 삭제 버튼
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        if (!confirm('정말로 이 항목을 삭제하시겠습니까?')) {
+          return;
+        }
+        
+        const id = this.dataset.id;
+        
+        fetch(`/coop/admin/solar-gallery/${id}`, {
+          method: 'DELETE'
+        })
+        .then(res => res.json())
+        .then(result => {
+          if (result.success) {
+            alert('삭제되었습니다.');
+            location.reload();
+          } else {
+            alert(result.error || '삭제 중 오류가 발생했습니다.');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('삭제 중 오류가 발생했습니다.');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
+

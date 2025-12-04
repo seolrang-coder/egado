@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>후원 안내 및 신청 | 관악구장애인단체연합회</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--brand:#4b4b8f;--brand-dark:#352f74;--muted:#6c757d;--bg:#f3f3f3}
+    body{font-family:'Noto Sans KR',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:#fff;color:#222}
+    .topbar{font-size:12px;background:#f8f9fa;border-bottom:1px solid #e9ecef}
+    .navbar-brand img{height:44px}
+    .brand-title{font-weight:800;color:var(--brand-dark);font-size:1.95rem;letter-spacing:-.2px}
+    @media (max-width: 576px){.brand-title{display:none}}
+    .mainnav{border-bottom:1px solid #e9ecef}
+    .mainnav .nav-link{font-weight:600;color:#333}
+    .mainnav .nav-link:hover{color:var(--brand)}
+    .footer{background:#2d2142;color:#d9d6e5}
+    .footer a{color:#e3def2;text-decoration:none}
+    .footer a:hover{text-decoration:underline}
+    .footer-brand img{height:36px}
+    .sponsor-card{transition:transform 0.3s ease,box-shadow 0.3s ease}
+    .sponsor-card:hover{transform:translateY(-5px);box-shadow:0 8px 20px rgba(0,0,0,0.15)!important}
+    .highlight-box{background:linear-gradient(135deg,#e3f2fd 0%,#f0f7ff 100%);border-left:4px solid #4b4b8f;padding:1.5rem;border-radius:0.5rem}
+    .account-info-box{background:#f8f9fa;border:2px solid #4b4b8f;border-radius:0.75rem;padding:1.5rem}
+    .form-section{background:#fff;border-radius:0.75rem;box-shadow:0 2px 10px rgba(0,0,0,0.08)}
+    .icon-circle{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1rem}
+  </style>
+</head>
+<body>
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="container d-flex justify-content-end align-items-center gap-3 py-1">
+      <div id="userInfo" style="display:none;">
+        <span id="usernameDisplay" class="text-muted me-2"></span>
+        <form action="/logout" method="post" style="display:inline;">
+          <button type="submit" class="btn btn-link link-secondary p-0" style="text-decoration:none;">로그아웃</button>
+        </form>
+      </div>
+      <div id="guestInfo">
+        <a href="login.html" class="link-secondary">로그인</a>
+        <a href="register.html" class="link-secondary">회원가입</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white mainnav">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-3" href="index.html">
+        <img src="img/footer-logo.png" alt="로고" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="토글 내비게이션">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="about.html" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">협회소개</a>
+            <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+              <li><a class="dropdown-item" href="about.html">협회소개</a></li>
+              <li><a class="dropdown-item" href="org.html">조직도</a></li>
+              <li><a class="dropdown-item" href="history.html">연혁</a></li>
+              <li><a class="dropdown-item" href="vision.html">비전</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="business.html">협회사업</a></li>
+          <li class="nav-item"><a class="nav-link" href="info.html">정보마당</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="activity-lovehouse.html" id="activityDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">행사 및 활동</a>
+            <ul class="dropdown-menu" aria-labelledby="activityDropdown">
+              <li><a class="dropdown-item" href="activity-lovehouse.html">러브하우스</a></li>
+              <li><a class="dropdown-item" href="activity-volunteer.html">행사 및 환경봉사단</a></li>
+              <li><a class="dropdown-item" href="activity-mobilitycare.html">전동보장구교육&케어</a></li>
+              <li><a class="dropdown-item" href="activity-beauty.html">무료 이·미용 봉사</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="board.html">게시판</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="affiliateDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">연합회소속단체</a>
+            <ul class="dropdown-menu" aria-labelledby="affiliateDropdown">
+              <li><a class="dropdown-item" href="http://www.sappd.or.kr/" target="_blank" rel="noopener noreferrer">사)서울지체장애인협회</a></li>
+              <li><a class="dropdown-item" href="http://www.kadi.or.kr/kadi/" target="_blank" rel="noopener noreferrer">사)한국장애인정보화협회</a></li>
+              <li><a class="dropdown-item" href="https://kaiad.or.kr/" target="_blank" rel="noopener noreferrer">사)한국산업재해장애인협회</a></li>
+              <li><a class="dropdown-item" href="http://www.kaed.or.kr/" target="_blank" rel="noopener noreferrer">사)한국장애인기업협회</a></li>
+              <li><a class="dropdown-item" href="http://www.nanum.tv/" target="_blank" rel="noopener noreferrer">사)국제장애인문화교류협회</a></li>
+              <li><a class="dropdown-item" href="http://www.kofd.co.kr/kofd/" target="_blank" rel="noopener noreferrer">사)한국기능장애인협회</a></li>
+              <li><a class="dropdown-item" href="https://www.deafkorea.com/main/" target="_blank" rel="noopener noreferrer">사)한국농아인협회</a></li>
+              <li><a class="dropdown-item" href="http://www.bluesky82.org/" target="_blank" rel="noopener noreferrer">사)한국장애인문화협회</a></li>
+              <li><a class="dropdown-item" href="https://www.kdwa.or.kr/main" target="_blank" rel="noopener noreferrer">사)서울신체장애인복지회</a></li>
+              <li><a class="dropdown-item" href="#">사)열린정보장애인협회</a></li>
+              <li><a class="dropdown-item" href="#">사)서울시각장애인연합회</a></li>
+              <li><a class="dropdown-item" href="#">사)한국장애인환경실천협회</a></li>
+              <li><a class="dropdown-item" href="nanum.html">전국장애인나눔협동조합</a></li>
+              <li><a class="dropdown-item" href="aboutgolf.html">한국장애인스크린파크골프협회</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="directions.html">오시는길</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container my-5">
+    <!-- 페이지 헤더 -->
+    <section class="page-header text-center mb-5">
+      <div class="header-decoration mb-3">
+        <i class="bi bi-heart-fill display-6 text-danger"></i>
+      </div>
+      <h2 class="display-8 fw-bold text-dark mb-3">후원 안내 및 신청</h2>
+      <p class="lead text-muted">관악구장애인단체연합회의 다양한 사업과 활동은 여러분의 소중한 후원으로 이루어지고 있습니다.</p>
+    </section>
+
+    <!-- 후원 안내 섹션 -->
+    <section class="mb-5">
+      <div class="card border-0 shadow-lg">
+        <div class="card-body p-5">
+          <div class="row align-items-center mb-4">
+            <div class="col-lg-8">
+              <div class="section-badge mb-3">
+                <span class="badge bg-danger bg-opacity-10 text-danger px-3 py-2 rounded-pill">
+                  <i class="bi bi-info-circle me-1"></i> 후원 안내
+                </span>
+              </div>
+              <h3 class="display-6 fw-bold text-dark mb-4">여러분의 후원이 희망을 만듭니다</h3>
+              <p class="lead text-muted mb-4">
+                아래 후원 방법과 절차를 확인하시고, 많은 관심과 참여 부탁드립니다.
+              </p>
+            </div>
+            <div class="col-lg-4 text-center">
+              <div class="icon-circle bg-danger bg-opacity-10 text-danger mx-auto">
+                <i class="bi bi-heart-pulse-fill"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="highlight-box mb-4">
+            <h5 class="fw-bold text-primary mb-3"><i class="bi bi-check-circle-fill me-2"></i>후원금 사용처 안내</h5>
+            <div class="row g-3">
+              <div class="col-md-4">
+                <div class="d-flex align-items-center">
+                  <i class="bi bi-check-lg text-success me-2"></i>
+                  <span>소외 계층 지원 및 복지 사업</span>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="d-flex align-items-center">
+                  <i class="bi bi-check-lg text-success me-2"></i>
+                  <span>교육·문화 프로그램 운영</span>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="d-flex align-items-center">
+                  <i class="bi bi-check-lg text-success me-2"></i>
+                  <span>지역사회 발전 및 연합회 공익 활동</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 후원 유형 카드 -->
+          <div class="row g-4 mt-3">
+            <div class="col-lg-6 col-md-6">
+              <div class="sponsor-card card border-0 shadow h-100">
+                <div class="card-body p-4">
+                  <div class="d-flex align-items-center mb-3">
+                    <div class="icon-circle bg-primary bg-opacity-10 text-primary me-3">
+                      <i class="bi bi-calendar-check"></i>
+                    </div>
+                    <h4 class="fw-bold text-primary mb-0">정기후원</h4>
+                  </div>
+                  <p class="text-muted mb-2">매월 정해진 금액을 CMS자동이체로 후원하는 방식입니다.</p>
+                  <p class="text-muted mb-0">안정적인 사업 운영에 큰 도움이 됩니다.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+              <div class="sponsor-card card border-0 shadow h-100">
+                <div class="card-body p-4">
+                  <div class="d-flex align-items-center mb-3">
+                    <div class="icon-circle bg-success bg-opacity-10 text-success me-3">
+                      <i class="bi bi-box-seam"></i>
+                    </div>
+                    <h4 class="fw-bold text-success mb-0">물품후원</h4>
+                  </div>
+                  <p class="text-muted mb-2">생활용품, 식료품 등 다양한 물품을 후원해주세요.</p>
+                  <p class="text-muted mb-1"><i class="bi bi-geo-alt-fill text-success me-1"></i>관악구장애인단체연합회로 후원물품 전달 및 배송</p>
+                  <p class="text-muted small mb-0">(서울시 관악구 남부순환로 1696)</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+              <div class="sponsor-card card border-0 shadow h-100">
+                <div class="card-body p-4">
+                  <div class="d-flex align-items-center mb-3">
+                    <div class="icon-circle bg-info bg-opacity-10 text-info me-3">
+                      <i class="bi bi-cash-coin"></i>
+                    </div>
+                    <h4 class="fw-bold text-info mb-0">일시후원</h4>
+                  </div>
+                  <p class="text-muted mb-2">원하시는 시기에, 원하는 금액만큼 후원하는 방식입니다.</p>
+                  <p class="text-muted mb-2">특별한 기념일, 행사 등을 기념하여 참여하실 수 있습니다.</p>
+                  <div class="mt-3 p-3 bg-light rounded">
+                    <p class="mb-1 small"><strong>계좌이체</strong></p>
+                    <p class="mb-0 small">우리은행 1005-003-466557</p>
+                    <p class="mb-0 small">예금주: 관악구장애인단체연합회</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+              <div class="sponsor-card card border-0 shadow h-100">
+                <div class="card-body p-4">
+                  <div class="d-flex align-items-center mb-3">
+                    <div class="icon-circle bg-warning bg-opacity-10 text-warning me-3">
+                      <i class="bi bi-building"></i>
+                    </div>
+                    <h4 class="fw-bold text-warning mb-0">기업·단체 후원</h4>
+                  </div>
+                  <p class="text-muted mb-0">기업 및 단체와의 파트너십을 통해 다양한 사회공헌 활동을 진행합니다.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 필요서류 카드 -->
+          <div class="card border-0 shadow mt-4" style="background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%);">
+            <div class="card-body p-4">
+              <h5 class="fw-bold text-danger mb-3"><i class="bi bi-file-earmark-text me-2"></i>필요서류</h5>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="d-flex align-items-start">
+                    <i class="bi bi-person-check text-danger me-2 mt-1"></i>
+                    <div>
+                      <strong>개인:</strong>
+                      <p class="mb-0 small text-muted">기부자의 주민등록번호를 포함한 개인정보</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="d-flex align-items-start">
+                    <i class="bi bi-building text-danger me-2 mt-1"></i>
+                    <div>
+                      <strong>법인:</strong>
+                      <p class="mb-0 small text-muted">사업자등록증 사본</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="alert alert-info mt-3 mb-0">
+                <i class="bi bi-info-circle me-2"></i>
+                <small>익명으로 기부하신 경우에도 영수증 발급이 필요하시면 내역 확인 후 발급이 가능합니다.</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 후원 계좌 및 문의 섹션 -->
+    <section class="mb-5">
+      <div class="card border-0 shadow-lg">
+        <div class="card-body p-5">
+          <div class="section-badge mb-3">
+            <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill">
+              <i class="bi bi-bank me-1"></i> 후원 계좌 및 문의
+            </span>
+          </div>
+          <div class="row g-4">
+            <div class="col-lg-6">
+              <div class="account-info-box h-100">
+                <h4 class="fw-bold text-primary mb-3"><i class="bi bi-wallet2 me-2"></i>후원 계좌</h4>
+                <div class="mb-3">
+                  <p class="mb-1"><strong>은행명:</strong> 우리은행</p>
+                  <p class="mb-1"><strong>계좌번호:</strong> 1005-003-466557</p>
+                  <p class="mb-0"><strong>예금주:</strong> 관악구장애인단체연합회</p>
+                </div>
+                <button class="btn btn-outline-primary btn-sm" onclick="copyAccount()">
+                  <i class="bi bi-clipboard me-1"></i>계좌번호 복사
+                </button>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="account-info-box h-100">
+                <h4 class="fw-bold text-primary mb-3"><i class="bi bi-telephone me-2"></i>문의처</h4>
+                <div>
+                  <p class="mb-2">
+                    <i class="bi bi-telephone-fill text-primary me-2"></i>
+                    <strong>전화:</strong> <a href="tel:02-887-9878" class="text-decoration-none">02-887-9878</a>
+                  </p>
+                  <p class="mb-0">
+                    <i class="bi bi-envelope-fill text-primary me-2"></i>
+                    <strong>이메일:</strong> <a href="mailto:2002cjy@daum.net" class="text-decoration-none">2002cjy@daum.net</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 후원 신청 폼 섹션 -->
+    <section class="mb-5">
+      <div class="card border-0 shadow-lg form-section">
+        <div class="card-header border-0 rounded-top-4 py-4" style="background: linear-gradient(135deg, #a8c5f0 0%, #b8d4f5 100%); color: #2c3e50;">
+          <div class="text-center">
+            <i class="bi bi-pencil-square fs-3 mb-2"></i>
+            <h3 class="mb-0 fw-bold">후원 신청서</h3>
+          </div>
+        </div>
+        <div class="card-body p-5">
+          <p class="text-muted text-center mb-4">
+            아래 신청서를 작성해 주시면 담당자가 확인 후 연락을 드립니다.
+          </p>
+
+          <form id="sponsorForm" method="post">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="name" class="form-label">성함 <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="name" name="name" required placeholder="성함을 입력해주세요">
+              </div>
+              <div class="col-md-6">
+                <label for="phone" class="form-label">연락처 <span class="text-danger">*</span></label>
+                <input type="tel" class="form-control" id="phone" name="phone" required placeholder="연락처를 입력해주세요">
+              </div>
+              <div class="col-md-6">
+                <label for="email" class="form-label">이메일</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="이메일을 입력해주세요">
+              </div>
+              <div class="col-md-6">
+                <label for="sponsorType" class="form-label">후원 형태 <span class="text-danger">*</span></label>
+                <select class="form-select" id="sponsorType" name="sponsorType" required>
+                  <option value="">선택하세요</option>
+                  <option value="regular">정기후원</option>
+                  <option value="one_time">일시후원</option>
+                  <option value="corporate">기업/단체 후원</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="amount" class="form-label">예상 후원금 (원)</label>
+                <input type="number" class="form-control" id="amount" name="amount" min="0" step="1000" placeholder="후원금액을 입력해주세요">
+              </div>
+              <div class="col-md-6">
+                <label for="method" class="form-label">납부 방법</label>
+                <select class="form-select" id="method" name="method">
+                  <option value="">선택하세요</option>
+                  <option value="account">계좌이체</option>
+                  <option value="card">카드납부</option>
+                  <option value="other">기타</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label for="message" class="form-label">문의 및 전달사항</label>
+                <textarea class="form-control" id="message" name="message" rows="4" placeholder="전하고 싶은 말씀을 자유롭게 적어 주세요."></textarea>
+              </div>
+            </div>
+
+            <div class="d-flex gap-2 justify-content-end mt-4">
+              <button type="reset" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-clockwise me-1"></i>초기화
+              </button>
+              <button type="submit" class="btn btn-primary">
+                <i class="bi bi-send me-1"></i>신청하기
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer pt-4 pb-5 mt-5">
+    <div class="container">
+      <div class="row g-3">
+        <div class="col-12 col-lg-8">
+          <a class="footer-brand d-inline-flex align-items-center gap-2 mb-2" href="index.html">
+            <img src="img/main.jpg" alt="관악구장애인단체연합회 로고" />
+            <span class="fw-bold text-white">관악구장애인단체연합회</span>
+          </a>
+          <div class="small text-secondary">고유번호:119-82-74874 | 협회장: 송 낙 규</div>
+          <div class="small text-secondary">서울특별시 남부순환로 1696, 뉴명지빌딩 (5,6,7층) | 대표 02-871-5686 | FAX 02-3281-3702</div>
+          <div class="small text-secondary">Copyright &copy; 2025 관악구장애인단체연합회. All Rights Reserved.</div>
+        </div>
+        <div class="col-12 col-lg-4">
+          <div class="d-flex gap-3 justify-content-lg-end small">
+            <a href="terms.html">이용약관</a>
+            <a href="privacy.html">개인정보처리방침</a>
+            <a href="email-policy.html">이메일무단수집거부</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function copyAccount() {
+      const account = '1005-003-466557';
+      navigator.clipboard.writeText(account).then(function() {
+        alert('계좌번호가 클립보드에 복사되었습니다: ' + account);
+      }, function() {
+        alert('복사에 실패했습니다. 수동으로 복사해주세요: ' + account);
+      });
+    }
+
+    // 후원 신청 폼 제출
+    document.getElementById('sponsorForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(this);
+      const data = {
+        name: formData.get('name'),
+        phone: formData.get('phone'),
+        email: formData.get('email'),
+        sponsorType: formData.get('sponsorType'),
+        amount: formData.get('amount'),
+        method: formData.get('method'),
+        message: formData.get('message')
+      };
+
+      const submitBtn = this.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span>처리 중...';
+
+      try {
+        const response = await fetch('/sponsors', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+          alert('후원 신청이 완료되었습니다. 감사합니다!');
+          this.reset();
+        } else {
+          alert(result.error || '후원 신청 중 오류가 발생했습니다.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('후원 신청 중 오류가 발생했습니다. 다시 시도해주세요.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+      }
+    });
+    
+    // 로그인 상태 확인
+    async function checkLoginStatus() {
+      try {
+        const res = await fetch('/api/user', {
+          credentials: 'include'
+        });
+        const data = await res.json();
+        
+        if (data.loggedIn) {
+          document.getElementById('userInfo').style.display = 'block';
+          document.getElementById('guestInfo').style.display = 'none';
+          document.getElementById('usernameDisplay').textContent = `${data.username}님`;
+        } else {
+          document.getElementById('userInfo').style.display = 'none';
+          document.getElementById('guestInfo').style.display = 'block';
+        }
+      } catch (error) {
+        console.error('Error checking login status:', error);
+      }
+    }
+    
+    checkLoginStatus();
+  </script>
+</body>
+</html>

@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>게시판 | 한국장애인스크린파크골프협회</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <style>
+    body{font-family:'Noto Sans KR',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+    .board-card{box-shadow:0 2px 10px rgba(0,0,0,0.08);border-radius:0.75rem;overflow:hidden;margin-bottom:2rem}
+    .board-card-header{background:linear-gradient(135deg,#6b7ba8 0%,#8a9bc4 100%);color:#fff;padding:1.25rem 1.5rem;display:flex;justify-content:space-between;align-items:center}
+    .board-card-header.notice{background:linear-gradient(135deg,#ffd54f 0%,#ffe082 100%);color:#000}
+    .board-card-header h3{margin:0;font-size:1.25rem;font-weight:600;display:flex;align-items:center;gap:0.75rem}
+    .board-table{width:100%;border-collapse:separate;border-spacing:0}
+    .board-table thead{background:#f8f9fa}
+    .board-table th{padding:1rem;text-align:center;font-weight:600;font-size:0.875rem;color:#495057;border-bottom:2px solid #dee2e6;white-space:nowrap}
+    .board-table td{padding:1rem;text-align:center;font-size:0.875rem;color:#6c757d;border-bottom:1px solid #e9ecef;vertical-align:middle}
+    .board-table .title-link{color:#212529;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;font-weight:500}
+    .board-table .title-link:hover{text-decoration:none}
+    .empty-state{text-align:center;padding:3rem 1.5rem;color:#6c757d}
+    .empty-state i{font-size:3rem;opacity:0.3;margin-bottom:1rem;display:block}
+    .admin-controls{display:none}
+    .admin-controls.show{display:block}
+    .pagination-wrapper{margin-top:2rem}
+    /* Mirror board.html enhancements */
+    .board-card-header .badge{font-size:0.875rem;padding:0.375rem 0.75rem}
+    .board-table tbody tr{transition:all 0.2s ease}
+    .board-table tbody tr:hover{background-color:#f8f9fa;transform:translateX(4px)}
+    .board-table tbody tr.notice-row{background-color:#fffbf0}
+    .board-table tbody tr.notice-row:hover{background-color:#fff8e1;transform:translateX(4px)}
+    .board-table .col-number{width:80px;font-weight:600;color:#4b4b8f}
+    .board-table .col-title{text-align:left;width:auto}
+    .board-table .col-author{width:150px}
+    .board-table .col-date{width:120px}
+    .board-table .col-views{width:80px}
+    .board-table .title-link:hover{color:#4b4b8f}
+    .board-table .title-link i{font-size:0.75rem;opacity:0.6}
+    .footer{background:#2d2142;color:#d9d6e5}
+    .footer a{color:#e3def2;text-decoration:none}
+    .footer a:hover{text-decoration:underline}
+    .footer-brand img{height:36px}
+  </style>
+</head>
+<body>
+  <!-- Topbar (Coop) -->
+  <div class="topbar" style="font-size:12px;background:#f8f9fa;border-bottom:1px solid #e9ecef">
+    <div class="container d-flex justify-content-end align-items-center gap-3 py-1">
+      <div id="userInfo" style="display:none;">
+        <span id="usernameDisplay" class="text-muted me-2"></span>
+        <form action="/golf/logout" method="post" style="display:inline;">
+          <button type="submit" class="btn btn-link link-secondary p-0" style="text-decoration:none;">로그아웃</button>
+        </form>
+      </div>
+      <div id="guestInfo">
+        <a href="golf-login.html" class="link-secondary">로그인</a>
+        <a href="golf-register.html" class="link-secondary">회원가입</a>
+      </div>
+    </div>
+  </div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-3" href="aboutgolf.html">
+        <img src="img/golf.jpg" alt="한국장애인스크린파크골프협회 로고" style="height:44px" />
+        <span class="fw-bold" style="color:#352f74;font-size:1.6rem;letter-spacing:-.2px">한국장애인스크린파크골프협회</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="토글 내비게이션">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+          <li class="nav-item"><a class="nav-link" href="aboutgolf.html">협회소개</a></li>
+          <li class="nav-item"><a class="nav-link" href="golf.html">스크린파크골프</a></li>
+          <li class="nav-item"><a class="nav-link active" href="golf-board.html">게시판</a></li>
+          <li class="nav-item ms-2">
+            <a class="nav-link p-0" href="index.html" title="관악구장애인단체연합회 홈" style="display:inline-flex;align-items:center">
+              <img src="img/footer-logo.png" alt="관악구장애인단체연합회 로고" style="height:32px" />
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container my-5">
+    <section class="page-header text-center mb-5">
+      <h2 class="display-8 fw-bold text-dark mb-3">한국장애인스크린파크골프협회 게시판</h2>
+    </section>
+
+    <!-- 공지사항 섹션 -->
+    <section class="board-card">
+      <div class="board-card-header notice">
+        <h3>
+          공지사항
+          <span class="badge bg-dark" id="noticeCount">0</span>
+        </h3>
+        <div class="admin-controls" id="adminControls">
+          <a href="/golf/new?category=general" class="btn btn-light btn-sm">
+            <i class="bi bi-pencil-square me-1"></i>글 작성
+          </a>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="board-table">
+          <thead>
+            <tr>
+              <th class="col-number">번호</th>
+              <th class="col-title">제목</th>
+              <th class="col-author">작성자</th>
+              <th class="col-date">작성일</th>
+              <th class="col-views">조회</th>
+            </tr>
+          </thead>
+          <tbody id="noticesList">
+            <tr>
+              <td colspan="5" class="empty-state">
+                <div class="spinner-border spinner-border-sm text-warning" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 일반 게시판과 자유게시판 섹션 -->
+    <div class="row g-4">
+      <!-- 일반 게시판: 좌측 -->
+      <div class="col-12 col-md-6">
+        <section class="board-card h-100">
+          <div class="board-card-header">
+            <h3>
+              알림 게시판
+              <span class="badge bg-light text-dark" id="postsCount">0</span>
+            </h3>
+            <div class="admin-controls" id="generalAdminControls">
+              <a href="/golf/new?category=general" class="btn btn-light btn-sm">
+                <i class="bi bi-pencil-square me-1"></i>글 작성
+              </a>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="board-table">
+              <thead>
+                <tr>
+                  <th class="col-number">번호</th>
+                  <th class="col-title">제목</th>
+                  <th class="col-author">작성자</th>
+                  <th class="col-date">작성일</th>
+                  <th class="col-views">조회</th>
+                </tr>
+              </thead>
+              <tbody id="postsList">
+                <tr>
+                  <td colspan="5" class="empty-state">
+                    <div class="spinner-border spinner-border-sm text-primary" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="pagination-wrapper">
+            <nav aria-label="게시판 페이지네이션" id="paginationNav" style="display:none;">
+              <ul class="pagination justify-content-center mb-0" id="paginationList"></ul>
+            </nav>
+          </div>
+        </section>
+      </div>
+
+      <!-- 자유게시판: 우측 -->
+      <div class="col-12 col-md-6">
+        <section class="board-card h-100">
+          <div class="board-card-header">
+            <h3>
+              자유게시판
+              <span class="badge bg-light text-dark" id="freePostsCount">0</span>
+            </h3>
+            <div id="freeBoardWriteBtn" style="display:none;">
+              <a href="/golf/new?category=free" class="btn btn-light btn-sm">
+                <i class="bi bi-pencil-square me-1"></i>글 작성
+              </a>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="board-table">
+              <thead>
+                <tr>
+                  <th class="col-number">번호</th>
+                  <th class="col-title">제목</th>
+                  <th class="col-author">작성자</th>
+                  <th class="col-date">작성일</th>
+                  <th class="col-views">조회</th>
+                </tr>
+              </thead>
+              <tbody id="freePostsList">
+                <tr>
+                  <td colspan="5" class="empty-state">
+                    <div class="spinner-border spinner-border-sm text-primary" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="pagination-wrapper">
+            <nav aria-label="자유게시판 페이지네이션" id="freePaginationNav" style="display:none;">
+              <ul class="pagination justify-content-center mb-0" id="freePaginationList"></ul>
+            </nav>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer pt-4 pb-5 mt-0">
+    <div class="container">
+      <div class="row g-3">
+        <div class="col-12 col-lg-8">
+          <a class="footer-brand d-inline-flex align-items-center gap-2 mb-2" href="aboutgolf.html">
+            <img src="img/golf.jpg" alt="한국장애인스크린파크골프협회 로고" />
+            <span class="fw-bold text-white">한국장애인스크린파크골프협회</span>
+          </a>
+          <div class="small text-secondary">고유번호:116-82-74837 | 대표: 송 낙 규</div>
+          <div class="small text-secondary">감사: 유 금 형 | 고문: 이 재 식 | 이사: 강 성 채 / 유 병 필</div>
+          <div class="small text-secondary">서울특별시 남부순환로 1696, 뉴명지빌딩 (5,6,7층) | 전화 02-871-5686 | FAX 02-3281-3702</div>
+          <div class="small text-secondary">Copyright &copy; 2025 관악구장애인단체연합회. All Rights Reserved.</div>
+        </div>
+        <div class="col-12 col-lg-4">
+          <div class="d-flex gap-3 justify-content-lg-end small">
+            <a href="terms.html">이용약관</a>
+            <a href="privacy.html">개인정보처리방침</a>
+            <a href="email-policy.html">이메일무단수집거부</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function escapeHtml(text){const div=document.createElement('div');div.textContent=text;return div.innerHTML;}
+    function formatDate(dateString){
+      if (!dateString) return '';
+      
+      // SQLite DATETIME 형식 (YYYY-MM-DD HH:MM:SS)을 직접 파싱하여 날짜만 추출
+      // 서버에서 저장된 날짜를 그대로 사용 (시간대 변환 없음)
+      let year, month, day;
+      
+      if (!dateString.includes('T') && !dateString.includes('Z') && !dateString.includes('+')) {
+        // YYYY-MM-DD HH:MM:SS 형식
+        const parts = dateString.split(' ');
+        const datePart = parts[0].split('-');
+        year = parseInt(datePart[0]);
+        month = parseInt(datePart[1]);
+        day = parseInt(datePart[2]);
+      } else if (dateString.includes('T')) {
+        // ISO 형식
+        const datePart = dateString.split('T')[0].split('-');
+        year = parseInt(datePart[0]);
+        month = parseInt(datePart[1]);
+        day = parseInt(datePart[2]);
+      } else {
+        // 기타 형식은 Date 객체로 파싱
+        const date = new Date(dateString);
+        year = date.getFullYear();
+        month = date.getMonth() + 1;
+        day = date.getDate();
+      }
+      
+      // YYYY.MM.DD 형식으로 반환
+      return `${year}.${String(month).padStart(2, '0')}.${String(day).padStart(2, '0')}`;
+    }
+
+    function renderPostRow(post, isNotice = false, index = 0, totalPosts = 0, currentPageNum = 1){
+      const postUrl = `/golf/posts/${post.id}`;
+      let number;
+      if (isNotice) { number = '<span class="badge bg-warning text-dark">공지</span>'; }
+      else { number = totalPosts - ((currentPageNum - 1) * 10) - index; }
+      const views = post.view_count || 0;
+      return `
+        <tr class="${isNotice ? 'notice-row' : ''}" onclick="window.location.href='${postUrl}'" style="cursor:pointer">
+          <td class="col-number">${number}</td>
+          <td class="col-title">
+            <a href="${postUrl}" class="title-link" onclick="event.stopPropagation(); window.location.href='${postUrl}'; return false;">
+              <i class="bi bi-file-text"></i>
+              ${escapeHtml(post.title)}
+            </a>
+          </td>
+          <td class="col-author">${escapeHtml(post.username || '관리자')}</td>
+          <td class="col-date">${formatDate(post.created_at)}</td>
+          <td class="col-views"><i class="bi bi-eye text-muted"></i> ${views}</td>
+        </tr>`;
+    }
+
+    function renderPagination(pagination, navId, listId, loaderFn){
+      const paginationNav = document.getElementById(navId);
+      const paginationList = document.getElementById(listId);
+      if (!pagination || pagination.totalPages <= 1) { paginationNav.style.display = 'none'; return; }
+      paginationNav.style.display = 'block';
+      let html = '';
+      html += `<li class="page-item ${!pagination.hasPrev ? 'disabled' : ''}"><a class="page-link" href="#" onclick="event.preventDefault(); if(${pagination.hasPrev}) ${loaderFn}(${pagination.currentPage - 1}); return false;"><i class=\"bi bi-chevron-left\"></i></a></li>`;
+      const startPage = Math.max(1, pagination.currentPage - 2);
+      const endPage = Math.min(pagination.totalPages, pagination.currentPage + 2);
+      if (startPage > 1) { html += `<li class="page-item"><a class="page-link" href="#" onclick="event.preventDefault(); ${loaderFn}(1); return false;">1</a></li>`; if (startPage > 2) html += `<li class="page-item disabled"><span class="page-link">...</span></li>`; }
+      for (let i = startPage; i <= endPage; i++) { html += `<li class="page-item ${i === pagination.currentPage ? 'active' : ''}"><a class="page-link" href="#" onclick="event.preventDefault(); ${loaderFn}(${i}); return false;">${i}</a></li>`; }
+      if (endPage < pagination.totalPages) { if (endPage < pagination.totalPages - 1) html += `<li class="page-item disabled"><span class="page-link">...</span></li>`; html += `<li class="page-item"><a class="page-link" href="#" onclick="event.preventDefault(); ${loaderFn}(${pagination.totalPages}); return false;">${pagination.totalPages}</a></li>`; }
+      html += `<li class="page-item ${!pagination.hasNext ? 'disabled' : ''}"><a class="page-link" href="#" onclick="event.preventDefault(); if(${pagination.hasNext}) ${loaderFn}(${pagination.currentPage + 1}); return false;"><i class=\"bi bi-chevron-right\"></i></a></li>`;
+      paginationList.innerHTML = html;
+    }
+
+    let currentPage = 1; let currentFreePage = 1;
+
+    async function checkAdmin(){
+      try{
+        const res=await fetch('/api/golf/check-admin',{credentials:'include'});
+        const data=await res.json();
+        if(data.isAdmin){
+          const adminControls=document.getElementById('adminControls');
+          if(adminControls) adminControls.classList.add('show');
+          const generalAdminControls=document.getElementById('generalAdminControls');
+          if(generalAdminControls) generalAdminControls.classList.add('show');
+        }
+      }catch(e){console.error('Error checking admin:',e)}
+    }
+
+    async function checkLoginStatus(){
+      try{
+        const res=await fetch('/api/golf/user',{credentials:'include'});
+        const data=await res.json();
+        const userInfo=document.getElementById('userInfo');
+        const guestInfo=document.getElementById('guestInfo');
+        if(data.loggedIn){
+          if(userInfo) userInfo.style.display='block';
+          if(guestInfo) guestInfo.style.display='none';
+          const nameEl=document.getElementById('usernameDisplay');
+          if(nameEl) nameEl.textContent=`${data.username}님`;
+          const btn=document.getElementById('freeBoardWriteBtn');
+          if(btn) btn.style.display='block';
+        } else {
+          if(userInfo) userInfo.style.display='none';
+          if(guestInfo) guestInfo.style.display='block';
+        }
+      }catch(e){console.error('Error checking login status:',e)}
+    }
+
+    async function loadBoard(page=1){
+      try{
+        currentPage = page;
+        const res=await fetch(`/api/golf/board?page=${page}`,{credentials:'include'});
+        if(!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+        const data=await res.json();
+        // 공지
+        const noticesList=document.getElementById('noticesList');
+        const noticeCount=document.getElementById('noticeCount');
+        if(!data.notices||data.notices.length===0){
+          noticesList.innerHTML=`<tr><td colspan="5" class="empty-state"><i class=\"bi bi-inbox\"></i><p class=\"mb-0\">등록된 공지사항이 없습니다.</p></td></tr>`; noticeCount.textContent='0';
+        } else {
+          noticesList.innerHTML=data.notices.map((n,i)=>renderPostRow(n,true,i,0,1)).join(''); noticeCount.textContent=data.notices.length;
+        }
+        // 일반
+        const postsList=document.getElementById('postsList');
+        const postsCount=document.getElementById('postsCount');
+        if(!data.posts||data.posts.length===0){
+          postsList.innerHTML=`<tr><td colspan="5" class="empty-state"><i class=\"bi bi-inbox\"></i><p class=\"mb-0\">등록된 게시글이 없습니다.</p></td></tr>`; postsCount.textContent='0';
+        } else {
+          const totalPosts=data.pagination?data.pagination.totalPosts:data.posts.length;
+          postsList.innerHTML=data.posts.map((p,i)=>renderPostRow(p,false,i,totalPosts,page)).join(''); postsCount.textContent=totalPosts;
+        }
+        if(data.pagination){ renderPagination(data.pagination,'paginationNav','paginationList','loadBoard'); }
+      }catch(error){ console.error('Error loading board:',error); }
+    }
+
+    async function loadFreeBoard(page=1){
+      try{
+        currentFreePage = page;
+        const res=await fetch(`/api/golf/board/free?page=${page}`,{credentials:'include'});
+        if(!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+        const data=await res.json();
+        const freePostsList=document.getElementById('freePostsList');
+        const freePostsCount=document.getElementById('freePostsCount');
+        if(!data.posts||data.posts.length===0){
+          freePostsList.innerHTML=`<tr><td colspan="5" class="empty-state"><i class=\"bi bi-inbox\"></i><p class=\"mb-0\">등록된 게시글이 없습니다.</p></td></tr>`; freePostsCount.textContent='0';
+        } else {
+          const totalPosts=data.pagination?data.pagination.totalPosts:data.posts.length;
+          freePostsList.innerHTML=data.posts.map((p,i)=>renderPostRow(p,false,i,totalPosts,page)).join(''); freePostsCount.textContent=totalPosts;
+        }
+        if(data.pagination){ renderPagination(data.pagination,'freePaginationNav','freePaginationList','loadFreeBoard'); }
+      }catch(error){ console.error('Error loading free board:',error); }
+    }
+
+    checkLoginStatus();
+    checkAdmin();
+    loadBoard(1);
+    loadFreeBoard(1);
+  </script>
+</body>
+</html>
