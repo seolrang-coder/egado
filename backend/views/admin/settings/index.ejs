@@ -1,0 +1,920 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>사이트 설정 | 관악구장애인단체연합회</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <style>
+    .image-preview{max-width:100%;max-height:300px;object-fit:cover;border-radius:0.5rem;margin-top:1rem;border:2px solid #dee2e6}
+    .upload-area{border:2px dashed #dee2e6;border-radius:0.5rem;padding:2rem;text-align:center;transition:all 0.3s ease;cursor:pointer}
+    .upload-area:hover{border-color:#4b4b8f;background:#f8f9fa}
+    .upload-area.dragover{border-color:#4b4b8f;background:#e7f3ff}
+    .announcement-item{border:1px solid #dee2e6;border-radius:0.5rem;padding:1rem;margin-bottom:1rem;background:#fff;transition:all 0.3s ease}
+    .announcement-item:hover{box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+    .announcement-item.inactive{opacity:0.6;background:#f8f9fa}
+    .icon-preview{display:inline-flex;align-items:center;gap:0.5rem;padding:0.5rem;background:#f8f9fa;border-radius:0.25rem;margin-top:0.5rem}
+    .icon-preview i{font-size:1.25rem}
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="/index.html">
+        <strong>관악구장애인단체연합회</strong>
+      </a>
+      <div class="ms-auto d-flex gap-2 align-items-center flex-wrap">
+        <span class="navbar-text">안녕하세요, <strong><%= currentUser.username %></strong>님</span>
+        <a href="/admin/users" class="btn btn-outline-primary btn-sm">
+          <i class="bi bi-people me-1"></i>회원 관리
+        </a>
+        <a href="/admin/sponsors" class="btn btn-outline-primary btn-sm">
+          <i class="bi bi-heart me-1"></i>후원 관리
+        </a>
+        <a href="/admin/settings" class="btn btn-primary btn-sm">
+          <i class="bi bi-gear me-1"></i>사이트 설정
+        </a>
+        <a href="/index.html" class="btn btn-outline-secondary btn-sm">홈으로</a>
+        <form action="/logout" method="post" class="d-inline">
+          <button type="submit" class="btn btn-outline-secondary btn-sm">로그아웃</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2>사이트 설정</h2>
+    </div>
+
+    <div class="row g-4">
+      <!-- Hero 이미지 설정 -->
+      <div class="col-12 col-lg-6">
+        <div class="card border-0 shadow-lg">
+          <div class="card-header bg-primary text-white border-0 rounded-top-4 py-4">
+            <div class="text-center">
+              <i class="bi bi-image fs-3 mb-2"></i>
+              <h5 class="mb-0 fw-bold">Hero 이미지</h5>
+            </div>
+          </div>
+          <div class="card-body p-4">
+            <div class="mb-3">
+              <label class="form-label fw-bold">현재 이미지</label>
+              <div class="text-center">
+                <img src="<%= heroImage %>" alt="Hero 이미지" class="image-preview" id="heroPreview">
+              </div>
+            </div>
+            <form id="heroImageForm">
+              <div class="upload-area mb-3" id="heroUploadArea">
+                <i class="bi bi-cloud-upload fs-1 text-muted d-block mb-2"></i>
+                <p class="mb-1">이미지를 드래그하거나 클릭하여 업로드</p>
+                <small class="text-muted">JPG, PNG, GIF, WEBP (최대 50MB)</small>
+                <input type="file" id="heroImageInput" name="image" accept="image/*" class="d-none" required>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">
+                <i class="bi bi-upload me-1"></i>이미지 업로드
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- About 섹션 이미지 설정 -->
+      <div class="col-12 col-lg-6">
+        <div class="card border-0 shadow-lg">
+          <div class="card-header bg-success text-white border-0 rounded-top-4 py-4">
+            <div class="text-center">
+              <i class="bi bi-image fs-3 mb-2"></i>
+              <h5 class="mb-0 fw-bold">About 섹션 이미지</h5>
+            </div>
+          </div>
+          <div class="card-body p-4">
+            <div class="mb-3">
+              <label class="form-label fw-bold">현재 이미지</label>
+              <div class="text-center">
+                <img src="<%= aboutImage %>" alt="About 이미지" class="image-preview" id="aboutPreview">
+              </div>
+            </div>
+            <form id="aboutImageForm">
+              <div class="upload-area mb-3" id="aboutUploadArea">
+                <i class="bi bi-cloud-upload fs-1 text-muted d-block mb-2"></i>
+                <p class="mb-1">이미지를 드래그하거나 클릭하여 업로드</p>
+                <small class="text-muted">JPG, PNG, GIF, WEBP (최대 50MB)</small>
+                <input type="file" id="aboutImageInput" name="image" accept="image/*" class="d-none" required>
+              </div>
+              <button type="submit" class="btn btn-success w-100">
+                <i class="bi bi-upload me-1"></i>이미지 업로드
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- 협회알림 및 공지사항 관리 -->
+      <div class="col-12 mt-4">
+        <div class="row g-4">
+          <!-- 협회알림 관리 -->
+          <div class="col-12 col-lg-6">
+            <div class="card border-0 shadow-lg h-100">
+              <div class="card-header bg-info text-white border-0 rounded-top-4 py-4">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="text-center flex-grow-1">
+                    <i class="bi bi-megaphone fs-3 mb-2"></i>
+                    <h5 class="mb-0 fw-bold">협회알림 관리</h5>
+                  </div>
+                  <button class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#addAnnouncementModal">
+                    <i class="bi bi-plus-circle me-1"></i>추가
+                  </button>
+                </div>
+              </div>
+          <div class="card-body p-4">
+            <p class="text-muted mb-3">메인 페이지의 "협회알림" 섹션에 표시될 공지사항을 관리할 수 있습니다.</p>
+            
+            <!-- 협회알림 목록 -->
+            <div id="announcementsList">
+              <% if (typeof announcements !== 'undefined' && announcements && announcements.length > 0) { %>
+                <% announcements.forEach((announcement) => { %>
+                  <div class="announcement-item <%= announcement.is_active === 0 ? 'inactive' : '' %>" data-id="<%= announcement.id %>">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <div class="flex-grow-1">
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                          <span class="badge bg-<%= announcement.is_active === 1 ? 'success' : 'secondary' %>">
+                            <%= announcement.is_active === 1 ? '활성' : '비활성' %>
+                          </span>
+                          <small class="text-muted">순서: <%= announcement.display_order %></small>
+                        </div>
+                        <p class="mb-0" id="content-<%= announcement.id %>"><%= announcement.content %></p>
+                        <small class="text-muted">
+                          생성일: <%= new Date(announcement.created_at).toLocaleString('ko-KR') %>
+                          <% if (announcement.updated_at) { %>
+                            | 수정일: <%= new Date(announcement.updated_at).toLocaleString('ko-KR') %>
+                          <% } %>
+                        </small>
+                      </div>
+                      <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-primary" onclick="editAnnouncement(<%= announcement.id %>, '<%= announcement.content.replace(/'/g, "\\'").replace(/"/g, '&quot;') %>', <%= announcement.display_order %>, <%= announcement.is_active %>)">
+                          <i class="bi bi-pencil"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="deleteAnnouncement(<%= announcement.id %>)">
+                          <i class="bi bi-trash"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                <% }); %>
+              <% } else { %>
+                <div class="alert alert-info text-center">
+                  <i class="bi bi-info-circle me-2"></i>등록된 협회알림이 없습니다.
+                </div>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 공지사항 관리 -->
+      <div class="col-12 col-lg-6">
+        <div class="card border-0 shadow-lg h-100">
+          <div class="card-header bg-warning text-dark border-0 rounded-top-4 py-4">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="text-center flex-grow-1">
+                <i class="bi bi-bell fs-3 mb-2"></i>
+                <h5 class="mb-0 fw-bold">공지사항 관리</h5>
+              </div>
+              <button class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#addNoticeModal">
+                <i class="bi bi-plus-circle me-1"></i>추가
+              </button>
+            </div>
+          </div>
+          <div class="card-body p-4">
+            <p class="text-muted mb-3 small">메인 페이지 우측 "공지사항" 섹션에 표시될 공지사항을 관리할 수 있습니다.</p>
+            
+            <!-- 공지사항 목록 -->
+            <div id="noticesList">
+              <% if (typeof notices !== 'undefined' && notices && notices.length > 0) { %>
+                <% notices.forEach((notice) => { %>
+                  <div class="announcement-item <%= notice.is_active === 0 ? 'inactive' : '' %>" data-id="<%= notice.id %>">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <div class="flex-grow-1">
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                          <span class="badge bg-<%= notice.is_active === 1 ? 'success' : 'secondary' %>">
+                            <%= notice.is_active === 1 ? '활성' : '비활성' %>
+                          </span>
+                          <small class="text-muted">순서: <%= notice.display_order %></small>
+                        </div>
+                        <p class="mb-0" id="notice-title-<%= notice.id %>">
+                          <% if (notice.icon_class && notice.icon_color) { %>
+                            <i class="bi <%= notice.icon_class %> text-<%= notice.icon_color %> me-2"></i>
+                          <% } %>
+                          <%= notice.title %>
+                        </p>
+                        <% if (notice.notice_date) { %>
+                          <small class="text-muted">날짜: <%= notice.notice_date %></small>
+                        <% } %>
+                        <br>
+                        <small class="text-muted">
+                          생성일: <%= new Date(notice.created_at).toLocaleString('ko-KR') %>
+                          <% if (notice.updated_at) { %>
+                            | 수정일: <%= new Date(notice.updated_at).toLocaleString('ko-KR') %>
+                          <% } %>
+                        </small>
+                      </div>
+                      <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-primary" onclick="editNotice(<%= notice.id %>, '<%= notice.title.replace(/'/g, "\\'").replace(/"/g, '&quot;') %>', '<%= (notice.icon_class || '').replace(/'/g, "\\'") %>', '<%= (notice.icon_color || '').replace(/'/g, "\\'") %>', '<%= (notice.notice_date || '').replace(/'/g, "\\'") %>', '<%= (notice.link || '').replace(/'/g, "\\'") %>', <%= notice.display_order %>, <%= notice.is_active %>)">
+                          <i class="bi bi-pencil"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="deleteNotice(<%= notice.id %>)">
+                          <i class="bi bi-trash"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                <% }); %>
+              <% } else { %>
+                <div class="alert alert-info text-center">
+                  <i class="bi bi-info-circle me-2"></i>등록된 공지사항이 없습니다.
+                </div>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Hero 이미지 업로드
+    const heroUploadArea = document.getElementById('heroUploadArea');
+    const heroImageInput = document.getElementById('heroImageInput');
+    const heroImageForm = document.getElementById('heroImageForm');
+    const heroPreview = document.getElementById('heroPreview');
+
+    heroUploadArea.addEventListener('click', () => heroImageInput.click());
+    heroUploadArea.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      heroUploadArea.classList.add('dragover');
+    });
+    heroUploadArea.addEventListener('dragleave', () => {
+      heroUploadArea.classList.remove('dragover');
+    });
+    heroUploadArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+      heroUploadArea.classList.remove('dragover');
+      if (e.dataTransfer.files.length > 0) {
+        heroImageInput.files = e.dataTransfer.files;
+        previewImage(heroImageInput.files[0], heroPreview);
+      }
+    });
+
+    heroImageInput.addEventListener('change', (e) => {
+      if (e.target.files.length > 0) {
+        previewImage(e.target.files[0], heroPreview);
+      }
+    });
+
+    heroImageForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(heroImageForm);
+      
+      const submitBtn = heroImageForm.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span>업로드 중...';
+
+      try {
+        const response = await fetch('/admin/settings/hero-image', {
+          method: 'POST',
+          body: formData,
+          credentials: 'include'
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          alert('Hero 이미지가 업데이트되었습니다.');
+          heroPreview.src = result.imagePath + '?t=' + Date.now();
+          heroImageForm.reset();
+        } else {
+          alert(result.error || '이미지 업로드 중 오류가 발생했습니다.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('이미지 업로드 중 오류가 발생했습니다.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+      }
+    });
+
+    // About 이미지 업로드
+    const aboutUploadArea = document.getElementById('aboutUploadArea');
+    const aboutImageInput = document.getElementById('aboutImageInput');
+    const aboutImageForm = document.getElementById('aboutImageForm');
+    const aboutPreview = document.getElementById('aboutPreview');
+
+    aboutUploadArea.addEventListener('click', () => aboutImageInput.click());
+    aboutUploadArea.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      aboutUploadArea.classList.add('dragover');
+    });
+    aboutUploadArea.addEventListener('dragleave', () => {
+      aboutUploadArea.classList.remove('dragover');
+    });
+    aboutUploadArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+      aboutUploadArea.classList.remove('dragover');
+      if (e.dataTransfer.files.length > 0) {
+        aboutImageInput.files = e.dataTransfer.files;
+        previewImage(aboutImageInput.files[0], aboutPreview);
+      }
+    });
+
+    aboutImageInput.addEventListener('change', (e) => {
+      if (e.target.files.length > 0) {
+        previewImage(e.target.files[0], aboutPreview);
+      }
+    });
+
+    aboutImageForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(aboutImageForm);
+      
+      const submitBtn = aboutImageForm.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span>업로드 중...';
+
+      try {
+        const response = await fetch('/admin/settings/about-image', {
+          method: 'POST',
+          body: formData,
+          credentials: 'include'
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          alert('About 이미지가 업데이트되었습니다.');
+          aboutPreview.src = result.imagePath + '?t=' + Date.now();
+          aboutImageForm.reset();
+        } else {
+          alert(result.error || '이미지 업로드 중 오류가 발생했습니다.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('이미지 업로드 중 오류가 발생했습니다.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+      }
+    });
+
+    function previewImage(file, previewElement) {
+      if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          previewElement.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    // 협회알림 관리 함수들
+    async function saveAnnouncement() {
+      const content = document.getElementById('addContent').value.trim();
+      const displayOrder = parseInt(document.getElementById('addDisplayOrder').value) || 0;
+      
+      if (!content) {
+        alert('내용을 입력해주세요.');
+        return;
+      }
+
+      try {
+        const response = await fetch('/admin/announcements', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+          body: JSON.stringify({ content, display_order: displayOrder })
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          alert('협회알림이 추가되었습니다.');
+          location.reload();
+        } else {
+          alert(result.error || '협회알림 추가 중 오류가 발생했습니다.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('협회알림 추가 중 오류가 발생했습니다.');
+      }
+    }
+
+    function editAnnouncement(id, content, displayOrder, isActive) {
+      document.getElementById('editId').value = id;
+      document.getElementById('editContent').value = content;
+      document.getElementById('editDisplayOrder').value = displayOrder;
+      document.getElementById('editIsActive').checked = isActive === 1;
+      
+      const modal = new bootstrap.Modal(document.getElementById('editAnnouncementModal'));
+      modal.show();
+    }
+
+    async function updateAnnouncement() {
+      const id = document.getElementById('editId').value;
+      const content = document.getElementById('editContent').value.trim();
+      const displayOrder = parseInt(document.getElementById('editDisplayOrder').value) || 0;
+      const isActive = document.getElementById('editIsActive').checked ? 1 : 0;
+      
+      if (!content) {
+        alert('내용을 입력해주세요.');
+        return;
+      }
+
+      try {
+        const response = await fetch(`/admin/announcements/${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+          body: JSON.stringify({ content, display_order: displayOrder, is_active: isActive })
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          alert('협회알림이 수정되었습니다.');
+          location.reload();
+        } else {
+          alert(result.error || '협회알림 수정 중 오류가 발생했습니다.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('협회알림 수정 중 오류가 발생했습니다.');
+      }
+    }
+
+    async function deleteAnnouncement(id) {
+      if (!confirm('정말 이 협회알림을 삭제하시겠습니까?')) {
+        return;
+      }
+
+      try {
+        const response = await fetch(`/admin/announcements/${id}`, {
+          method: 'DELETE',
+          credentials: 'include'
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          alert('협회알림이 삭제되었습니다.');
+          location.reload();
+        } else {
+          alert(result.error || '협회알림 삭제 중 오류가 발생했습니다.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('협회알림 삭제 중 오류가 발생했습니다.');
+      }
+    }
+
+    // 공지사항 관리 함수들
+    async function saveNotice() {
+      const title = document.getElementById('addNoticeTitle').value.trim();
+      const iconClassSelect = document.getElementById('addNoticeIconClass').value.trim();
+      const iconClassCustom = document.getElementById('addNoticeIconClassCustom').value.trim();
+      const iconClass = iconClassCustom || iconClassSelect;
+      const iconColor = document.getElementById('addNoticeIconColor').value;
+      const noticeDate = document.getElementById('addNoticeDate').value.trim();
+      const link = document.getElementById('addNoticeLink').value.trim();
+      const displayOrder = parseInt(document.getElementById('addNoticeDisplayOrder').value) || 0;
+      
+      if (!title) {
+        alert('제목을 입력해주세요.');
+        return;
+      }
+
+      try {
+        const response = await fetch('/admin/notices', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+          body: JSON.stringify({ 
+            title, 
+            icon_class: iconClass || null,
+            icon_color: iconColor || null,
+            notice_date: noticeDate || null,
+            link: link || null,
+            display_order: displayOrder 
+          })
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          alert('공지사항이 추가되었습니다.');
+          location.reload();
+        } else {
+          alert(result.error || '공지사항 추가 중 오류가 발생했습니다.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('공지사항 추가 중 오류가 발생했습니다.');
+      }
+    }
+
+    function editNotice(id, title, iconClass, iconColor, noticeDate, link, displayOrder, isActive) {
+      document.getElementById('editNoticeId').value = id;
+      document.getElementById('editNoticeTitle').value = title;
+      
+      // 아이콘 클래스가 목록에 있는지 확인
+      const iconClassSelect = document.getElementById('editNoticeIconClass');
+      const iconClassCustom = document.getElementById('editNoticeIconClassCustom');
+      const iconOptions = Array.from(iconClassSelect.options).map(opt => opt.value);
+      
+      if (iconClass && iconOptions.includes(iconClass)) {
+        iconClassSelect.value = iconClass;
+        iconClassCustom.value = '';
+      } else {
+        iconClassSelect.value = '';
+        iconClassCustom.value = iconClass || '';
+      }
+      
+      document.getElementById('editNoticeIconColor').value = iconColor || '';
+      document.getElementById('editNoticeDate').value = noticeDate || '';
+      document.getElementById('editNoticeLink').value = link || '';
+      document.getElementById('editNoticeDisplayOrder').value = displayOrder;
+      document.getElementById('editNoticeIsActive').checked = isActive === 1;
+      
+      // 아이콘 미리보기 업데이트
+      setTimeout(() => {
+        updateIconPreview('editNoticeIconClass', 'editNoticeIconPreview', 'editNoticeIconPreviewIcon', 'editNoticeIconPreviewText', 'editNoticeIconClassCustom');
+      }, 100);
+      
+      const modal = new bootstrap.Modal(document.getElementById('editNoticeModal'));
+      modal.show();
+    }
+
+    async function updateNotice() {
+      const id = document.getElementById('editNoticeId').value;
+      const title = document.getElementById('editNoticeTitle').value.trim();
+      const iconClassSelect = document.getElementById('editNoticeIconClass').value.trim();
+      const iconClassCustom = document.getElementById('editNoticeIconClassCustom').value.trim();
+      const iconClass = iconClassCustom || iconClassSelect;
+      const iconColor = document.getElementById('editNoticeIconColor').value;
+      const noticeDate = document.getElementById('editNoticeDate').value.trim();
+      const link = document.getElementById('editNoticeLink').value.trim();
+      const displayOrder = parseInt(document.getElementById('editNoticeDisplayOrder').value) || 0;
+      const isActive = document.getElementById('editNoticeIsActive').checked ? 1 : 0;
+      
+      if (!title) {
+        alert('제목을 입력해주세요.');
+        return;
+      }
+
+      try {
+        const response = await fetch(`/admin/notices/${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+          body: JSON.stringify({ 
+            title,
+            icon_class: iconClass || null,
+            icon_color: iconColor || null,
+            notice_date: noticeDate || null,
+            link: link || null,
+            display_order: displayOrder,
+            is_active: isActive
+          })
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          alert('공지사항이 수정되었습니다.');
+          location.reload();
+        } else {
+          alert(result.error || '공지사항 수정 중 오류가 발생했습니다.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('공지사항 수정 중 오류가 발생했습니다.');
+      }
+    }
+
+    async function deleteNotice(id) {
+      if (!confirm('정말 이 공지사항을 삭제하시겠습니까?')) {
+        return;
+      }
+
+      try {
+        const response = await fetch(`/admin/notices/${id}`, {
+          method: 'DELETE',
+          credentials: 'include'
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          alert('공지사항이 삭제되었습니다.');
+          location.reload();
+        } else {
+          alert(result.error || '공지사항 삭제 중 오류가 발생했습니다.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('공지사항 삭제 중 오류가 발생했습니다.');
+      }
+    }
+
+    // 아이콘 미리보기 기능
+    function updateIconPreview(selectId, previewId, iconId, textId, customInputId) {
+      const select = document.getElementById(selectId);
+      const preview = document.getElementById(previewId);
+      const iconElement = document.getElementById(iconId);
+      const textElement = document.getElementById(textId);
+      const customInput = document.getElementById(customInputId);
+      const colorSelect = selectId.includes('add') ? document.getElementById('addNoticeIconColor') : document.getElementById('editNoticeIconColor');
+      
+      const selectedValue = select.value;
+      const customValue = customInput.value.trim();
+      const iconClass = customValue || selectedValue;
+      const iconColor = colorSelect.value;
+      
+      if (iconClass) {
+        iconElement.className = `bi ${iconClass}`;
+        if (iconColor) {
+          iconElement.className += ` text-${iconColor}`;
+        }
+        textElement.textContent = iconClass;
+        preview.style.display = 'inline-flex';
+      } else {
+        preview.style.display = 'none';
+      }
+    }
+
+    // 추가 모달 아이콘 미리보기
+    document.getElementById('addNoticeIconClass').addEventListener('change', function() {
+      document.getElementById('addNoticeIconClassCustom').value = '';
+      updateIconPreview('addNoticeIconClass', 'addNoticeIconPreview', 'addNoticeIconPreviewIcon', 'addNoticeIconPreviewText', 'addNoticeIconClassCustom');
+    });
+    document.getElementById('addNoticeIconClassCustom').addEventListener('input', function() {
+      if (this.value.trim()) {
+        document.getElementById('addNoticeIconClass').value = '';
+      }
+      updateIconPreview('addNoticeIconClass', 'addNoticeIconPreview', 'addNoticeIconPreviewIcon', 'addNoticeIconPreviewText', 'addNoticeIconClassCustom');
+    });
+    document.getElementById('addNoticeIconColor').addEventListener('change', function() {
+      updateIconPreview('addNoticeIconClass', 'addNoticeIconPreview', 'addNoticeIconPreviewIcon', 'addNoticeIconPreviewText', 'addNoticeIconClassCustom');
+    });
+
+    // 수정 모달 아이콘 미리보기
+    document.getElementById('editNoticeIconClass').addEventListener('change', function() {
+      document.getElementById('editNoticeIconClassCustom').value = '';
+      updateIconPreview('editNoticeIconClass', 'editNoticeIconPreview', 'editNoticeIconPreviewIcon', 'editNoticeIconPreviewText', 'editNoticeIconClassCustom');
+    });
+    document.getElementById('editNoticeIconClassCustom').addEventListener('input', function() {
+      if (this.value.trim()) {
+        document.getElementById('editNoticeIconClass').value = '';
+      }
+      updateIconPreview('editNoticeIconClass', 'editNoticeIconPreview', 'editNoticeIconPreviewIcon', 'editNoticeIconPreviewText', 'editNoticeIconClassCustom');
+    });
+    document.getElementById('editNoticeIconColor').addEventListener('change', function() {
+      updateIconPreview('editNoticeIconClass', 'editNoticeIconPreview', 'editNoticeIconPreviewIcon', 'editNoticeIconPreviewText', 'editNoticeIconClassCustom');
+    });
+  </script>
+
+  <!-- 새 알림 추가 모달 -->
+  <div class="modal fade" id="addAnnouncementModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">새 협회알림 추가</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="addAnnouncementForm">
+            <div class="mb-3">
+              <label class="form-label">내용 <span class="text-danger">*</span></label>
+              <textarea class="form-control" id="addContent" rows="3" required placeholder="협회알림 내용을 입력하세요"></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">표시 순서</label>
+              <input type="number" class="form-control" id="addDisplayOrder" value="0" min="0">
+              <small class="text-muted">숫자가 작을수록 먼저 표시됩니다.</small>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+          <button type="button" class="btn btn-primary" onclick="saveAnnouncement()">저장</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 알림 수정 모달 -->
+  <div class="modal fade" id="editAnnouncementModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">협회알림 수정</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="editAnnouncementForm">
+            <input type="hidden" id="editId">
+            <div class="mb-3">
+              <label class="form-label">내용 <span class="text-danger">*</span></label>
+              <textarea class="form-control" id="editContent" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">표시 순서</label>
+              <input type="number" class="form-control" id="editDisplayOrder" min="0">
+            </div>
+            <div class="mb-3">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="editIsActive">
+                <label class="form-check-label" for="editIsActive">활성화</label>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+          <button type="button" class="btn btn-primary" onclick="updateAnnouncement()">수정</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 새 공지사항 추가 모달 -->
+  <div class="modal fade" id="addNoticeModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">새 공지사항 추가</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="addNoticeForm">
+            <div class="mb-3">
+              <label class="form-label">제목 <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="addNoticeTitle" required placeholder="공지사항 제목을 입력하세요">
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">아이콘 클래스</label>
+                <select class="form-select" id="addNoticeIconClass">
+                  <option value="">선택안함</option>
+                  <option value="bi-bell">🔔 벨 (bell)</option>
+                  <option value="bi-megaphone">📢 확성기 (megaphone)</option>
+                  <option value="bi-calendar-event">📅 달력 (calendar-event)</option>
+                  <option value="bi-info-circle">ℹ️ 정보 (info-circle)</option>
+                  <option value="bi-exclamation-triangle">⚠️ 경고 (exclamation-triangle)</option>
+                  <option value="bi-check-circle">✅ 체크 (check-circle)</option>
+                  <option value="bi-star">⭐ 별 (star)</option>
+                  <option value="bi-flag">🚩 깃발 (flag)</option>
+                  <option value="bi-bullhorn">📣 나팔 (bullhorn)</option>
+                  <option value="bi-file-earmark-text">📄 문서 (file-earmark-text)</option>
+                </select>
+                <div id="addNoticeIconPreview" class="icon-preview" style="display:none;">
+                  <span>미리보기:</span>
+                  <i id="addNoticeIconPreviewIcon"></i>
+                  <span id="addNoticeIconPreviewText"></span>
+                </div>
+                <small class="text-muted">아이콘을 선택하거나 직접 입력할 수 있습니다.</small>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">아이콘 색상</label>
+                <select class="form-select" id="addNoticeIconColor">
+                  <option value="">선택안함</option>
+                  <option value="primary">Primary (파란색)</option>
+                  <option value="success">Success (초록색)</option>
+                  <option value="warning">Warning (노란색)</option>
+                  <option value="danger">Danger (빨간색)</option>
+                  <option value="info">Info (하늘색)</option>
+                </select>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">아이콘 클래스 직접 입력 (선택사항)</label>
+              <input type="text" class="form-control" id="addNoticeIconClassCustom" placeholder="예: bi-custom-icon">
+              <small class="text-muted">위 목록에 없는 아이콘을 사용하려면 직접 입력하세요.</small>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">날짜</label>
+                <input type="text" class="form-control" id="addNoticeDate" placeholder="예: 2025.11.13">
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">표시 순서</label>
+                <input type="number" class="form-control" id="addNoticeDisplayOrder" value="0" min="0">
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">링크 (선택사항)</label>
+              <input type="text" class="form-control" id="addNoticeLink" placeholder="클릭 시 이동할 URL">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+          <button type="button" class="btn btn-warning" onclick="saveNotice()">저장</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 공지사항 수정 모달 -->
+  <div class="modal fade" id="editNoticeModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">공지사항 수정</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="editNoticeForm">
+            <input type="hidden" id="editNoticeId">
+            <div class="mb-3">
+              <label class="form-label">제목 <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="editNoticeTitle" required>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">아이콘 클래스</label>
+                <select class="form-select" id="editNoticeIconClass">
+                  <option value="">선택안함</option>
+                  <option value="bi-bell">🔔 벨 (bell)</option>
+                  <option value="bi-megaphone">📢 확성기 (megaphone)</option>
+                  <option value="bi-calendar-event">📅 달력 (calendar-event)</option>
+                  <option value="bi-info-circle">ℹ️ 정보 (info-circle)</option>
+                  <option value="bi-exclamation-triangle">⚠️ 경고 (exclamation-triangle)</option>
+                  <option value="bi-check-circle">✅ 체크 (check-circle)</option>
+                  <option value="bi-star">⭐ 별 (star)</option>
+                  <option value="bi-flag">🚩 깃발 (flag)</option>
+                  <option value="bi-bullhorn">📣 나팔 (bullhorn)</option>
+                  <option value="bi-file-earmark-text">📄 문서 (file-earmark-text)</option>
+                </select>
+                <div id="editNoticeIconPreview" class="icon-preview" style="display:none;">
+                  <span>미리보기:</span>
+                  <i id="editNoticeIconPreviewIcon"></i>
+                  <span id="editNoticeIconPreviewText"></span>
+                </div>
+                <small class="text-muted">아이콘을 선택하거나 직접 입력할 수 있습니다.</small>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">아이콘 색상</label>
+                <select class="form-select" id="editNoticeIconColor">
+                  <option value="">선택안함</option>
+                  <option value="primary">Primary (파란색)</option>
+                  <option value="success">Success (초록색)</option>
+                  <option value="warning">Warning (노란색)</option>
+                  <option value="danger">Danger (빨간색)</option>
+                  <option value="info">Info (하늘색)</option>
+                </select>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">아이콘 클래스 직접 입력 (선택사항)</label>
+              <input type="text" class="form-control" id="editNoticeIconClassCustom" placeholder="예: bi-custom-icon">
+              <small class="text-muted">위 목록에 없는 아이콘을 사용하려면 직접 입력하세요.</small>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">날짜</label>
+                <input type="text" class="form-control" id="editNoticeDate" placeholder="예: 2025.11.13">
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">표시 순서</label>
+                <input type="number" class="form-control" id="editNoticeDisplayOrder" min="0">
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">링크 (선택사항)</label>
+              <input type="text" class="form-control" id="editNoticeLink" placeholder="클릭 시 이동할 URL">
+            </div>
+            <div class="mb-3">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="editNoticeIsActive">
+                <label class="form-check-label" for="editNoticeIsActive">활성화</label>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+          <button type="button" class="btn btn-warning" onclick="updateNotice()">수정</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

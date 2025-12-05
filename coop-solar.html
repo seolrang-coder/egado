@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>태양광 | 전국장애인나눔협동조합</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--brand:#4b4b8f;--brand-dark:#352f74;--muted:#6c757d;--bg:#f3f3f3}
+    body{font-family:'Noto Sans KR',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:#fff;color:#222}
+    .topbar{font-size:12px;background:#f8f9fa;border-bottom:1px solid #e9ecef}
+    .navbar-brand img{height:44px}
+    .brand-title{font-weight:800;color:var(--brand-dark);font-size:1.95rem;letter-spacing:-.2px}
+    @media (max-width: 576px){.brand-title{display:none}}
+    .mainnav{border-bottom:1px solid #e9ecef}
+    .mainnav .nav-link{font-weight:600;color:#333}
+    .mainnav .nav-link:hover{color:var(--brand)}
+    .footer{background:#2d2142;color:#d9d6e5}
+    .footer a{color:#e3def2;text-decoration:none}
+    .footer a:hover{text-decoration:underline}
+    .footer-brand img{height:36px}
+    .sponsor-card{transition:transform 0.3s ease,box-shadow 0.3s ease}
+    .sponsor-card:hover{transform:translateY(-5px);box-shadow:0 8px 20px rgba(0,0,0,0.15)!important}
+    .highlight-box{background:linear-gradient(135deg,#fff5e6 0%,#ffe8cc 100%);border-left:4px solid #ffc107;padding:1.5rem;border-radius:0.5rem}
+    .icon-circle{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1rem}
+    .gallery-card{transition:transform 0.3s ease,box-shadow 0.3s ease}
+    .gallery-card:hover{transform:translateY(-5px);box-shadow:0 8px 20px rgba(0,0,0,0.15)!important}
+    .card-overlay{transition:opacity 0.3s ease}
+    .gallery-card:hover .card-overlay{opacity:1!important}
+  </style>
+</head>
+<body>
+  <!-- Topbar (Coop) -->
+  <div class="topbar" style="font-size:12px;background:#f8f9fa;border-bottom:1px solid #e9ecef">
+    <div class="container d-flex justify-content-end align-items-center gap-3 py-1">
+      <div id="userInfo" style="display:none;">
+        <span id="usernameDisplay" class="text-muted me-2"></span>
+        <form action="/coop/logout" method="post" style="display:inline;">
+          <button type="submit" class="btn btn-link link-secondary p-0" style="text-decoration:none;">로그아웃</button>
+        </form>
+      </div>
+      <div id="guestInfo">
+        <a href="coop-login.html" class="link-secondary">로그인</a>
+        <a href="coop-register.html" class="link-secondary">회원가입</a>
+      </div>
+    </div>
+  </div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-3" href="nanum.html">
+        <img src="img/나눔logo.png" alt="전국장애인나눔협동조합 로고" style="height:44px" />
+        <span class="fw-bold" style="color:#352f74;font-size:1.6rem;letter-spacing:-.2px">전국장애인나눔협동조합</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="토글 내비게이션">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+          <li class="nav-item"><a class="nav-link" href="coop-housing.html">주거협동조합</a></li>
+          <li class="nav-item"><a class="nav-link active" href="coop-solar.html">태양광</a></li>
+          <li class="nav-item"><a class="nav-link" href="coop-board.html">게시판</a></li>
+          <li class="nav-item ms-2">
+            <a class="nav-link p-0" href="index.html" title="관악구장애인단체연합회 홈" style="display:inline-flex;align-items:center">
+              <img src="img/footer-logo.png" alt="관악구장애인단체연합회 로고" style="height:32px" />
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container my-5">
+    <!-- 페이지 헤더 -->
+    <section class="page-header text-center mb-5">
+      <div class="header-decoration mb-3">
+        <i class="bi bi-sun-fill display-6 text-warning"></i>
+      </div>
+      <h2 class="display-5 fw-bold text-dark mb-3">태양광 사업</h2>
+      <p class="lead text-muted">친환경 에너지 생산을 통한 지속가능한 미래를 만들어갑니다.</p>
+    </section>
+
+    <!-- 태양광 사업 소개 섹션 -->
+    <section class="mb-5">
+      <div class="card border-0 shadow-lg">
+        <div class="card-body p-5">
+          <div class="row align-items-center mb-4">
+            <div class="col-lg-8">
+              <div class="section-badge mb-3">
+                <span class="badge bg-warning bg-opacity-10 text-warning px-3 py-2 rounded-pill">
+                  <i class="bi bi-info-circle me-1"></i> 태양광 사업 소개
+                </span>
+              </div>
+              <h3 class="display-6 fw-bold text-dark mb-4">태양광 사업이란?</h3>
+              <p class="lead text-muted mb-4">
+                태양광 사업은 태양광 발전 시설을 구축하여 친환경 전력을 생산하는 사업입니다. 
+                장애인의 경제적 자립과 환경 보호에 기여합니다.
+              </p>
+            </div>
+            <div class="col-lg-4 text-center">
+              <div class="icon-circle bg-warning bg-opacity-10 text-warning mx-auto">
+                <i class="bi bi-sun"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="highlight-box mb-4">
+            <h5 class="fw-bold text-warning mb-3"><i class="bi bi-check-circle-fill me-2"></i>태양광 사업의 주요 특징</h5>
+            <div class="row g-3">
+              <div class="col-md-3">
+                <div class="d-flex align-items-center">
+                  <i class="bi bi-sun-fill text-warning me-2"></i>
+                  <span>태양광 발전</span>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="d-flex align-items-center">
+                  <i class="bi bi-lightning-charge text-success me-2"></i>
+                  <span>전력 생산</span>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="d-flex align-items-center">
+                  <i class="bi bi-shield-check text-primary me-2"></i>
+                  <span>환경 보호</span>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="d-flex align-items-center">
+                  <i class="bi bi-graph-up text-info me-2"></i>
+                  <span>경제성</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 태양광 사업 특징 카드 -->
+          <div class="row g-4 mt-3">
+            <div class="col-lg-6 col-md-6">
+              <div class="sponsor-card card border-0 shadow h-100">
+                <div class="card-body p-4">
+                  <div class="d-flex align-items-center mb-3">
+                    <div class="icon-circle bg-warning bg-opacity-10 text-warning me-3">
+                      <i class="bi bi-sun-fill"></i>
+                    </div>
+                    <h4 class="fw-bold text-warning mb-0">태양광 발전</h4>
+                  </div>
+                  <p class="text-muted mb-2">친환경 에너지 생산</p>
+                  <p class="text-muted mb-2">재생 가능한 에너지원</p>
+                  <p class="text-muted mb-0">지속가능한 발전</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+              <div class="sponsor-card card border-0 shadow h-100">
+                <div class="card-body p-4">
+                  <div class="d-flex align-items-center mb-3">
+                    <div class="icon-circle bg-success bg-opacity-10 text-success me-3">
+                      <i class="bi bi-lightning-charge"></i>
+                    </div>
+                    <h4 class="fw-bold text-success mb-0">전력 생산</h4>
+                  </div>
+                  <p class="text-muted mb-2">안정적인 전력 공급</p>
+                  <p class="text-muted mb-2">전력 판매 수익</p>
+                  <p class="text-muted mb-0">에너지 자립</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+              <div class="sponsor-card card border-0 shadow h-100">
+                <div class="card-body p-4">
+                  <div class="d-flex align-items-center mb-3">
+                    <div class="icon-circle bg-primary bg-opacity-10 text-primary me-3">
+                      <i class="bi bi-shield-check"></i>
+                    </div>
+                    <h4 class="fw-bold text-primary mb-0">환경 보호</h4>
+                  </div>
+                  <p class="text-muted mb-2">탄소 배출 절감</p>
+                  <p class="text-muted mb-2">대기 오염 감소</p>
+                  <p class="text-muted mb-0">친환경 에너지</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+              <div class="sponsor-card card border-0 shadow h-100">
+                <div class="card-body p-4">
+                  <div class="d-flex align-items-center mb-3">
+                    <div class="icon-circle bg-info bg-opacity-10 text-info me-3">
+                      <i class="bi bi-graph-up"></i>
+                    </div>
+                    <h4 class="fw-bold text-info mb-0">경제성</h4>
+                  </div>
+                  <p class="text-muted mb-2">장기적 비용 절감</p>
+                  <p class="text-muted mb-2">수익 창출</p>
+                  <p class="text-muted mb-0">투자 가치</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 태양광 시설구축 예시 섹션 -->
+    <section class="mb-5">
+      <div class="card border-0 shadow-lg">
+        <div class="card-header border-0 rounded-top-4 py-4" style="background: linear-gradient(135deg, #ffe8a1 0%, #ffd54f 100%); color: #2c3e50;">
+          <div class="text-center">
+            <i class="bi bi-images fs-3 mb-2"></i>
+            <h3 class="mb-0 fw-bold">태양광 시설구축 예시</h3>
+          </div>
+        </div>
+        <div class="card-body p-5">
+          <p class="text-muted text-center mb-4">
+            전국장애인나눔협동조합의 태양광 시설구축 현장을 소개합니다.
+          </p>
+          <div class="row g-4" id="galleryContainer">
+            <!-- 갤러리 항목이 여기에 동적으로 로드됩니다 -->
+          </div>
+          <!-- 페이지네이션 -->
+          <nav aria-label="갤러리 페이지네이션" id="galleryPagination" class="mt-4">
+            <!-- 페이지네이션이 여기에 동적으로 로드됩니다 -->
+          </nav>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <!-- Footer -->
+  <footer class="footer pt-4 pb-5 mt-0">
+    <div class="container">
+      <div class="row g-3">
+        <div class="col-12 col-lg-8">
+          <a class="footer-brand d-inline-flex align-items-center gap-2 mb-2" href="nanum.html">
+            <img src="img/나눔logo.png" alt="전국장애인나눔협동조합 로고" />
+            <span class="fw-bold text-white">전국장애인나눔협동조합</span>
+          </a>
+          <div class="small text-secondary">고유번호:119-86-87663 | 대표: 송 낙 규</div>
+          <div class="small text-secondary">감사: 유 금 형 , 강 성 채 | 고문: 이 재 식 | 이사: 유 병 필</div>
+          <div class="small text-secondary">서울특별시 남부순환로 1696, 뉴명지빌딩 (5,6,7층) | 전화 02-871-5686 | FAX 02-3281-3702</div>
+          <div class="small text-secondary">Copyright &copy; 2025 관악구장애인단체연합회. All Rights Reserved.</div>
+        </div>
+        <div class="col-12 col-lg-4">
+          <div class="d-flex gap-3 justify-content-lg-end small">
+            <a href="terms.html">이용약관</a>
+            <a href="privacy.html">개인정보처리방침</a>
+            <a href="email-policy.html">이메일무단수집거부</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // 로그인 상태 확인
+    (async function(){
+      try{
+        const res=await fetch('/api/coop/user',{credentials:'include'});
+        const data=await res.json();
+        const userInfo=document.getElementById('userInfo');
+        const guestInfo=document.getElementById('guestInfo');
+        if(data.loggedIn){
+          if(userInfo) userInfo.style.display='block';
+          if(guestInfo) guestInfo.style.display='none';
+          const nameEl=document.getElementById('usernameDisplay');
+          if(nameEl) nameEl.textContent=`${data.username}님`;
+        } else {
+          if(userInfo) userInfo.style.display='none';
+          if(guestInfo) guestInfo.style.display='block';
+        }
+      }catch(e){console.error('Error checking login status:',e)}
+    })();
+
+    // 태양광 갤러리 로드
+    let currentGalleryPage = 1;
+    async function loadSolarGallery(page = 1) {
+      try {
+        const res = await fetch(`/api/coop/solar-gallery?page=${page}`);
+        const data = await res.json();
+        const container = document.getElementById('galleryContainer');
+        const pagination = document.getElementById('galleryPagination');
+        
+        if (!data.items || data.items.length === 0) {
+          container.innerHTML = '<div class="col-12 text-center text-muted py-5"><p>등록된 이미지가 없습니다.</p></div>';
+          pagination.innerHTML = '';
+          return;
+        }
+        
+        container.innerHTML = data.items.map(item => {
+          const badgeClass = {
+            '시설구축': 'bg-warning',
+            '설치완료': 'bg-success',
+            '시공진행': 'bg-info'
+          }[item.status_badge] || 'bg-secondary';
+          
+          return `
+            <div class="col-lg-4 col-md-6">
+              <div class="gallery-card card border-0 shadow h-100">
+                <div class="position-relative overflow-hidden rounded-top-4">
+                  <img src="${item.image_path}" alt="${item.title}" class="card-img-top" style="height: 250px; object-fit: cover;">
+                  <div class="card-overlay position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-25 d-flex align-items-center justify-content-center opacity-0">
+                    <i class="bi bi-eye-fill text-white fs-1"></i>
+                  </div>
+                </div>
+                <div class="card-body p-4">
+                  <div class="d-flex align-items-center mb-3">
+                    ${item.status_badge ? `<span class="badge ${badgeClass} rounded-pill me-2">${item.status_badge}</span>` : ''}
+                    ${item.date_text ? `<small class="text-muted"><i class="bi bi-calendar3 me-1"></i>${item.date_text}</small>` : ''}
+                  </div>
+                  <h5 class="card-title fw-bold mb-3">${item.title}</h5>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+        
+        // 페이지네이션 생성
+        if (data.pagination && data.pagination.totalPages > 1) {
+          let paginationHTML = '<ul class="pagination justify-content-center mb-0">';
+          
+          // 이전 버튼
+          if (data.pagination.hasPrev) {
+            paginationHTML += `<li class="page-item"><a class="page-link" href="#" data-page="${data.pagination.currentPage - 1}">이전</a></li>`;
+          } else {
+            paginationHTML += '<li class="page-item disabled"><span class="page-link">이전</span></li>';
+          }
+          
+          // 페이지 번호
+          for (let i = 1; i <= data.pagination.totalPages; i++) {
+            if (i === data.pagination.currentPage) {
+              paginationHTML += `<li class="page-item active"><span class="page-link">${i}</span></li>`;
+            } else {
+              paginationHTML += `<li class="page-item"><a class="page-link" href="#" data-page="${i}">${i}</a></li>`;
+            }
+          }
+          
+          // 다음 버튼
+          if (data.pagination.hasNext) {
+            paginationHTML += `<li class="page-item"><a class="page-link" href="#" data-page="${data.pagination.currentPage + 1}">다음</a></li>`;
+          } else {
+            paginationHTML += '<li class="page-item disabled"><span class="page-link">다음</span></li>';
+          }
+          
+          paginationHTML += '</ul>';
+          pagination.innerHTML = paginationHTML;
+          
+          // 페이지네이션 클릭 이벤트
+          pagination.querySelectorAll('a.page-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+              e.preventDefault();
+              const page = parseInt(this.dataset.page);
+              if (page) {
+                currentGalleryPage = page;
+                loadSolarGallery(page);
+                window.scrollTo({ top: container.offsetTop - 100, behavior: 'smooth' });
+              }
+            });
+          });
+        } else {
+          pagination.innerHTML = '';
+        }
+      } catch (e) {
+        console.error('Error loading gallery:', e);
+      }
+    }
+    
+    loadSolarGallery(1);
+  </script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>조합원 가입 신청 관리 | <%= typeof orgName !== 'undefined' ? orgName : '전국장애인나눔협동조합' %></title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <style>
+    .status-badge {
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+    .status-pending { background: #fff3cd; color: #856404; }
+    .status-reviewing { background: #cfe2ff; color: #084298; }
+    .status-approved { background: #d4edda; color: #155724; }
+    .status-rejected { background: #f8d7da; color: #721c24; }
+    .status-completed { background: #d1e7dd; color: #0f5132; }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="<%= typeof orgType !== 'undefined' && orgType === 'coop' ? '/nanum.html' : '/index.html' %>">
+        <strong><%= typeof orgName !== 'undefined' ? orgName : '전국장애인나눔협동조합' %></strong>
+      </a>
+      <div class="ms-auto d-flex gap-2 align-items-center flex-wrap">
+        <span class="navbar-text">안녕하세요, <strong><%= currentUser.username %></strong>님</span>
+        <a href="/coop/admin/users" class="btn btn-outline-primary btn-sm">
+          <i class="bi bi-people me-1"></i>회원 관리
+        </a>
+        <a href="/coop/admin/accessions" class="btn btn-primary btn-sm">
+          <i class="bi bi-file-earmark-text me-1"></i>가입 신청 관리
+        </a>
+        <a href="/coop/admin/solar-gallery" class="btn btn-outline-primary btn-sm">
+          <i class="bi bi-images me-1"></i>태양광 갤러리
+        </a>
+        <a href="/coop/admin/settings" class="btn btn-outline-primary btn-sm">
+          <i class="bi bi-gear me-1"></i>사이트 설정
+        </a>
+        <a href="/nanum.html" class="btn btn-outline-secondary btn-sm">홈으로</a>
+        <form action="/coop/logout" method="post" class="d-inline">
+          <button type="submit" class="btn btn-outline-secondary btn-sm">로그아웃</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h2 class="mb-1">조합원 가입 신청 관리</h2>
+        <p class="text-muted mb-0">총 <strong><%= totalCount %></strong>건의 신청서</p>
+      </div>
+    </div>
+
+    <!-- 필터 -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <form method="get" class="row g-3">
+          <div class="col-md-3">
+            <select name="status" class="form-select">
+              <option value="all" <%= currentStatus === 'all' ? 'selected' : '' %>>전체 상태</option>
+              <option value="pending" <%= currentStatus === 'pending' ? 'selected' : '' %>>대기중</option>
+              <option value="reviewing" <%= currentStatus === 'reviewing' ? 'selected' : '' %>>검토중</option>
+              <option value="approved" <%= currentStatus === 'approved' ? 'selected' : '' %>>승인됨</option>
+              <option value="rejected" <%= currentStatus === 'rejected' ? 'selected' : '' %>>거절됨</option>
+              <option value="completed" <%= currentStatus === 'completed' ? 'selected' : '' %>>완료</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">
+              <i class="bi bi-search me-1"></i>필터
+            </button>
+          </div>
+          <div class="col-md-2">
+            <a href="/coop/admin/accessions" class="btn btn-outline-secondary w-100">
+              <i class="bi bi-arrow-clockwise me-1"></i>초기화
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- 신청서 목록 -->
+    <div class="card">
+      <div class="card-body p-0">
+        <% if (accessions.length === 0) { %>
+          <div class="text-center py-5 text-muted">
+            <i class="bi bi-file-earmark-text fs-1 d-block mb-3"></i>
+            <p>신청서가 없습니다.</p>
+          </div>
+        <% } else { %>
+          <div class="table-responsive">
+            <table class="table table-hover mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th>신청번호</th>
+                  <th>성함</th>
+                  <th>생년월일</th>
+                  <th>연락처</th>
+                  <th>이메일</th>
+                  <th>장애유형</th>
+                  <th>첨부파일</th>
+                  <th>신청일</th>
+                  <th>상태</th>
+                  <th>관리</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% accessions.forEach(accession => { %>
+                  <tr>
+                    <td><%= accession.id %></td>
+                    <td><strong><%= accession.name %></strong></td>
+                    <td><%= accession.birthdate %></td>
+                    <td>
+                      <a href="tel:<%= accession.phone %>"><%= accession.phone %></a>
+                    </td>
+                    <td>
+                      <a href="mailto:<%= accession.email %>"><%= accession.email %></a>
+                    </td>
+                    <td><%= accession.disability_type %></td>
+                    <td>
+                      <% if (accession.documentCount > 0) { %>
+                        <span class="badge bg-info"><%= accession.documentCount %>개</span>
+                      <% } else { %>
+                        <span class="text-muted">-</span>
+                      <% } %>
+                    </td>
+                    <td><%= new Date(accession.created_at).toLocaleDateString('ko-KR') %></td>
+                    <td>
+                      <% 
+                        const statusMap = {
+                          'pending': { class: 'status-pending', text: '대기중' },
+                          'reviewing': { class: 'status-reviewing', text: '검토중' },
+                          'approved': { class: 'status-approved', text: '승인됨' },
+                          'rejected': { class: 'status-rejected', text: '거절됨' },
+                          'completed': { class: 'status-completed', text: '완료' }
+                        };
+                        const statusInfo = statusMap[accession.status] || { class: 'status-pending', text: '대기중' };
+                      %>
+                      <span class="status-badge <%= statusInfo.class %>"><%= statusInfo.text %></span>
+                    </td>
+                    <td>
+                      <a href="/coop/admin/accessions/<%= accession.id %>" class="btn btn-sm btn-outline-primary">
+                        <i class="bi bi-eye"></i> 상세
+                      </a>
+                    </td>
+                  </tr>
+                <% }); %>
+              </tbody>
+            </table>
+          </div>
+        <% } %>
+      </div>
+    </div>
+
+    <!-- 페이지네이션 -->
+    <% if (totalPages > 1) { %>
+      <nav aria-label="페이지 네비게이션" class="mt-4">
+        <ul class="pagination justify-content-center">
+          <% if (currentPage > 1) { %>
+            <li class="page-item">
+              <a class="page-link" href="/coop/admin/accessions?page=<%= currentPage - 1 %>&status=<%= currentStatus %>">이전</a>
+            </li>
+          <% } %>
+          <% for (let i = 1; i <= totalPages; i++) { %>
+            <li class="page-item <%= i === currentPage ? 'active' : '' %>">
+              <a class="page-link" href="/coop/admin/accessions?page=<%= i %>&status=<%= currentStatus %>"><%= i %></a>
+            </li>
+          <% } %>
+          <% if (currentPage < totalPages) { %>
+            <li class="page-item">
+              <a class="page-link" href="/coop/admin/accessions?page=<%= currentPage + 1 %>&status=<%= currentStatus %>">다음</a>
+            </li>
+          <% } %>
+        </ul>
+      </nav>
+    <% } %>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+

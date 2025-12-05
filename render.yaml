@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: union-site-backend
+    env: node
+    plan: free  # 또는 starter, standard 등
+    region: singapore  # 또는 oregon, frankfurt 등
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SESSION_SECRET
+        generateValue: true  # Render가 자동으로 생성
+      # PORT는 Render가 자동으로 제공하므로 설정 불필요
+    disk:
+      name: union-site-disk
+      mountPath: /opt/render/project/src/backend
+      sizeGB: 1  # SQLite DB와 업로드 파일 저장용
+

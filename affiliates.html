@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>연합회소속단체 | 전국장애인나눔협동조합</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--brand:#4b4b8f;--brand-dark:#352f74;--muted:#6c757d;--bg:#f3f3f3}
+    body{font-family:'Noto Sans KR',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:#fff;color:#222}
+    .topbar{font-size:12px;background:#f8f9fa;border-bottom:1px solid #e9ecef}
+    .mainnav{border-bottom:1px solid #e9ecef}
+    .mainnav .nav-link{font-weight:600;color:#333}
+    .mainnav .nav-link:hover{color:var(--brand)}
+    .section-card{box-shadow:0 2px 10px rgba(0,0,0,0.08);border-radius:0.75rem;overflow:hidden;margin-bottom:1.5rem}
+    .section-header{background:linear-gradient(135deg,#6b7ba8 0%,#8a9bc4 100%);color:#fff;padding:1rem 1.25rem}
+    .section-body{background:#fff;padding:1.25rem}
+    .footer{background:#2d2142;color:#d9d6e5}
+    .footer a{color:#e3def2;text-decoration:none}
+    .footer a:hover{text-decoration:underline}
+    .footer-brand img{height:36px}
+    .about-img{height:220px}
+    @media (min-width: 992px){.about-img{height:300px}}
+    .about-img img{width:100%;height:100%;object-fit:cover}
+    /* Hero */
+    .hero{position:relative;min-height:65vh;background-size:cover;background-position:center;background-repeat:no-repeat;display:flex;align-items:center;color:#fff}
+    .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.35))}
+    .hero .hero-content{position:relative;padding-top:3rem;padding-bottom:3rem}
+    .hero h1,.hero p{color:#fff}
+    /* Sections & Cards (match index.html) */
+    .section{padding:48px 0}
+    .cards-3 .card{border:0;box-shadow:0 4px 16px rgba(0,0,0,.08);transition:transform 0.3s ease,box-shadow 0.3s ease;border-radius:0.75rem;overflow:hidden}
+    .cards-3 .card:hover{transform:translateY(-5px);box-shadow:0 8px 20px rgba(0,0,0,.15)}
+    .cards-3 .card-title{font-weight:700}
+    .cards-3 .card .card-body{display:flex;flex-direction:column;align-items:center;text-align:center}
+    .cards-3 .card .card-title{text-align:center;width:100%}
+    .cards-3 .card .card-body .btn{margin-top:auto}
+    .card-cover{width:100%;height:220px;background-position:center;background-size:cover;background-repeat:no-repeat;border-radius:0.75rem 0.75rem 0 0}
+  </style>
+</head>
+<body>
+  <!-- Topbar (same as index) -->
+  <div class="topbar">
+    <div class="container d-flex justify-content-end align-items-center gap-3 py-1">
+      <div id="userInfo" style="display:none;">
+        <span id="usernameDisplay" class="text-muted me-2"></span>
+        <form action="/logout" method="post" style="display:inline;">
+          <button type="submit" class="btn btn-link link-secondary p-0" style="text-decoration:none;">로그아웃</button>
+        </form>
+      </div>
+      <div id="guestInfo">
+        <a href="coop-login.html" class="link-secondary">로그인</a>
+        <a href="coop-register.html" class="link-secondary">회원가입</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar (Coop style) -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-3" href="nanum.html">
+        <img src="img/나눔logo.png" alt="전국장애인나눔협동조합 로고" style="height:44px" />
+        <span class="fw-bold" style="color:#352f74;font-size:1.6rem;letter-spacing:-.2px">전국장애인나눔협동조합</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="토글 내비게이션">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+          <li class="nav-item"><a class="nav-link" href="coop-intro.html">협회소개</a></li>
+          <li class="nav-item"><a class="nav-link" href="coop-housing.html">주거협동조합</a></li>
+          <li class="nav-item"><a class="nav-link" href="coop-solar.html">태양광</a></li>
+          <li class="nav-item"><a class="nav-link" href="coop-board.html">게시판</a></li>
+          <li class="nav-item ms-2">
+            <a class="nav-link p-0" href="index.html" title="관악구장애인단체연합회 홈" style="display:inline-flex;align-items:center">
+              <img src="img/footer-logo.png" alt="관악구장애인단체연합회 로고" style="height:32px" />
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="heroSection" style="background-image:url('img/coop-hero.jpg')">
+    <div class="container hero-content">
+      <div class="col-12 col-lg-8">
+        <h1 class="display-5 mb-3">전국장애인나눔협동조합</h1>
+        <p class="mb-4">장애인의 사회경제적 자립과 상호부조를 위한 협동조합에 참여하세요</p>
+        <div class="d-flex gap-2 flex-wrap">
+          <a href="coop-housing.html" class="btn btn-primary px-4">
+            <i class="bi bi-building  me-2"></i>주거협동조합
+          </a>
+          <a href="coop-solar.html" class="btn btn-outline-light px-4">
+            <i class="bi bi-sun me-2"></i>태양광
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Start -->
+  <section class="about-section py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-5 col-md-6 mb-8 mb-lg-0">
+                <div class="about-img position-relative">
+                    <img id="aboutImage" src="img/coop-4.png" alt="주거협동조합" class="img-fluid rounded-4 shadow">
+                    <div class="about-overlay position-absolute top-0 start-0 w-100 h-100 bg-primary bg-opacity-10 rounded-4"></div>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-6">
+                <div class="about-content">
+                        <h2 class="display-5 fw-bold text-dark mb-3">
+                            <i class="bi bi-building text-primary me-2"></i>주거협동조합
+                        </h2>
+                    </div>
+                    <div class="about-text">
+                        <p class="lead text-muted mb-4">
+                            장애인의 주거 문제 해결을 위한 협동조합 방식의 주택 사업.
+                        </p>
+                        <div class="features-list mb-4">
+                            <div class="feature-item d-flex align-items-center mb-3">
+                                <div class="feature-icon me-3">
+                                    <i class="bi bi-check-circle-fill text-success fs-5"></i>
+                                </div>
+                                <span class="text-muted">시 행 사: 관악구장애인단체연합회</span>
+                            </div>
+                            <div class="feature-item d-flex align-items-center mb-3">
+                                <div class="feature-icon me-3">
+                                    <i class="bi bi-check-circle-fill text-success fs-5"></i>
+                                </div>
+                                <span class="text-muted">작 성 자: 전국장애인나눔협동조합</span>
+                            </div>
+                            <div class="feature-item d-flex align-items-center">
+                                <div class="feature-icon me-3">
+                                    <i class="bi bi-check-circle-fill text-success fs-5"></i>
+                                </div>
+                                <span class="text-muted">부 서 명: 조합주택담당</span>
+                            </div>
+                        </div>
+                        <a class="btn btn-primary btn-lg px-4 py-2 rounded-pill" href="coop-accession.html">
+                            <i class="bi bi-house me-2"></i>조합원가입안내 및 신청<i class="bi bi-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- About End -->
+
+ <!-- News & Notices -->
+  <section class="section pt-0">
+    <div class="container">
+      <div class="card border-0 shadow-lg">
+        <div class="card-body p-4 p-md-5">
+          <div class="row g-4">
+            <div class="col-12 col-lg-8">
+              <div class="panel h-100">
+                <div class="panel-header d-flex justify-content-between align-items-center">
+                  <span><i class="bi bi-megaphone me-2"></i>협회알림</span>
+                  <a class="btn btn-sm btn-outline-light" href="coop-board.html">
+                    <i class="bi bi-arrow-right-circle me-1"></i>더보기
+                  </a>
+                </div>
+                <div class="panel-body">
+                  <ul class="list-compact" id="announcementsList">
+                    <li><span class="text-muted">로딩 중...</span></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4">
+              <div class="panel h-100">
+                <div class="panel-header d-flex justify-content-between align-items-center">
+                  <span><i class="bi bi-bell me-2"></i>공지사항</span>
+                  <a class="btn btn-sm btn-outline-light" href="coop-board.html">
+                    <i class="bi bi-arrow-right-circle me-1"></i>더보기
+                  </a>
+                </div>
+                <div class="panel-body">
+                  <ul class="list-compact" id="noticesList">
+                    <li><span class="text-muted">로딩 중...</span></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission Section -->
+  <section class="mission-section my-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center mb-4">
+          <i class="bi bi-house-fill text-danger display-6 mb-3"></i>
+          <h3 class="fw-bold mb-2">협동조합형 주택 소개</h3>
+        </div>
+        <div class="col-12 col-lg-10 mx-auto">
+          <div class="card border-0 shadow-lg">
+            <div class="card-body p-5">
+              <p class="lead text-muted mb-3">『협동조합기본법』에 따라 주택의 공동 구매, 건설, 관리 등을 목적으로 하는 협동조합을 추진하는 경우도 있습니다.</p>
+              <p class="text-muted mb-3">이는 조합원들이 함께 주택을 소유하고 공동 관리하며 공동체 생활을 영위하는 것에 중점을 둡니다.</p>
+              <div class="text-center mt-4">
+                <h5 class="text-primary fw-bold">
+                  <i class="bi bi-quote me-2"></i>연락처: 전국장애인나눔협동조합 02-871-5686<i class="bi bi-quote ms-2"></i>
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intro cards -->
+  <section class="section mb-5" id="about">
+    <div class="container">
+      <div class="row g-4 cards-3">
+        <!-- 카드 1 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card h-100">
+            <div class="card-cover" style="background-image:url('img/coop-3.png')"></div>
+            <div class="card-body">
+              <h5 class="card-title">
+                <i class="bi bi-house-heart text-success me-2"></i>주거협동조합
+              </h5>
+              <p class="card-text text-muted">장애인의 주거 문제 해결을 위한 협동조합 방식의 주택 사업.</p>
+              <a href="coop-housing.html" class="btn btn-outline-success btn-sm">
+                <i class="bi bi-arrow-right-circle me-1"></i>주거협동조합
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- 카드 2 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card h-100">
+            <div class="card-cover" style="background-image:url('img/blog-501.jpg')"></div>
+            <div class="card-body">
+              <h5 class="card-title">
+                <i class="bi bi-sun text-info me-2"></i>태양광
+              </h5>
+              <p class="card-text text-muted">태양광 관련 내용을 여기에 작성하세요.</p>
+              <a href="coop-solar.html" class="btn btn-outline-info btn-sm">
+                <i class="bi bi-arrow-right-circle me-1"></i>태양광
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- 카드 3 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card h-100">
+            <div class="card-cover" style="background-image:url('img/coop-4.png')"></div>
+            <div class="card-body">
+              <h5 class="card-title">
+                  <i class="bi bi-house-heart text-warning me-2"></i>주거협동조합
+              </h5>
+              <p class="card-text text-muted">장애인의 주거 문제 해결을 위한 협동조합 방식의 주택 사업.</p>
+              <a href="coop-housing.html" class="btn btn-outline-warning btn-sm">
+                <i class="bi bi-arrow-right-circle me-1"></i>주거협동조합
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer pt-4 pb-5 mt-0">
+    <div class="container">
+      <div class="row g-3">
+        <div class="col-12 col-lg-8">
+          <a class="footer-brand d-inline-flex align-items-center gap-2 mb-2" href="nanum.html">
+            <img src="img/나눔logo.png" alt="전국장애인나눔협동조합 로고" />
+            <span class="fw-bold text-white">전국장애인나눔협동조합</span>
+          </a>
+          <div class="small text-secondary">고유번호:119-86-87663 | 대표: 송 낙 규</div>
+          <div class="small text-secondary">감사: 유 금 형 , 강 성 채 | 고문: 이 재 식 | 이사: 유 병 필</div>
+          <div class="small text-secondary">서울특별시 남부순환로 1696, 뉴명지빌딩 (5,6,7층) | 전화 02-871-5686 | FAX 02-3281-3702</div>
+          <div class="small text-secondary">Copyright &copy; 2025 관악구장애인단체연합회. All Rights Reserved.</div>
+        </div>
+        <div class="col-12 col-lg-4">
+          <div class="d-flex gap-3 justify-content-lg-end small">
+            <a href="terms.html">이용약관</a>
+            <a href="privacy.html">개인정보처리방침</a>
+            <a href="email-policy.html">이메일무단수집거부</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

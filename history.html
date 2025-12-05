@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>연혁 | 관악구장애인단체연합회</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--brand:#4b4b8f;--brand-dark:#352f74;--muted:#6c757d;--bg:#f3f3f3}
+    body{font-family:'Noto Sans KR',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:#fff;color:#222}
+    .topbar{font-size:12px;background:#f8f9fa;border-bottom:1px solid #e9ecef}
+    .navbar-brand img{height:44px}
+    .brand-title{font-weight:800;color:var(--brand-dark);font-size:1.95rem;letter-spacing:-.2px}
+    @media (max-width: 576px){.brand-title{display:none}}
+    .mainnav{border-bottom:1px solid #e9ecef}
+    .mainnav .nav-link{font-weight:600;color:#333}
+    .mainnav .nav-link:hover{color:var(--brand)}
+    .footer{background:#2d2142;color:#d9d6e5}
+    .footer a{color:#e3def2;text-decoration:none}
+    .footer a:hover{text-decoration:underline}
+    .footer-brand img{height:36px}
+.timeline-section{position:relative;padding:2rem 0}
+.modern-timeline{position:relative;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;grid-auto-rows:minmax(30px,auto);align-items:start}
+.timeline-item{position:relative;display:flex;flex-direction:column}
+.timeline-item:nth-child(1){grid-column:1;grid-row:1}
+.timeline-item:nth-child(2){grid-column:2;grid-row:1;margin-top:30px}
+.timeline-item:nth-child(3){grid-column:3;grid-row:1;margin-top:60px}
+.timeline-item:nth-child(4){grid-column:1;grid-row:2}
+.timeline-item:nth-child(5){grid-column:2;grid-row:2;margin-top:30px}
+.timeline-item:nth-child(6){grid-column:3;grid-row:2;margin-top:60px}
+.timeline-item:nth-child(7){grid-column:1;grid-row:3}
+.timeline-item:nth-child(8){grid-column:2;grid-row:3;margin-top:30px}
+.timeline-item:nth-child(9){grid-column:3;grid-row:3;margin-top:60px}
+.timeline-item::before{display:none}
+.timeline-marker{display:none}
+.timeline-item:nth-child(3n+1) .timeline-marker{background:#667eea}
+.timeline-item:nth-child(3n+2) .timeline-marker{background:#764ba2}
+.timeline-item:nth-child(3n+3) .timeline-marker{background:#f093fb}
+.timeline-card{background:#fff;border-radius:12px;padding:1.25rem;box-shadow:0 4px 20px rgba(0,0,0,0.08);transition:transform 0.3s,box-shadow 0.3s;border-top:4px solid transparent;position:relative;height:100%;display:flex;flex-direction:column}
+.timeline-card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,0.12)}
+.timeline-item:nth-child(3n+1) .timeline-card{border-top-color:#667eea}
+.timeline-item:nth-child(3n+2) .timeline-card{border-top-color:#764ba2}
+.timeline-item:nth-child(3n+3) .timeline-card{border-top-color:#f093fb}
+.timeline-date{font-size:1.15rem;font-weight:700;padding:0.75rem 1.25rem;border-radius:10px;display:inline-block;margin-bottom:0.75rem;letter-spacing:0.5px;line-height:1.3;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+.timeline-content h4{font-size:1.25rem;color:#2c3e50;margin-bottom:0.4rem;font-weight:700;line-height:1.3}
+.timeline-content p{font-size:1rem;color:#555;margin:0;line-height:1.6;font-weight:500}
+@media (max-width:992px){.modern-timeline{grid-template-columns:repeat(2,1fr);grid-auto-rows:minmax(30px,auto)}.timeline-item:nth-child(odd){grid-column:1;margin-top:0!important}.timeline-item:nth-child(even){grid-column:2;margin-top:30px!important}.timeline-item:nth-child(1){grid-row:1}.timeline-item:nth-child(2){grid-row:1}.timeline-item:nth-child(3){grid-row:2}.timeline-item:nth-child(4){grid-row:2}.timeline-item:nth-child(5){grid-row:3}.timeline-item:nth-child(6){grid-row:3}.timeline-item:nth-child(7){grid-row:4}.timeline-item:nth-child(8){grid-row:4}.timeline-item:nth-child(9){grid-row:5}}
+@media (max-width:768px){.modern-timeline{grid-template-columns:1fr;grid-auto-rows:auto}.timeline-item{grid-column:1!important;grid-row:auto!important}.timeline-item::before{display:none}.timeline-marker{display:none}.timeline-card{margin-top:0!important;padding:1.25rem}.timeline-date{font-size:0.95rem;padding:0.6rem 1rem}.timeline-content h4{font-size:1.1rem}}
+  </style>
+</head>
+<body>
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="container d-flex justify-content-end align-items-center gap-3 py-1">
+      <div id="userInfo" style="display:none;">
+        <span id="usernameDisplay" class="text-muted me-2"></span>
+        <form action="/logout" method="post" style="display:inline;">
+          <button type="submit" class="btn btn-link link-secondary p-0" style="text-decoration:none;">로그아웃</button>
+        </form>
+      </div>
+      <div id="guestInfo">
+        <a href="login.html" class="link-secondary">로그인</a>
+        <a href="register.html" class="link-secondary">회원가입</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white mainnav">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-3" href="index.html">
+        <img src="img/footer-logo.png" alt="로고" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="토글 내비게이션">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="about.html" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">협회소개</a>
+            <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+              <li><a class="dropdown-item" href="about.html">협회소개</a></li>
+              <li><a class="dropdown-item" href="org.html">조직도</a></li>
+              <li><a class="dropdown-item" href="history.html">연혁</a></li>
+              <li><a class="dropdown-item" href="vision.html">비전</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="business.html">협회사업</a></li>
+          <li class="nav-item"><a class="nav-link" href="info.html">정보마당</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="activity-lovehouse.html" id="activityDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">행사 및 활동</a>
+            <ul class="dropdown-menu" aria-labelledby="activityDropdown">
+              <li><a class="dropdown-item" href="activity-lovehouse.html">러브하우스</a></li>
+              <li><a class="dropdown-item" href="activity-volunteer.html">행사 및 환경봉사단</a></li>
+              <li><a class="dropdown-item" href="activity-mobilitycare.html">전동보장구교육&케어</a></li>
+              <li><a class="dropdown-item" href="activity-beauty.html">무료 이·미용 봉사</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="board.html">게시판</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="affiliateDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">연합회소속단체</a>
+            <ul class="dropdown-menu" aria-labelledby="affiliateDropdown">
+              <li><a class="dropdown-item" href="http://www.sappd.or.kr/" target="_blank" rel="noopener noreferrer">사)서울지체장애인협회</a></li>
+              <li><a class="dropdown-item" href="http://www.kadi.or.kr/kadi/" target="_blank" rel="noopener noreferrer">사)한국장애인정보화협회</a></li>
+              <li><a class="dropdown-item" href="https://kaiad.or.kr/" target="_blank" rel="noopener noreferrer">사)한국산업재해장애인협회</a></li>
+              <li><a class="dropdown-item" href="http://www.kaed.or.kr/" target="_blank" rel="noopener noreferrer">사)한국장애인기업협회</a></li>
+              <li><a class="dropdown-item" href="http://www.nanum.tv/" target="_blank" rel="noopener noreferrer">사)국제장애인문화교류협회</a></li>
+              <li><a class="dropdown-item" href="http://www.kofd.co.kr/kofd/" target="_blank" rel="noopener noreferrer">사)한국기능장애인협회</a></li>
+              <li><a class="dropdown-item" href="https://www.deafkorea.com/main/" target="_blank" rel="noopener noreferrer">사)한국농아인협회</a></li>
+              <li><a class="dropdown-item" href="http://www.bluesky82.org/" target="_blank" rel="noopener noreferrer">사)한국장애인문화협회</a></li>
+              <li><a class="dropdown-item" href="https://www.kdwa.or.kr/main" target="_blank" rel="noopener noreferrer">사)서울신체장애인복지회</a></li>
+              <li><a class="dropdown-item" href="#">사)열린정보장애인협회</a></li>
+              <li><a class="dropdown-item" href="#">사)서울시각장애인연합회</a></li>
+              <li><a class="dropdown-item" href="#">사)한국장애인환경실천협회</a></li>
+              <li><a class="dropdown-item" href="nanum.html">전국장애인나눔협동조합</a></li>
+              <li><a class="dropdown-item" href="aboutgolf.html">한국장애인스크린파크골프협회</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="directions.html">오시는길</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<main class="container my-5">
+  <!-- 페이지 헤더 -->
+  <section class="page-header text-center mb-5">
+    <div class="header-decoration mb-3">
+      <i class="bi bi-clock-history display-6 text-primary"></i>
+    </div>
+    <h3 class="display-8 fw-bold text-dark mb-6">연혁</h3>
+    <p class="lead text-muted">관악구장애인단체연합회의 발자취와 주요 역사를 소개합니다.</p>
+  </section>
+
+  <!-- 타임라인 섹션 -->
+  <section class="timeline-section">
+    <div class="modern-timeline">
+      <div class="timeline-item wow fadeInUp" data-wow-delay="0.1s">
+        <div class="timeline-marker bg-primary"></div>
+        <div class="timeline-card">
+          <div class="timeline-date badge bg-primary text-white mb-3">2023년 11월 12일 ~ 2026년 11월 11일</div>
+          <div class="timeline-content">
+            <h4 class="fw-bold text-dark mb-2">제 9대 회장 연임</h4>
+            <p class="text-muted mb-0">제 9대 회장 송낙규</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="timeline-item wow fadeInUp" data-wow-delay="0.2s">
+        <div class="timeline-marker bg-success"></div>
+        <div class="timeline-card">
+          <div class="timeline-date badge bg-success text-white mb-3">2023년 03월 28일 ~ 2023년 11월 11일</div>
+          <div class="timeline-content">
+            <h4 class="fw-bold text-dark mb-2">제 8대 회장 보궐선거</h4>
+            <p class="text-muted mb-0">제 8대 회장 송낙규 (잔여 임기)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item wow fadeInUp" data-wow-delay="0.3s">
+        <div class="timeline-marker bg-info"></div>
+        <div class="timeline-card">
+          <div class="timeline-date badge bg-info text-white mb-3">2018년 01월 01일 ~ 2020년 12월 31일</div>
+          <div class="timeline-content">
+            <h4 class="fw-bold text-dark mb-2">제 7대 회장 연임</h4>
+            <p class="text-muted mb-0">제 7대 회장 은준영</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item wow fadeInUp" data-wow-delay="0.4s">
+        <div class="timeline-marker bg-warning"></div>
+        <div class="timeline-card">
+          <div class="timeline-date badge bg-warning text-white mb-3">2015년 01월 27일 ~ 2017년 12월 31일</div>
+          <div class="timeline-content">
+            <h4 class="fw-bold text-dark mb-2">제 6대 회장 취임</h4>
+            <p class="text-muted mb-0">제 6대 회장 은준영</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item wow fadeInUp" data-wow-delay="0.5s">
+        <div class="timeline-marker bg-secondary"></div>
+        <div class="timeline-card">
+          <div class="timeline-date badge bg-secondary text-white mb-3">2011년 12월 30일 ~ 2015년 01월 26일</div>
+          <div class="timeline-content">
+            <h4 class="fw-bold text-dark mb-2">제 5대 회장 연임</h4>
+            <p class="text-muted mb-0">제 5대 회장 한재상</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item wow fadeInUp" data-wow-delay="0.6s">
+        <div class="timeline-marker bg-primary"></div>
+        <div class="timeline-card">
+          <div class="timeline-date badge bg-primary text-white mb-3">2009년 12월 30일 ~ 2011년 12월 29일</div>
+          <div class="timeline-content">
+            <h4 class="fw-bold text-dark mb-2">제 4대 회장 취임</h4>
+            <p class="text-muted mb-0">제 4대 회장 한재상</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item wow fadeInUp" data-wow-delay="0.7s">
+        <div class="timeline-marker bg-success"></div>
+        <div class="timeline-card">
+          <div class="timeline-date badge bg-success text-white mb-3">2009년 05월 29일 ~ 2009년 12월 29일</div>
+          <div class="timeline-content">
+            <h4 class="fw-bold text-dark mb-2">제 3대 회장 취임</h4>
+            <p class="text-muted mb-0">제 3대 회장 박래선</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item wow fadeInUp" data-wow-delay="0.8s">
+        <div class="timeline-marker bg-info"></div>
+        <div class="timeline-card">
+          <div class="timeline-date badge bg-info text-white mb-3">2004년 06월 24일 ~ 2009년 05월 28일</div>
+          <div class="timeline-content">
+            <h4 class="fw-bold text-dark mb-2">제 2대 회장 취임</h4>
+            <p class="text-muted mb-0">제 2대 회장 김재술</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item wow fadeInUp" data-wow-delay="0.9s">
+        <div class="timeline-marker bg-danger"></div>
+        <div class="timeline-card">
+          <div class="timeline-date badge bg-danger text-white mb-3">1991년 01월 30일 ~ 2004년 06월 23일</div>
+          <div class="timeline-content">
+            <h4 class="fw-bold text-dark mb-2">창립총회 및 초대 회장</h4>
+            <p class="text-muted mb-0">제 1대 회장 이기원</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 연혁 행사 섹션 -->
+  <section class="event-section mt-5">
+    <h3 class="mb-4 text-center">주요 행사 연혁</h3>
+    
+    <div class="row g-4">
+      <!-- 2020년대 -->
+      <div class="col-12 col-md-6">
+        <div class="card h-100 shadow-sm">
+          <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#events2020s" role="button" style="cursor: pointer;">
+            <h5 class="mb-0">2020년대</h5>
+            <i class="bi bi-chevron-down collapse-icon"></i>
+          </div>
+          <div class="collapse show" id="events2020s" data-bs-parent=".row">
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">2025.07.22 - 장애인 환경봉사단 구성.운영(발대식 및 거리청소) - 일명 "클린&짜장면 데이 장애인 환경봉사대"</li>
+                <li class="list-group-item">2025.07.11 - 장애인 문화체험 여가활동(경기도 광주시 경안천 습지생태공원, 천진암 계곡, 경기 도자박물관 등</li>
+                <li class="list-group-item">2025.06.13 - 관악구장애인단체연합회 운영센터 이전, 개소식 개최 (관악구 남부순환로 1696 뉴명지빌딩, 5~7층)</li>
+                <li class="list-group-item">2025.04.24 - 연합회 사무실 이전(관악구장애인종합복지관 8층 → 남부순환로 1696, 5~7층)</li>
+                <li class="list-group-item">2025.04.17 - 제45회 "장애인의 날" 기념행사 개최(낙성대공원내 게이트볼 돔구장)</li>
+                <li class="list-group-item">2025.04~06 - (상반기)장애인 이동기기(수동.전동휠체어, 전동스쿠터) 클린서비스(2회)</li>
+                <li class="list-group-item">2025.03~06 - (상반기)장애인 전동보조기기 이용자 안전교육(이론 및 실습) 6회</li>
+                <li class="list-group-item">2025.01~06 - (상반기)장애인 무료 "이·미용 봉사"(매월 1회, 총 6회)</li>
+                <li class="list-group-item">2024.10.24 - 장애인 이동봉사 특장차(리프트 설치)무상 지원(MG새마을금고 지역희망나눔재단)</li>
+                <li class="list-group-item">2024.07.22 - 장애인 문화체험 여가활동(강원도 양양군 현남면 광진리 큰바다해수욕장 1박2일)</li>
+                <li class="list-group-item">2024.04~11 - 장애인 전동보조기기 이용자 안전교육(이론 및 실습) 12회</li>
+                <li class="list-group-item">2024.04.19 - 제44회 "장애인의 날" 기념행사 개최(낙성대공원내 게이트볼 돔구장)</li>
+                <li class="list-group-item">2023.05~11 - 장애인 이동기기(수동.전동휠체어, 전동스쿠터) 클린서비스(4회)</li>
+                <li class="list-group-item">2023.05.16 - 상생발전을 위한 업무협약체결(관악구장애인단체연합회 → 서울특별시 관악구시설관리공단)</li>
+                <li class="list-group-item">2023.04.20 - 제43회 "장애인의 날" 기념행사 개최(낙성대공원내 게이트볼 돔구장)</li>
+                <li class="list-group-item">2023.03~11 - 장애인 전동보조기기 이용자 안전교육(이론 및 실습) 18회</li>
+                <li class="list-group-item">2023.03.28 - 연합회장 보궐선거(송낙규 회장 취임, 잔여 임기 2023.03.28 ~ 2023.11.11)</li>
+                <li class="list-group-item">2023.02~11 - 저소득 장애인 주거환경개선 추진(15가구)</li>
+                <li class="list-group-item">2022.06~11 - 장애인 전동보조기기 이용자 안전교육(이론 및 실습) 10회</li>
+                <li class="list-group-item">2022.04.19 - 제42회 "장애인의 날" 기념행사 개최(낙성대공원내 게이트볼 돔구장)</li>
+                <li class="list-group-item">2022.05~11 - 장애인 이동기기(수동.전동휠체어, 전동스쿠터) 클린서비스(4회) </li>
+                <li class="list-group-item">2022.04.01 - 장애인 전동보조기기(전동휠체어, 전동스쿠터) 운전연습장 조성(전국 최초)</li>
+                <li class="list-group-item">2022.03.12 - 저소득 장애인 주거환경개선 추진(11가구)</li>
+                <li class="list-group-item">2021.11.11 - 장애인 문화체험 여가활동(경기도 화성시 전곡항 1박2일)</li>
+                <li class="list-group-item">2021.04.20 - 제41회 "장애인의 날" 기념행사 개최(관악구장애인종합복지관 7층 강당)</li>
+                <li class="list-group-item">2021.03.12 - 저소득 장애인 주거환경개선 추진(9가구)</li>
+                <li class="list-group-item">2020.11.12 - 제8대 연합회장 선거(은중영 회장: 재연임)/ 후보등록:11.3 ~ 11.5</li>
+                <li class="list-group-item">2020.08.20 - [하반기]주거환경개선사업(중앙동)/ 10.8(서림동)/ 10.25(남현동)</li>
+                <li class="list-group-item">2020.08.20 - 11.08(난향동)/ 11.15(삼성동)/ 11.29(인헌동) : 총 10가구</li>
+                <li class="list-group-item">2020.07.01 - 이동기기클린서비스사업(복지관 1층)/ 2차:8.5/ 3차:9.23/ 4차:11.11</li>
+                <li class="list-group-item">2020.06.25 - 제40회 "장애인의 날" 행사(4.20 무기연기 코로나19) </li>
+                <li class="list-group-item">2020.05.25 - "연합회 대의원 총회" 개최(18명중 15명 참석/ 정관개정)</li>
+                <li class="list-group-item">2020.05.12 - 연합회 비영리민간단체 신청(서울시 장애인권익팀)/ 등록증 교부 2020.09.01</li>
+                <li class="list-group-item">2020.05.10 - [상반기]주거환경개선사업(중앙동)/5.24(난향동)/6.14(삼성동)/6.28(신원동)</li>
+                <li class="list-group-item">2020.04.15 - 제21대 국회의원 선거(장애인투표 수송지원)</li>
+                <li class="list-group-item">2020.03.09 - 연합회 명칭 변경(협의회 → 연합회:119-82-74874)</li>
+                <li class="list-group-item">2020.01.20 - '코로나19' 첫 환자 발생(보고) 경계단계→심각(2월24일)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2010년대 -->
+      <div class="col-12 col-md-6">
+        <div class="card h-100 shadow-sm">
+          <div class="card-header bg-success text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#events2010s" role="button" style="cursor: pointer;">
+            <h5 class="mb-0">2010년대</h5>
+            <i class="bi bi-chevron-down collapse-icon"></i>
+          </div>
+          <div class="collapse" id="events2010s" data-bs-parent=".row">
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">2019.04.00 - 제39회 "장애인의 날" 행사 참가</li>
+                <li class="list-group-item">2018.04.20 - 제38회 "장애인의 날" 행사 참가</li>
+                <li class="list-group-item">2017.04.28 - 장애인단체연합회 사무실 이전(푸르지오APT단지→관악구장애인종합복지관8층)</li>
+                <li class="list-group-item">2017.04.20 - 제37회 "장애인의 날" 행사 참가</li>
+                <li class="list-group-item">2016.05.18 - 전국나눔협동조합연합회 등록</li>
+                <li class="list-group-item">2016.04.20 - 제36회 "장애인의 날" 행사 참가</li>
+                <li class="list-group-item">2016.04.15 - 연합회 "이·미용 봉사활동" 실시</li>
+                <li class="list-group-item">2016.03.10 - "은준영과 함께하는 러브하우스" 운영</li>
+                <li class="list-group-item">2015.07.29 - 제12회 장애인가족 하계수련회</li>
+                <li class="list-group-item">2015.04.20 - 제35회 "장애인의 날" 행사 참가</li>
+                <li class="list-group-item">2014.04.20 - 제34회 "장애인의 날" 행사 참가</li>
+                <li class="list-group-item">2013.04.20 - 제33회 "장애인의 날" 행사 참가</li>
+                <li class="list-group-item">2012.07.25 - 제11회 장애인가족 하계수련회</li>
+                <li class="list-group-item">2012.04.20 - 제32회 "장애인의 날" 행사 참가</li>
+                <li class="list-group-item">2011.04.20 - 제31회 "장애인의 날" 행사 참가</li>
+                <li class="list-group-item">2010.07.26 - 제10회 장애인가족 하계수련회</li>
+                <li class="list-group-item">2010.04.20 - 제30회 "장애인의 날" 행사 참가</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2000년대 -->
+      <div class="col-12 col-md-6">
+        <div class="card h-100 shadow-sm">
+          <div class="card-header bg-warning text-dark d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#events2000s" role="button" style="cursor: pointer;">
+            <h5 class="mb-0">2000년대</h5>
+            <i class="bi bi-chevron-down collapse-icon"></i>
+          </div>
+          <div class="collapse" id="events2000s" data-bs-parent=".row">
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">2009.04.20 - 제29회 "장애인의 날" 행사 참가</li>
+                <li class="list-group-item">2008.07.26 - 제9회 장애인가족 하계수련회</li>
+                <li class="list-group-item">2008.04.20 - 제28회 "장애인의 날" 행사 참가</li>
+                <li class="list-group-item">2008.03.28 - 관악구장애인단체협의회 사업자등록증(고유번호) 발급</li>
+                <li class="list-group-item">2007.10.30 - "전국 장애인의 날" 행사 참가</li>
+                <li class="list-group-item">2007.09.25 - 서울시 장애인체육대회 참가</li>
+                <li class="list-group-item">2007.12.15 - 2008년 연말총회</li>
+                <li class="list-group-item">2007.08.20 - 제20회 전국장애인종합예술제 참가</li>
+                <li class="list-group-item">2007.07.27 - 제8회 장애인가족 하계수련회</li>
+                <li class="list-group-item">2007.04.20 - 제27회 "장애인의 날" 행사(한마당 큰잔치)</li>
+                <li class="list-group-item">2007.03.15 - 장애인 도우미 민원상담실 운영(관악구청)</li>
+                <li class="list-group-item">2007.02.20 - 관악구 장애인 "상상의 나래" 나들이</li>
+                <li class="list-group-item">2006.07.25 - 제7회 장애인가족 하계수련회</li>
+                <li class="list-group-item">2006.03.02 - 장애인차별금지법 인권위원회 점거 단식농성(한재상 회장 및 회원)</li>
+                <li class="list-group-item">2005.04.05 - 관악구장애인 편의시설 지원센터 개설</li>
+                <li class="list-group-item">2004.07.29 - 제6회 장애인가족 하계수련회</li>
+                <li class="list-group-item">2004.05.14 - 관악구 장애인복지증진대회 실시</li>
+                <li class="list-group-item">2003.07.27 - 제5회 장애인가족 하계수련회</li>
+                <li class="list-group-item">2002.06.22 - 제10회 장애인생활체육 전국게이트볼대회 참가(1위)</li>
+                <li class="list-group-item">2001.08.15 - 관악구 장애인재활증진 및 사회참여교육 실시</li>
+                <li class="list-group-item">2000.04.20 - 제20회 "장애인의 날"기념행사 및 체육대회 개최</li>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1990년대 -->
+      <div class="col-12 col-md-6">
+        <div class="card h-100 shadow-sm">
+          <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#events1990s" role="button" style="cursor: pointer;">
+            <h5 class="mb-0">1990년대</h5>
+            <i class="bi bi-chevron-down collapse-icon"></i>
+          </div>
+          <div class="collapse" id="events1990s" data-bs-parent=".row">
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">1999.10.12 - 관악구 장애인 사회인식개선교육 실시</li>
+                <li class="list-group-item">1998.04.06 - 관악구 장애인교통질서캠페인 실시</li>
+                <li class="list-group-item">1997.07.25 - 제4회 장애인가족 곰두리 하계수련회</li>
+                <li class="list-group-item">1996.03.09 - 관악구 장애인환경보호캠페인 실시</li>
+                <li class="list-group-item">1995.05.18 - 제8회 전국장애인종합예술제 참가</li>
+                <li class="list-group-item">1995.04.22 - 제3회 전국장애인게이트볼대회 참가</li>
+                <li class="list-group-item">1995.04.20 - 제15회 "장애인의 날" 기념행사</li>
+                <li class="list-group-item">1994.10.05 - 제2회 환태평양 게이트볼대회 참가</li>
+                <li class="list-group-item">1994.08.03 - 제3회 관악구장애인가족 하계수련회</li>
+                <li class="list-group-item">1994.07.05 - 제1회 바자회 대축제개최(관악구 밝은마음 환한미소)</li>
+                <li class="list-group-item">1994.05.16 - 제7회 전국장애인종합예술제 참가</li>
+                <li class="list-group-item">1994.04.20 - 제14회 "장애인의 날" 기념행사 및 체육대회 개최</li>
+                <li class="list-group-item">1993.10.17 - 제1회 서울시협회장기 생활체육 장애인게이트볼대회 참가</li>
+                <li class="list-group-item">1993.08.18 - 제2회 관악구장애인가족 하계수련회</li>
+                <li class="list-group-item">1993.05.22 - 제6회 전국장애인종합예술제 참가</li>
+                <li class="list-group-item">1993.04.20 - 제13회 "장애인의 날" 기념행사 및 재활증진대회 참가</li>
+                <li class="list-group-item">1992.10.25 - 제5회 전국장애인종합예술제 참가</li>
+                <li class="list-group-item">1992.07.28 - 제1회 관악구장애인가족 하계수련회</li>
+                <li class="list-group-item">1991.01.30 - 창립총회</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="footer pt-4 pb-5 mt-0">
+  <div class="container">
+    <div class="row g-3">
+      <div class="col-12 col-lg-8">
+        <a class="footer-brand d-inline-flex align-items-center gap-2 mb-2" href="index.html">
+          <img src="img/main.jpg" alt="관악구장애인단체연합회 로고" />
+          <span class="fw-bold text-white">관악구장애인단체연합회</span>
+        </a>
+        <div class="small text-secondary">고유번호:119-82-74874 | 협회장: 송 낙 규</div>
+        <div class="small text-secondary">서울특별시 남부순환로 1696, 뉴명지빌딩 (5,6,7층) | 대표 02-871-5686 | FAX 02-3281-3702</div>
+        <div class="small text-secondary">Copyright &copy; 2025 관악구장애인단체연합회. All Rights Reserved.</div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <div class="d-flex gap-3 justify-content-lg-end small">
+          <a href="terms.html">이용약관</a>
+            <a href="privacy.html">개인정보처리방침</a>
+            <a href="email-policy.html">이메일무단수집거부</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // 펼치기/접기 아이콘 토글
+  document.addEventListener('DOMContentLoaded', function() {
+    const collapseElements = document.querySelectorAll('.collapse');
+    
+    collapseElements.forEach(function(collapse) {
+      collapse.addEventListener('show.bs.collapse', function() {
+        const icon = this.previousElementSibling.querySelector('.collapse-icon');
+        if (icon) {
+          icon.classList.remove('bi-chevron-down');
+          icon.classList.add('bi-chevron-up');
+        }
+      });
+      
+      collapse.addEventListener('hide.bs.collapse', function() {
+        const icon = this.previousElementSibling.querySelector('.collapse-icon');
+        if (icon) {
+          icon.classList.remove('bi-chevron-up');
+          icon.classList.add('bi-chevron-down');
+        }
+      });
+    });
+    
+    // 초기 상태 설정 (2020년대는 show 상태)
+    const events2020s = document.getElementById('events2020s');
+    if (events2020s && events2020s.classList.contains('show')) {
+      const icon = events2020s.previousElementSibling.querySelector('.collapse-icon');
+      if (icon) {
+        icon.classList.remove('bi-chevron-down');
+        icon.classList.add('bi-chevron-up');
+      }
+    }
+  });
+  
+  // 로그인 상태 확인
+  async function checkLoginStatus() {
+    try {
+      const res = await fetch('/api/user', {
+        credentials: 'include'
+      });
+      const data = await res.json();
+      
+      if (data.loggedIn) {
+        document.getElementById('userInfo').style.display = 'block';
+        document.getElementById('guestInfo').style.display = 'none';
+        document.getElementById('usernameDisplay').textContent = `${data.username}님`;
+      } else {
+        document.getElementById('userInfo').style.display = 'none';
+        document.getElementById('guestInfo').style.display = 'block';
+      }
+    } catch (error) {
+      console.error('Error checking login status:', error);
+    }
+  }
+  
+  checkLoginStatus();
+</script>
+</body>
+</html>
